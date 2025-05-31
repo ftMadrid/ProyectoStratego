@@ -112,7 +112,7 @@ public class Login extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Usuario no encontrado");
         }
         }
-    }                          
+                              
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
