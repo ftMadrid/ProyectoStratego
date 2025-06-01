@@ -1,4 +1,4 @@
-package proyectostratego.eventos.Logueo;
+package proyectostratego.eventos.logueo;
 
 import proyectostratego.eventos.Jugador;
 import javax.swing.JOptionPane;

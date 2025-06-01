@@ -1,4 +1,4 @@
-package proyectostratego.eventos.Logueo;
+package proyectostratego.eventos.logueo;
 
 import javax.swing.JOptionPane;
 import proyectostratego.ventanas.MenuPrincipal;
