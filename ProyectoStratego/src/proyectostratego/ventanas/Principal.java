@@ -6,6 +6,7 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
+        setTitle("Stratego Marvel Heroes");
     }
 
     @SuppressWarnings("unchecked")
