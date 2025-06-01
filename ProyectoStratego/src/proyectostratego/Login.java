@@ -83,7 +83,8 @@ public class Login extends javax.swing.JFrame {
         {
         for (int i = 0;i<MenuPrimero.nUsuariosTotal;i++)
         {
-        if (User.getText().equals(MenuPrimero.jugadores[i].username)) //If user valido basicamente
+        if (User.getText().equalsIgnoreCase(MenuPrimero.jugadores[i].username)) //If user valido basicamente
+            //Tambien ignore case porque tiene que ser unico
         {
         if (MenuPrimero.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
         {
