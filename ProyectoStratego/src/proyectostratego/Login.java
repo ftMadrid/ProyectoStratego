@@ -89,8 +89,10 @@ public class Login extends javax.swing.JFrame {
         if (MenuPrimero.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
         {
         JOptionPane.showMessageDialog(this, "Logeado correctamente");
+        
         //System.out.println(MenuPrincipal.jugadores[i].validarPass(Password.getText()));
         //DEBUG - para ver el estado si es true o false 
+        
         encontrado = true;
         MenuPrimero.jugadorLog = MenuPrimero.jugadores[i];
         MenuPrimero.logged = true;
