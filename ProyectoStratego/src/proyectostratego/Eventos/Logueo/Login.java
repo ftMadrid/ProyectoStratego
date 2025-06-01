@@ -64,11 +64,13 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No puedes dejar los espacios solicitados en blanco");
         } else {
             for (int i = 0; i < MenuPrincipal.nUsuariosTotal; i++) {
-                if (User.getText().equals(MenuPrincipal.jugadores[i].username)) //If user valido basicamente
+                if (User.getText().equalsIgnoreCase(MenuPrincipal.jugadores[i].username)) //If user valido basicamente
+                //Tambien ignore case porque tiene que ser unico
                 {
                     if (MenuPrincipal.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
                     {
                         JOptionPane.showMessageDialog(this, "Logeado correctamente");
+
                         //System.out.println(MenuPrincipal.jugadores[i].validarPass(Password.getText()));
                         //DEBUG - para ver el estado si es true o false 
                         encontrado = true;

@@ -80,7 +80,7 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Registrar Usuario validando a ver si los dos tienen campos
         for (int j = 0; j < MenuPrincipal.nUsuariosTotal; j++) {
-            if (Usuario.getText().equals(MenuPrincipal.jugadores[j].username)) {
+            if (Usuario.getText().equalsIgnoreCase(MenuPrincipal.jugadores[j].username)) {
                 JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese nombre");
                 return;
             }
@@ -90,6 +90,8 @@ public class Register extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No pueden estar vacios los campos!");
         } else if (Contra.getText().contains(" ")) {
             JOptionPane.showMessageDialog(this, "No puedes tener espacio en la contrasena");
+        } else if (Contra.getText().length() != 5) {
+            JOptionPane.showMessageDialog(this, "La contrasena tiene que ser unicamente de 5 caracteres");
         } else {
 
             Jugador nuevoJugador = new Jugador(Usuario.getText(), Contra.getText());
