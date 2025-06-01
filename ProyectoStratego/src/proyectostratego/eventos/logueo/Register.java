@@ -172,6 +172,7 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
