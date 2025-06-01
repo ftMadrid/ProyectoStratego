@@ -84,7 +84,7 @@ public class Login extends javax.swing.JFrame {
                     {
                         JOptionPane.showMessageDialog(this, "Contrasena incorrecta");
                         //System.out.println(MenuPrincipal.jugadores[i].validarPass(Password.getText()));
-                        //DEBUG - para ver el estado si es true o false 
+                        //DEBUG - para ver el estado si es true o falses 
                         return;
                     }
                 }
