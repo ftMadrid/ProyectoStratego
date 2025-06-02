@@ -55,4 +55,31 @@ public class GenerarTablero extends JPanel {
         });
     }
     
+    public void paint(Graphics g) 
+    {
+        
+        super.paint(g);//TODO - Revisar que hace
+        x = 0;
+        y = 0;
+        for (int c = 0;c<columnas;c++)
+        {
+            for (int r = 0;r<rows;r++)
+            {
+            g.drawRect(x, y, altura, base);  
+            //Draw Rec y no fillRect porque asi solo crea las lineas de un rect y no el rect como tal (Se podria usar una combinacion para eso)
+            // Basicamente los primeros son las coordenadas x ,y | los otros dos son los tamanos l*w
+            x +=45;
+                
+            }
+            y += 45;
+            x=0;
+            
+        }
+        
+        //Logica para la celda y pieza proximamente XD
+        // Dibujar la imagen si hay una celda seleccionada
+    
+    }
+    
+    
 }

@@ -15,6 +15,11 @@ public class Juego extends javax.swing.JFrame {
      */
     public Juego() {
         initComponents();
+        GenerarTablero generar = new GenerarTablero();
+        generar.setOpaque(false);
+        generar.setBounds(0, 0, jLabel1.getWidth(), jLabel1.getHeight()); // Mismo tamaño que el tablero (La ventana)
+        jLabel1.setLayout(null); // Se sobrepone por asi decirlo
+        jLabel1.add(generar); //Se agrega al mismo jlabel
     }
 
     /**
