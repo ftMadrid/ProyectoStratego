@@ -24,7 +24,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         //Logica para que cuando jugadorLog no sea null , que lo lleve ya a la parte del juego
-
     }
 
     @SuppressWarnings("unchecked")
