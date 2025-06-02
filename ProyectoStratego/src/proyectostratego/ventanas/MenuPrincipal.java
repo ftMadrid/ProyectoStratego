@@ -20,12 +20,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton2.setOpaque(true);
         jButton3.setOpaque(true);
         setTitle("Stratego Marvel Heroes");
-<<<<<<< Updated upstream
-=======
+
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         
         //Logica para que cuando jugadorLog no sea null , que lo lleve ya a la parte del juego
->>>>>>> Stashed changes
+
     }
 
     @SuppressWarnings("unchecked")
