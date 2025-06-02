@@ -20,7 +20,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton2.setOpaque(true);
         jButton3.setOpaque(true);
         setTitle("Stratego Marvel Heroes");
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,6 +33,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("ITF Devanagari", 1, 24)); // NOI18N
@@ -135,9 +135,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        principal.setLocationRelativeTo(null);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 

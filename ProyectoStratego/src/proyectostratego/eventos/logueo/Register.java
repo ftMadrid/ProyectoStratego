@@ -29,6 +29,7 @@ public class Register extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jButton1.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 204, 0));

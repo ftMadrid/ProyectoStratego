@@ -17,6 +17,7 @@ public class Principal extends javax.swing.JFrame {
         botonStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         botonStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/botonstart.png"))); // NOI18N
         botonStart.setBorder(null);

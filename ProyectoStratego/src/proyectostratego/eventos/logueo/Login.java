@@ -28,6 +28,7 @@ public class Login extends javax.swing.JFrame {
         botonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/logintexto.png"))); // NOI18N
 
