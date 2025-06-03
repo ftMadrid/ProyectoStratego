@@ -107,9 +107,9 @@ public class GenerarTablero extends JPanel {
             // Basicamente los primeros son las coordenadas x ,y | los otros dos son los tamanos l*w
             x +=45;
             
-            pieza p = tablero[r][c];//Referenciando objeto
+            pieza p = tablero[r][c];//Referenciando objeto osea la pieza
             if (p != null && p.imagen != null) {
-            g.drawImage(p.imagen, c * base, r * altura, base, altura, this);
+            g.drawImage(p.imagen, c * base, r * altura, base, altura, this); //usa la imagen de p (la pieza)
             }
                 
             }
