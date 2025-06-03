@@ -1,5 +1,6 @@
 package proyectostratego.eventos;
 
+import java.awt.Color;
 import proyectostratego.utilidades.pieza;
 import proyectostratego.utilidades.villanos;
 import proyectostratego.utilidades.heroes;
@@ -69,7 +70,17 @@ public class GenerarTablero extends JPanel {
 
                 System.out.println("X" + celdax
                         + "\nY" + celday);
-                System.out.println(tablero[celday][celdax].nombre);
+                
+                if (tablero[celday][celdax]!= null)
+                {
+                    System.out.println("Pieza aqui");
+                    System.out.println(tablero[celday][celdax].nombre);
+                    tablero[celday][celdax].seleccionada = true;
+                }
+                
+                
+                repaint();
+
             }
         });
     }
@@ -79,6 +90,9 @@ public class GenerarTablero extends JPanel {
         super.paint(g);//TODO - Revisar que hace
         x = 0;
         y = 0;
+        
+        
+        
         for (int c = 0; c < columnas; c++) {
             for (int r = 0; r < rows; r++) {
                 g.drawRect(x, y, altura, base);
@@ -96,8 +110,23 @@ public class GenerarTablero extends JPanel {
             y += 45;
             x = 0;
 
+        }//
+        
+        
+        
+        if (celday >= 0 && celdax >=0 && celday < rows && celdax < columnas)
+        {
+            if (tablero[celday][celdax]!= null)
+            {
+        if (tablero[celday][celdax].seleccionada) {
+        System.out.println(tablero[celday][celdax].nombre);
+        g.setColor(Color.blue);
+        g.drawRect(celdax * base, celday * altura, altura, base);
+        g.setColor(Color.black);
         }
+    }
 
+        }
         //Logica para la celda y pieza proximamente XD
         //TODO - Ocupo buscar la manera de conseguir que se mueva la pieza ya que tengo arreglos bidimensionales
         // Dibujar la imagen si hay una celda seleccionada
