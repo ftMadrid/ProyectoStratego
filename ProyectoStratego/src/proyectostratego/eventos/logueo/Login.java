@@ -2,11 +2,13 @@ package proyectostratego.eventos.logueo;
 
 import javax.swing.JOptionPane;
 import proyectostratego.utilidades.Fondos;
+import proyectostratego.ventanas.MenuInicial;
 import proyectostratego.ventanas.MenuPrincipal;
 
 public class Login extends javax.swing.JFrame {
-    
-    MenuPrincipal menu = new MenuPrincipal();
+
+    MenuInicial menuinicial = new MenuInicial();
+    MenuPrincipal menuprincipal = new MenuPrincipal();
 
     public Login() {
         initComponents();
@@ -75,22 +77,22 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(117, Short.MAX_VALUE)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelUsuario)
+                            .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelContra)
+                            .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(116, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonLoguear, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelUsuario)
-                    .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelContra)
-                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(258, 258, 258)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonLoguear, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,11 +108,11 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(labelContra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(botonLoguear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,21 +135,21 @@ public class Login extends javax.swing.JFrame {
         if (User.getText().equals("") || Password.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "No puedes dejar los espacios solicitados en blanco");
         } else {
-            for (int i = 0; i < MenuPrincipal.nUsuariosTotal; i++) {
-                if (User.getText().equalsIgnoreCase(MenuPrincipal.jugadores[i].username)) //If user valido basicamente
+            for (int i = 0; i < MenuInicial.nUsuariosTotal; i++) {
+                if (User.getText().equalsIgnoreCase(MenuInicial.jugadores[i].username)) //If user valido basicamente
                 //Tambien ignore case porque tiene que ser unico
                 {
-                    if (MenuPrincipal.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
+                    if (MenuInicial.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
                     {
                         JOptionPane.showMessageDialog(this, "Logeado correctamente");
 
                         //System.out.println(MenuPrincipal.jugadores[i].validarPass(Password.getText()));
                         //DEBUG - para ver el estado si es true o false 
                         encontrado = true;
-                        MenuPrincipal.jugadorLog = MenuPrincipal.jugadores[i];
-                        MenuPrincipal.logged = true;
-                        menu.setVisible(true);
-                        menu.setLocationRelativeTo(null);
+                        MenuInicial.jugadorLog = MenuInicial.jugadores[i];
+                        MenuInicial.logged = true;
+                        menuprincipal.setVisible(true);
+                        menuprincipal.setLocationRelativeTo(null);
                         dispose();
                         return;
                     } else //Si no es correcta
@@ -172,8 +174,8 @@ public class Login extends javax.swing.JFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
-        menu.setVisible(true);
-        menu.setLocationRelativeTo(null);
+        menuinicial.setVisible(true);
+        menuinicial.setLocationRelativeTo(null);
         dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 

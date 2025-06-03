@@ -1,110 +1,122 @@
 package proyectostratego.ventanas;
 
-import proyectostratego.eventos.logueo.Register;
-import proyectostratego.eventos.logueo.Login;
-import proyectostratego.eventos.Jugador;
+import javax.swing.JOptionPane;
 import proyectostratego.utilidades.Fondos;
 
 public class MenuPrincipal extends javax.swing.JFrame {
-    
-    public static int nUsuariosTotal = 0;
-    public static Jugador jugadorLog = null;
-    public static boolean logged = false;
-    
-    public static Jugador[]jugadores = new Jugador[100]; //Crea la cantidad de jugadores y aqui se almacenan los jugadores como tal
-    //La razon por la que son 100 , es porque es eso o crear uno que por cada user se vaya actualizando
 
     public MenuPrincipal() {
         initComponents();
-        jButton1.setOpaque(true);
-        jButton2.setOpaque(true);
-        jButton3.setOpaque(true);
         setTitle("Stratego Marvel Heroes");
-
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        
-        //Logica para que cuando jugadorLog no sea null , que lo lleve ya a la parte del juego
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new Fondos("/proyectostratego/imagenes/fondomenuprincipal.png");
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
+        jugar = new javax.swing.JButton();
+        configuracion = new javax.swing.JButton();
+        perfil = new javax.swing.JButton();
+        universo = new javax.swing.JButton();
+        cerrarsesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("ITF Devanagari", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 153, 255));
-        jButton2.setText("LOG IN");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/menuprincipaltexto.png"))); // NOI18N
+
+        jugar.setFont(new java.awt.Font("ITF Devanagari", 1, 16)); // NOI18N
+        jugar.setForeground(new java.awt.Color(0, 153, 255));
+        jugar.setText("STRATEGO - MARVEL HEROES!");
+        jugar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jugarActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("ITF Devanagari", 1, 20)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 153, 255));
-        jButton1.setText("CREAR PLAYER");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        configuracion.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        configuracion.setForeground(new java.awt.Color(0, 153, 255));
+        configuracion.setText("CONFIGURACION");
+        configuracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        configuracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                configuracionActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("ITF Devanagari", 1, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 153, 255));
-        jButton3.setText("SALIR");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 2, true));
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        perfil.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        perfil.setForeground(new java.awt.Color(0, 153, 255));
+        perfil.setText("MI PERFIL");
+        perfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        perfil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                perfilActionPerformed(evt);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/menuprincipaltexto.png"))); // NOI18N
+        universo.setFont(new java.awt.Font("ITF Devanagari", 1, 17)); // NOI18N
+        universo.setForeground(new java.awt.Color(0, 153, 255));
+        universo.setText("UNIVERSO MARVEL");
+        universo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        universo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                universoActionPerformed(evt);
+            }
+        });
+
+        cerrarsesion.setFont(new java.awt.Font("ITF Devanagari", 1, 17)); // NOI18N
+        cerrarsesion.setForeground(new java.awt.Color(0, 153, 255));
+        cerrarsesion.setText("CERRAR SESION");
+        cerrarsesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cerrarsesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarsesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(89, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(172, 172, 172))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(titulo)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(69, 69, 69)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(universo, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cerrarsesion, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(77, 77, 77))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(titulo)
+                .addGap(41, 41, 41)
+                .addComponent(jugar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(configuracion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(universo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cerrarsesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,26 +133,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         // TODO add your handling code here:
-        Login login = new Login();
-        login.setVisible(true);
-        login.setLocationRelativeTo(null);
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jugarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuracionActionPerformed
         // TODO add your handling code here:
-        Register register = new Register();
-        register.setVisible(true);
-        register.setLocationRelativeTo(null);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_configuracionActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
         // TODO add your handling code here:
+        MiPerfil miperfil = new MiPerfil();
+        miperfil.setVisible(true);
+        miperfil.setLocationRelativeTo(null);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_perfilActionPerformed
+
+    private void universoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_universoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_universoActionPerformed
+
+    private void cerrarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarsesionActionPerformed
+        // TODO add your handling code here:
+        
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if(opcion == JOptionPane.YES_OPTION){
+            MenuInicial menuinicial = new MenuInicial();
+            MenuInicial.jugadorLog = null;
+            MenuInicial.logged = false;
+            menuinicial.setVisible(true);
+            menuinicial.setLocationRelativeTo(null);
+            dispose();
+        }
+    }//GEN-LAST:event_cerrarsesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +194,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -179,10 +204,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton cerrarsesion;
+    private javax.swing.JButton configuracion;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jugar;
+    private javax.swing.JButton perfil;
+    private javax.swing.JLabel titulo;
+    private javax.swing.JButton universo;
     // End of variables declaration//GEN-END:variables
 }

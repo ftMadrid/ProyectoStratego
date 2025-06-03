@@ -65,7 +65,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void botonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonStartActionPerformed
         // TODO add your handling code here:
-        MenuPrincipal menu = new MenuPrincipal();
+        MenuInicial menu = new MenuInicial();
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
         dispose();
