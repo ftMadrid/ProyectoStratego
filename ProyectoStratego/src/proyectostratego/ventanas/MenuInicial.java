@@ -7,12 +7,7 @@ import proyectostratego.utilidades.Fondos;
 
 public class MenuInicial extends javax.swing.JFrame {
     
-    public static int nUsuariosTotal = 0;
-    public static Jugador jugadorLog = null;
-    public static boolean logged = false;
     
-    public static Jugador[]jugadores = new Jugador[100]; //Crea la cantidad de jugadores y aqui se almacenan los jugadores como tal
-    //La razon por la que son 100 , es porque es eso o crear uno que por cada user se vaya actualizando
 
     public MenuInicial() {
         initComponents();

@@ -1,6 +1,7 @@
 package proyectostratego.ventanas;
 
 import javax.swing.JOptionPane;
+import proyectostratego.eventos.Jugador;
 import proyectostratego.utilidades.Fondos;
 
 public class MenuPrincipal extends javax.swing.JFrame {
@@ -160,8 +161,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         if(opcion == JOptionPane.YES_OPTION){
             MenuInicial menuinicial = new MenuInicial();
-            MenuInicial.jugadorLog = null;
-            MenuInicial.logged = false;
+            Jugador.jugadorLog = null;
+            Jugador.logged = false;
             menuinicial.setVisible(true);
             menuinicial.setLocationRelativeTo(null);
             dispose();

@@ -1,5 +1,6 @@
 package proyectostratego.ventanas;
 
+import proyectostratego.eventos.Jugador;
 import proyectostratego.utilidades.Fondos;
 
 public class MiPerfil extends javax.swing.JFrame {
@@ -8,7 +9,7 @@ public class MiPerfil extends javax.swing.JFrame {
         initComponents();
         setTitle("Stratego Marvel Heroes");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        jLabel1.setText("Estadisticas de "+MenuInicial.jugadorLog.username);
+        jLabel1.setText("Estadisticas de "+Jugador.jugadorLog.username);
     }
 
     @SuppressWarnings("unchecked")

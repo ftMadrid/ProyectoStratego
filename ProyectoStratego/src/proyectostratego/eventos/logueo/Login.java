@@ -1,6 +1,7 @@
 package proyectostratego.eventos.logueo;
 
 import javax.swing.JOptionPane;
+import proyectostratego.eventos.Jugador;
 import proyectostratego.utilidades.Fondos;
 import proyectostratego.ventanas.MenuInicial;
 import proyectostratego.ventanas.MenuPrincipal;
@@ -135,19 +136,19 @@ public class Login extends javax.swing.JFrame {
         if (User.getText().equals("") || Password.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "No puedes dejar los espacios solicitados en blanco");
         } else {
-            for (int i = 0; i < MenuInicial.nUsuariosTotal; i++) {
-                if (User.getText().equalsIgnoreCase(MenuInicial.jugadores[i].username)) //If user valido basicamente
+            for (int i = 0; i < Jugador.nUsuariosTotal; i++) {
+                if (User.getText().equalsIgnoreCase(Jugador.jugadores[i].username)) //If user valido basicamente
                 //Tambien ignore case porque tiene que ser unico
                 {
-                    if (MenuInicial.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
+                    if (Jugador.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
                     {
                         JOptionPane.showMessageDialog(this, "Logeado correctamente");
 
                         //System.out.println(MenuPrincipal.jugadores[i].validarPass(Password.getText()));
                         //DEBUG - para ver el estado si es true o false 
                         encontrado = true;
-                        MenuInicial.jugadorLog = MenuInicial.jugadores[i];
-                        MenuInicial.logged = true;
+                        Jugador.jugadorLog = Jugador.jugadores[i];
+                        Jugador.logged = true;
                         menuprincipal.setVisible(true);
                         menuprincipal.setLocationRelativeTo(null);
                         dispose();

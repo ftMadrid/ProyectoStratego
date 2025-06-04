@@ -1,6 +1,7 @@
 package proyectostratego.ventanas;
 
 import javax.swing.JOptionPane;
+import proyectostratego.eventos.Jugador;
 import proyectostratego.utilidades.Fondos;
 
 public class CambiarPassword extends javax.swing.JFrame {
@@ -142,13 +143,13 @@ public class CambiarPassword extends javax.swing.JFrame {
 
     private void botonCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCambiarActionPerformed
         // TODO add your handling code here:
-        if (MenuInicial.jugadorLog.validarPass(passwordActual.getText())) {
+        if (Jugador.jugadorLog.validarPass(passwordActual.getText())) {
             if (passwordNueva.getText().contains(" ")) {
                 JOptionPane.showMessageDialog(this, "No puedes tener espacios en la contraseña");
             } else if (passwordNueva.getText().length() != 5) {
                 JOptionPane.showMessageDialog(this, "La contraseña tiene que ser unicamente de 5 caracteres");
             } else {
-                MenuInicial.jugadorLog.nuevaPass(passwordNueva.getText());
+                Jugador.jugadorLog.nuevaPass(passwordNueva.getText());
                 JOptionPane.showMessageDialog(this, "Contraseña actualizada correctamente.");
                 MiPerfil miperfil = new MiPerfil();
                 miperfil.setVisible(true);
