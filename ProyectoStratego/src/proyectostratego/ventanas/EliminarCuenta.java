@@ -129,9 +129,9 @@ public class EliminarCuenta extends javax.swing.JFrame {
 
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         // TODO add your handling code here:
-        if (MenuInicial.jugadorLog.validarPass(password.getText())) {
-            Jugador.eliminarJugador(MenuInicial.jugadorLog.username);
-            JOptionPane.showMessageDialog(this, "El usuario "+MenuInicial.jugadorLog.username+" fue eliminado!.");
+        if (Jugador.jugadorLog.validarPass(password.getText())) {
+            Jugador.eliminarJugador(Jugador.jugadorLog.getUsername());
+            JOptionPane.showMessageDialog(this, "El usuario "+Jugador.jugadorLog.getUsername()+" fue eliminado!.");
             MenuInicial menuinicial = new MenuInicial();
             menuinicial.setVisible(true);
             menuinicial.setLocationRelativeTo(this);

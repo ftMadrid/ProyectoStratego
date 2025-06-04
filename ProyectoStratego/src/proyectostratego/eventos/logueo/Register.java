@@ -143,8 +143,8 @@ public class Register extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Registrar Usuario validando a ver si los dos tienen campos
-        for (int j = 0; j < MenuInicial.nUsuariosTotal; j++) {
-            if (Usuario.getText().equalsIgnoreCase(MenuInicial.jugadores[j].username)) {
+        for (int j = 0; j < Jugador.nUsuariosTotal; j++) {
+            if (Usuario.getText().equalsIgnoreCase(Jugador.jugadores[j].username)) {
                 JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese nombre");
                 return;
             }
@@ -159,8 +159,8 @@ public class Register extends javax.swing.JFrame {
         } else {
 
             Jugador nuevoJugador = new Jugador(Usuario.getText(), Contra.getText());
-            MenuInicial.jugadores[MenuInicial.nUsuariosTotal] = nuevoJugador;
-            MenuInicial.nUsuariosTotal++;
+            Jugador.jugadores[Jugador.nUsuariosTotal] = nuevoJugador;
+            Jugador.nUsuariosTotal++;
 
             JOptionPane.showMessageDialog(this, "Usuario Creado");
             
