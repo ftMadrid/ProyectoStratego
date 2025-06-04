@@ -13,13 +13,15 @@ public class GenerarTablero extends JPanel {
 
     Random random = new Random();
 
+    private pieza piezaSeleccionada = null;
+    private int seleccionFila = -1;
+    private int seleccionColumna = -1;
+
     private final int rows = 10;
     private final int columnas = 10;
 
     private int celday = -1;
     private int celdax = -1;
-    int x = 0;
-    int y = 0;
 
     private final int base = 45;//Width
     private final int altura = 45;//Length
@@ -59,43 +61,88 @@ public class GenerarTablero extends JPanel {
         //El mouse listener para lo de click?
         this.addMouseListener(new MouseAdapter() {
 
-            @Override//No se para que es pero me lo pide el mouseClicked
+            @Override
             public void mouseClicked(MouseEvent click) {
                 int coordenadax = click.getX();
                 int coordenaday = click.getY();
 
-                celdax = coordenadax / promedio;//Columna
-                celday = coordenaday / promedio;//Fila
+                celdax = coordenadax / promedio;
+                celday = coordenaday / promedio;
 
-                System.out.println("X" + celdax
-                        + "\nY" + celday);
-                System.out.println(tablero[celday][celdax].nombre);
+                if (piezaSeleccionada == null) {
+                    // Seleccionar pieza si existe en la celda
+                    pieza seleccion = tablero[celday][celdax];
+                    if (seleccion != null) {
+                        piezaSeleccionada = seleccion;
+                        seleccionFila = celday;
+                        seleccionColumna = celdax;
+                        System.out.println("Seleccionada pieza: " + seleccion.nombre);
+                    }
+                } else {
+                    // Intentar mover la pieza
+                    int distanciaFila = Math.abs(celday - seleccionFila);
+                    int distanciaColumna = Math.abs(celdax - seleccionColumna);
+
+                    // Solo permitir si se mueve una casilla en una dirección (no diagonal)
+                    boolean esMovimientoValido
+                            = (distanciaFila == 1 && distanciaColumna == 0)
+                            || (distanciaFila == 0 && distanciaColumna == 1);
+
+                    pieza objetivo = tablero[celday][celdax];
+
+                    if (esMovimientoValido) {
+                        if (objetivo == null) {
+                            // Movimiento normal a celda vacía
+                            tablero[celday][celdax] = piezaSeleccionada;
+                            tablero[seleccionFila][seleccionColumna] = null;
+//
+                            piezaSeleccionada.fila = celday;
+                            piezaSeleccionada.columna = celdax;
+
+                            System.out.println("Movida a: " + celday + ", " + celdax);
+                        } else if (piezaSeleccionada.heroe != objetivo.heroe) {
+                            // Ataca a enemigo
+                            System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
+
+                            tablero[celday][celdax] = piezaSeleccionada;
+                            tablero[seleccionFila][seleccionColumna] = null;
+
+                            piezaSeleccionada.fila = celday;
+                            piezaSeleccionada.columna = celdax;
+                        } else {
+                            // Mismo bando
+                            System.out.println("No puedes atacar a tu propio equipo.");
+                        }
+                    } else {
+                        System.out.println("Movimiento inválido.");
+                    }
+
+                    piezaSeleccionada = null;
+                    seleccionFila = -1;
+                    seleccionColumna = -1;
+                }
+
+                repaint();
             }
         });
     }
 
     public void paint(Graphics g) {
 
-        super.paint(g);//TODO - Revisar que hace
-        x = 0;
-        y = 0;
-        for (int c = 0; c < columnas; c++) {
-            for (int r = 0; r < rows; r++) {
+        super.paint(g);
+
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < columnas; c++) {
+                int x = c * base;
+                int y = r * altura;
+
                 g.drawRect(x, y, altura, base);
 
-                //Draw Rec y no fillRect porque asi solo crea las lineas de un rect y no el rect como tal (Se podria usar una combinacion para eso)
-                // Basicamente los primeros son las coordenadas x ,y | los otros dos son los tamanos l*w
-                x += 45;
-
-                pieza p = tablero[r][c];//Referenciando objeto osea la pieza
+                pieza p = tablero[r][c];
                 if (p != null && p.imagen != null) {
-                    g.drawImage(p.imagen, c * base, r * altura, base, altura, this); //usa la imagen de p (la pieza)
+                    g.drawImage(p.imagen, x, y, base, altura, this);
                 }
-
             }
-            y += 45;
-            x = 0;
-
         }
 
         //Logica para la celda y pieza proximamente XD
