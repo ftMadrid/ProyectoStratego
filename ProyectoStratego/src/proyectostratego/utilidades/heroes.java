@@ -9,7 +9,7 @@ public class heroes {//Codigo para heroes
     public pieza[] heroes; //Public object array heroes
 
     public heroes() {
-        heroes = new pieza[3];//piezas nomas
+        heroes = new pieza[33];//piezas nomas
         //Formato
         //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
         heroes[0] = new pieza("Black Widow", "/proyectostratego/imagenes/Pieza.png", 1, 1, -1, -1, true);

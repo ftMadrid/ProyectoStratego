@@ -99,6 +99,7 @@ public class GenerarTablero extends JPanel {
 //
                             piezaSeleccionada.fila = celday;
                             piezaSeleccionada.columna = celdax;
+                            piezaSeleccionada.seleccionada = false;
 
                             System.out.println("Movida a: " + celday + ", " + celdax);
                         } else if (piezaSeleccionada.heroe != objetivo.heroe) {
