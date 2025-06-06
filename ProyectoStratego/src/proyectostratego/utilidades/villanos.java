@@ -4,18 +4,18 @@
  */
 package proyectostratego.utilidades;
 
-
 public class villanos {//Codigo para villanos
-        public pieza[] villanos; //Public object array heroes
-    public villanos()
-    {
-    villanos = new pieza[3];//piezas nomas
-    //Formato
-    //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
-    villanos[0] = new pieza("Black Widow","/proyectostratego/imagenes/Pieza.png",1,1,-1,-1,false);
-    villanos[1] = new pieza("Tierra", "/proyectostratego/imagenes/Pieza.png", 0, 0, -1, -1, false);
-    villanos[2] = new pieza("Bomba", "/proyectostratego/imagenes/Pieza.png", 0, 0, -1, -1, false);
-    
+
+    public pieza[] villanos; //Public object array heroes
+
+    public villanos() {
+        villanos = new pieza[3];//piezas nomas
+        //Formato
+        //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
+        villanos[0] = new pieza("Black Widow", "/proyectostratego/imagenes/33BlackWidow.jpg", 1, 1, -1, -1, false);
+        villanos[1] = new pieza("Tierra", "/proyectostratego/imagenes/Pieza.png", 0, 0, -1, -1, false);
+        villanos[2] = new pieza("Bomba", "/proyectostratego/imagenes/Pieza.png", 0, 0, -1, -1, false);
+
     }
-    
+
 }
