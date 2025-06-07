@@ -186,9 +186,18 @@ public class GenerarTablero extends JPanel {
                     int distanciaColumna = Math.abs(celdax - seleccionColumna);
 
                     // Solo permitir si se mueve una casilla en una dirección (no diagonal)
+                    
                     boolean esMovimientoValido
                             = (distanciaFila == piezaSeleccionada.movimiento && distanciaColumna == 0)
                             || (distanciaFila == 0 && distanciaColumna == piezaSeleccionada.movimiento);
+                    
+                    if (piezaSeleccionada.rango == 2)
+                {
+                esMovimientoValido
+                            = (distanciaFila <= piezaSeleccionada.movimiento && distanciaColumna == 0)
+                            || (distanciaFila == 0 && distanciaColumna <= piezaSeleccionada.movimiento);
+                    System.out.println("Entro");
+                }
 
                     pieza objetivo = tablero[celday][celdax];
                     if (esMovimientoValido) {
@@ -242,6 +251,7 @@ public class GenerarTablero extends JPanel {
 
                         }
                     } else {
+                        System.out.println(piezaSeleccionada.movimiento);
                         System.out.println("Movimiento inválido.");
 
                     }
