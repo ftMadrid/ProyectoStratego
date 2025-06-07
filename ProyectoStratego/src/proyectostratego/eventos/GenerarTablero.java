@@ -78,6 +78,7 @@ public class GenerarTablero extends JPanel {
                         seleccionFila = celday;
                         seleccionColumna = celdax;
                         System.out.println("Seleccionada pieza: " + seleccion.nombre);
+                        piezaSeleccionada.seleccionada = true;
                     }
                 } else {
                     // Intentar mover la pieza
@@ -99,6 +100,7 @@ public class GenerarTablero extends JPanel {
 //
                             piezaSeleccionada.fila = celday;
                             piezaSeleccionada.columna = celdax;
+                            
 
                             System.out.println("Movida a: " + celday + ", " + celdax);
                         } else if (piezaSeleccionada.heroe != objetivo.heroe) {
@@ -110,14 +112,17 @@ public class GenerarTablero extends JPanel {
 
                             piezaSeleccionada.fila = celday;
                             piezaSeleccionada.columna = celdax;
+                            
                         } else {
                             // Mismo bando
                             System.out.println("No puedes atacar a tu propio equipo.");
+                            
                         }
                     } else {
                         System.out.println("Movimiento inválido.");
+                        
                     }
-
+                    piezaSeleccionada.seleccionada = false;
                     piezaSeleccionada = null;
                     seleccionFila = -1;
                     seleccionColumna = -1;
@@ -155,11 +160,17 @@ public class GenerarTablero extends JPanel {
                     g.drawImage(p.imagen, x, y, base, altura, this); // Dibuja imagen de la pieza
                 }
 
-                if (tablero[r][c] != null && tablero[r][c].seleccionada) {
+                /*if (tablero[r][c] != null && tablero[r][c].seleccionada) {
                     g.setColor(Color.BLUE);
                     g.drawRect(x, y, altura, base); // Resalta selección
                     g.setColor(Color.BLACK);
                 }
+                else
+                {
+                g.setColor(Color.black);
+                g.drawRect(x, y, altura, base);
+                }
+                */
             }
         }
     }
