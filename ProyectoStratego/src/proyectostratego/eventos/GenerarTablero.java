@@ -39,8 +39,22 @@ public class GenerarTablero extends JPanel {
     private final int rango8 = 1;
     private final int rango9 = 1;
     private final int rango10 = 1;
+    
+    private boolean[][] zonaProhibida = new boolean[rows][columnas];
+    //Zona prohibida
+    
 
     public GenerarTablero() {
+        
+        zonaProhibida[4][2] = true;
+        zonaProhibida[4][3] = true;
+        zonaProhibida[5][2] = true;
+        zonaProhibida[5][3] = true;
+        zonaProhibida[4][6] = true;
+        zonaProhibida[4][7] = true;
+        zonaProhibida[5][6] = true;
+        zonaProhibida[5][7] = true;
+        
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
@@ -197,11 +211,18 @@ public class GenerarTablero extends JPanel {
                             = (distanciaFila <= piezaSeleccionada.movimiento && distanciaColumna == 0)
                             || (distanciaFila == 0 && distanciaColumna <= piezaSeleccionada.movimiento);
                     System.out.println("Entro");
-                }
-
+                } 
                     pieza objetivo = tablero[celday][celdax];
+                    if (zonaProhibida[celday][celdax])
+                    {
+                    
+                    }
                     if (esMovimientoValido) {
-                        if (objetivo == null) {
+                        if (zonaProhibida[celday][celdax])
+                    {
+                        System.out.println("Zona Prohibida");
+                    }
+                        else if (objetivo == null) {
                             // Movimiento normal a celda vacía
 
                             tablero[celday][celdax] = piezaSeleccionada;
@@ -285,7 +306,10 @@ public class GenerarTablero extends JPanel {
             for (int c = 0; c < columnas; c++) {
                 int x = c * base;
                 int y = r * altura;
-
+                if (zonaProhibida[r][c]) //No dibuja el cuadrito
+                    {
+                    continue;
+                    }
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, altura, base); // Dibuja celda
 
