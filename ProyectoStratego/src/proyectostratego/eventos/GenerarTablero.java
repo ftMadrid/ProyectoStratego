@@ -69,6 +69,8 @@ public class GenerarTablero extends JPanel {
 
                 celdax = coordenadax / promedio;
                 celday = coordenaday / promedio;
+                //Creo que hay que hacer que las bombas y la tierra no se puedan seleccionar 
+                //Para evitar problemas mas a futuro
 
                 if (piezaSeleccionada == null) {
                     // Seleccionar pieza si existe en la celda
@@ -87,40 +89,55 @@ public class GenerarTablero extends JPanel {
 
                     // Solo permitir si se mueve una casilla en una dirección (no diagonal)
                     boolean esMovimientoValido
-                            = (distanciaFila == 1 && distanciaColumna == 0)
-                            || (distanciaFila == 0 && distanciaColumna == 1);
+                            = (distanciaFila == piezaSeleccionada.movimiento && distanciaColumna == 0)
+                            || (distanciaFila == 0 && distanciaColumna == piezaSeleccionada.movimiento);
 
                     pieza objetivo = tablero[celday][celdax];
-
                     if (esMovimientoValido) {
                         if (objetivo == null) {
                             // Movimiento normal a celda vacía
+
                             tablero[celday][celdax] = piezaSeleccionada;
                             tablero[seleccionFila][seleccionColumna] = null;
 //
                             piezaSeleccionada.fila = celday;
                             piezaSeleccionada.columna = celdax;
-                            
 
                             System.out.println("Movida a: " + celday + ", " + celdax);
+
                         } else if (piezaSeleccionada.heroe != objetivo.heroe) {
                             // Ataca a enemigo
-                            System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
+                            
+                            
+                            if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
+                                //La parte es por la excepcion de black widow , despues agregar las de rango 3
+                                System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
 
-                            tablero[celday][celdax] = piezaSeleccionada;
+                                tablero[celday][celdax] = piezaSeleccionada;
+                                tablero[seleccionFila][seleccionColumna] = null;
+
+                                piezaSeleccionada.fila = celday;
+                                piezaSeleccionada.columna = celdax;
+                            } else if (piezaSeleccionada.rango < objetivo.rango) {
+                                //Si son del mismo rango pierden las dos , si la que esta atacando es menor pierde
+                                //Falta agregar la logica que se den vuelta y asi (Parecido a lo del juego)
+                            tablero[piezaSeleccionada.fila ][piezaSeleccionada.columna]=null;
+                            System.out.println("Gano la otra pieza");
+                            }
+                            else if(piezaSeleccionada.rango == objetivo.rango){
+                            tablero[piezaSeleccionada.fila ][piezaSeleccionada.columna]=null;
                             tablero[seleccionFila][seleccionColumna] = null;
-
-                            piezaSeleccionada.fila = celday;
-                            piezaSeleccionada.columna = celdax;
+                                System.out.println("Mismo rango , las dos mueren");
+                            }
                             
                         } else {
                             // Mismo bando
                             System.out.println("No puedes atacar a tu propio equipo.");
-                            
+
                         }
                     } else {
                         System.out.println("Movimiento inválido.");
-                        
+
                     }
                     piezaSeleccionada.seleccionada = false;
                     piezaSeleccionada = null;
@@ -144,6 +161,7 @@ public class GenerarTablero extends JPanel {
     }
 
     @Override
+
     public void paint(Graphics g) {
         super.paint(g);
 
@@ -156,7 +174,9 @@ public class GenerarTablero extends JPanel {
                 g.drawRect(x, y, altura, base); // Dibuja celda
 
                 pieza p = tablero[r][c];
+
                 if (p != null && p.imagen != null) {
+
                     g.drawImage(p.imagen, x, y, base, altura, this); // Dibuja imagen de la pieza
                 }
 
@@ -170,7 +190,7 @@ public class GenerarTablero extends JPanel {
                 g.setColor(Color.black);
                 g.drawRect(x, y, altura, base);
                 }
-                */
+                 */
             }
         }
     }
