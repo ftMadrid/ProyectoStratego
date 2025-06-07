@@ -28,13 +28,111 @@ public class GenerarTablero extends JPanel {
     private final int altura = 60;//Length
     private final int promedio = (base + altura) / 2;
     private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
+//Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
+    private final int rango1 = 1;
+    private final int rango2 = 1;
+    private final int rango3 = 1;
+    private final int rango4 = 1;
+    private final int rango5 = 1;
+    private final int rango6 = 1;
+    private final int rango7 = 1;
+    private final int rango8 = 1;
+    private final int rango9 = 1;
+    private final int rango10 = 1;
 
     public GenerarTablero() {
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
-        // Colocar villanos en filas 0 y 1
-        int indexVillanos = 0;//Cuantos villanos hay
+        
+        //eleccion de rangos 
+        for (int rango = 1; rango <= 10; rango++) {
+
+            int colocados = 0;//Variable para saber cuantos han sido colocados
+            int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
+
+            while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
+                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
+                int contador = 0;
+
+                for (int i = 0; i < villanos.villanos.length; i++) {//Recorrer toooooodo el array
+                    pieza p = villanos.villanos[i];
+
+                    if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
+                        posibles[contador] = p;
+                        contador++;
+                    }
+                }
+                if (contador == 0) {
+                    System.out.println("Debug(No hay de ese rango):" + rango);
+                    break;
+                }
+                int posicionRandom = random.nextInt(contador);
+                pieza eleccion = posibles[posicionRandom];
+                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
+
+                int randomr, randomc;
+                do {
+                    randomr = random.nextInt(2);
+                    randomc = random.nextInt(columnas);
+                } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
+                tablero[randomr][randomc] = eleccion;
+                eleccion.fila = randomr;
+                eleccion.columna = randomc;
+                System.out.println("Se coloco villano:" + eleccion.nombre);
+                eleccion.colocada = true;
+                colocados++;
+
+            }
+
+        }//Fin for rango
+        
+        
+        
+        for (int rango = 1; rango <= 10; rango++) {
+
+            int colocados = 0;//Variable para saber cuantos han sido colocados
+            int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
+
+            while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
+                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
+                int contador = 0;
+
+                for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
+                    pieza p = heroes.heroes[i];
+
+                    if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
+                        posibles[contador] = p;
+                        contador++;
+                    }
+                }
+                if (contador == 0) {
+                    System.out.println("Debug(No hay de ese rango):" + rango);
+                    break;
+                }
+                int posicionRandom = random.nextInt(contador);
+                pieza eleccion = posibles[posicionRandom];
+                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
+
+                int randomr, randomc;
+                do {
+                    randomr = 8 + random.nextInt(2);
+                    randomc = random.nextInt(columnas);
+                } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
+                tablero[randomr][randomc] = eleccion;
+                eleccion.fila = randomr;
+                eleccion.columna = randomc;
+                System.out.println("Se coloco heroe:" + eleccion.nombre);
+                eleccion.colocada = true;
+                colocados++;
+
+            }
+
+        }//Fin for rango
+
+        //-------------------------------------------------------------------
+        // Colocar villanos en filas 0 y 1 
+        /*int indexVillanos = 0;//Cuantos villanos hay
         while (indexVillanos < villanos.villanos.length) {
             int randomr = random.nextInt(2); // 0 o 1
             int randomc = random.nextInt(columnas);
@@ -45,7 +143,6 @@ public class GenerarTablero extends JPanel {
                 indexVillanos++;
             }
         }
-
         // Colocar heroes en filas 8 y 9
         int indexHeroes = 0;//Cuantos heroes hay
         while (indexHeroes < heroes.heroes.length) {
@@ -58,6 +155,7 @@ public class GenerarTablero extends JPanel {
                 indexHeroes++;
             }
         }
+        */
 
         //El mouse listener para lo de click?
         this.addMouseListener(new MouseAdapter() {
@@ -107,29 +205,37 @@ public class GenerarTablero extends JPanel {
 
                         } else if (piezaSeleccionada.heroe != objetivo.heroe) {
                             // Ataca a enemigo
-                            
-                            
+
                             if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
                                 //La parte es por la excepcion de black widow , despues agregar las de rango 3
                                 System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
 
                                 tablero[celday][celdax] = piezaSeleccionada;
+                                tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
+                                
 
                                 piezaSeleccionada.fila = celday;
                                 piezaSeleccionada.columna = celdax;
                             } else if (piezaSeleccionada.rango < objetivo.rango) {
                                 //Si son del mismo rango pierden las dos , si la que esta atacando es menor pierde
                                 //Falta agregar la logica que se den vuelta y asi (Parecido a lo del juego)
-                            tablero[piezaSeleccionada.fila ][piezaSeleccionada.columna]=null;
-                            System.out.println("Gano la otra pieza");
-                            }
-                            else if(piezaSeleccionada.rango == objetivo.rango){
-                            tablero[piezaSeleccionada.fila ][piezaSeleccionada.columna]=null;
-                            tablero[seleccionFila][seleccionColumna] = null;
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
+                                
+                                System.out.println("Gano la otra pieza");
+                            } else if (piezaSeleccionada.rango == objetivo.rango) {
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
+                                tablero[seleccionFila][seleccionColumna].colocada = false;
+                                
+                                
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
+                                tablero[seleccionFila][seleccionColumna] = null;
+                                
+                               
                                 System.out.println("Mismo rango , las dos mueren");
                             }
-                            
+
                         } else {
                             // Mismo bando
                             System.out.println("No puedes atacar a tu propio equipo.");
@@ -192,6 +298,33 @@ public class GenerarTablero extends JPanel {
                 }
                  */
             }
+        }
+    }
+
+    private int getMinimoPorRango(int rango) {
+        switch (rango) {
+            case 1:
+                return rango1;
+            case 2:
+                return rango2;
+            case 3:
+                return rango3;
+            case 4:
+                return rango4;
+            case 5:
+                return rango5;
+            case 6:
+                return rango6;
+            case 7:
+                return rango7;
+            case 8:
+                return rango8;
+            case 9:
+                return rango9;
+            case 10:
+                return rango10;
+            default:
+                return 0;//Por si por alguna razon se bugea
         }
     }
 }

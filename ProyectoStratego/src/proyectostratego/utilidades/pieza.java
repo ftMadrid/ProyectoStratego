@@ -13,6 +13,7 @@ public class pieza {
     public int columna;
     public boolean heroe; //Pongamos que true = heroe , false = villano pa no complicarla
     public boolean seleccionada; //Pa saber si esta seleccionada
+    public boolean colocada;
     
     public pieza(String nombre,String rutaImagen , int rango, int movimiento, int fila, int columna, boolean heroe) 
 //    
@@ -28,6 +29,7 @@ public class pieza {
     this.fila = fila;
     this.columna = columna;
     this.seleccionada = false;
+    this.colocada = false;
     }
     
 }
