@@ -12,9 +12,9 @@ public class villanos {//Codigo para villanos
         villanos = new pieza[3];//piezas nomas
         //Formato
         //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
-        villanos[0] = new pieza("Black Widow", "/proyectostratego/imagenes/33BlackWidow.jpg", 1, 1, -1, -1, false);
-        villanos[1] = new pieza("Tierra", "/proyectostratego/imagenes/Pieza.png", 0, 0, -1, -1, false);
-        villanos[2] = new pieza("Bomba", "/proyectostratego/imagenes/Pieza.png", 0, 0, -1, -1, false);
+        villanos[0] = new pieza("Dr Doom", "/proyectostratego/imagenes/1DrDoom.jpg", 1, 1, -1, -1, false);
+        villanos[1] = new pieza("Galactus", "/proyectostratego/imagenes/2Galactus.png", 0, 0, -1, -1, false);
+        villanos[2] = new pieza("KingPin", "/proyectostratego/imagenes/7Venom.png", 0, 0, -1, -1, false);
 
     }
 

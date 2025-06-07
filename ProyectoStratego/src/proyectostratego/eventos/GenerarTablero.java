@@ -24,8 +24,8 @@ public class GenerarTablero extends JPanel {
     private int celday = -1;
     private int celdax = -1;
 
-    private final int base = 45;//Width
-    private final int altura = 45;//Length
+    private final int base = 60;//Width
+    private final int altura = 60;//Length
     private final int promedio = (base + altura) / 2;
     private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 
