@@ -2,7 +2,6 @@ package proyectostratego.ventanas;
 
 import proyectostratego.eventos.logueo.Register;
 import proyectostratego.eventos.logueo.Login;
-import proyectostratego.eventos.Jugador;
 import proyectostratego.utilidades.Fondos;
 
 public class MenuInicial extends javax.swing.JFrame {
