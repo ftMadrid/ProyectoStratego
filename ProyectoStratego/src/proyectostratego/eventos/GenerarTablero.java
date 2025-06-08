@@ -9,10 +9,12 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.event.MouseAdapter; //Libreria para los mouse
 import java.awt.event.MouseEvent;
+import proyectostratego.ventanas.Juego;
 
 public class GenerarTablero extends JPanel {
 
     Random random = new Random();
+    private Juego juego;
 
     private pieza piezaSeleccionada = null;
     private int seleccionFila = -1;
@@ -23,9 +25,10 @@ public class GenerarTablero extends JPanel {
 
     private int celday = -1;
     private int celdax = -1;
+    private boolean turno = true; //true = Heroes, false = Villanos;
 
-    private final int base = 60;//Width
-    private final int altura = 60;//Length
+    private final int base = 70;//Width
+    private final int altura = 70;//Length
     private final int promedio = (base + altura) / 2;
     private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
@@ -43,8 +46,17 @@ public class GenerarTablero extends JPanel {
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
 
-    public GenerarTablero() {
+    private void reiniciarSeleccion() {
+        piezaSeleccionada.seleccionada = false;
+        piezaSeleccionada = null;
+        seleccionFila = -1;
+        seleccionColumna = -1;
+    }
 
+    public GenerarTablero(Juego juego) {
+        
+        this.juego = juego;
+        
         zonaProhibida[4][2] = true;
         zonaProhibida[4][3] = true;
         zonaProhibida[5][2] = true;
@@ -57,87 +69,53 @@ public class GenerarTablero extends JPanel {
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
-        //eleccion de rangos 
-        for (int rango = 1; rango <= 10; rango++) {
-
-            int colocados = 0;//Variable para saber cuantos han sido colocados
-            int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
-
-            while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
-                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
-                int contador = 0;
-
-                for (int i = 0; i < villanos.villanos.length; i++) {//Recorrer toooooodo el array
-                    pieza p = villanos.villanos[i];
-
-                    if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
-                        posibles[contador] = p;
-                        contador++;
+        //sorteo de villanos 
+        int colocadosVillanos = 0;
+        for (int i = 0; i < villanos.villanos.length; i++) {
+            pieza p = villanos.villanos[i];
+            if (!p.colocada) {
+                boolean colocada = false;
+                for (int intentos = 0; intentos < 100 && !colocada; intentos++) {
+                    int randomr = random.nextInt(4); // filas 0 a 3 (puedes ajustar)
+                    int randomc = random.nextInt(columnas);
+                    if (tablero[randomr][randomc] == null && !zonaProhibida[randomr][randomc]) {
+                        tablero[randomr][randomc] = p;
+                        p.fila = randomr;
+                        p.columna = randomc;
+                        p.colocada = true;
+                        colocadosVillanos++;
+                        System.out.println("Se colocó villano: " + p.nombre + " (rango " + p.rango + ")");
+                        colocada = true;
                     }
                 }
-                if (contador == 0) {
-                    System.out.println("Debug(No hay de ese rango):" + rango);
-                    break;
+                if (!colocada) {
+                    System.out.println("No se pudo colocar villano: " + p.nombre);
                 }
-                int posicionRandom = random.nextInt(contador);
-                pieza eleccion = posibles[posicionRandom];
-                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
-
-                int randomr, randomc;
-                do {
-                    randomr = random.nextInt(2);
-                    randomc = random.nextInt(columnas);
-                } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
-                tablero[randomr][randomc] = eleccion;
-                eleccion.fila = randomr;
-                eleccion.columna = randomc;
-                System.out.println("Se coloco villano:" + eleccion.nombre);
-                eleccion.colocada = true;
-                colocados++;
-
             }
-
         }//Fin for rango
 
-        for (int rango = 1; rango <= 10; rango++) {
-
-            int colocados = 0;//Variable para saber cuantos han sido colocados
-            int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
-
-            while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
-                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
-                int contador = 0;
-
-                for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
-                    pieza p = heroes.heroes[i];
-
-                    if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
-                        posibles[contador] = p;
-                        contador++;
+        int colocadosHeroes = 0;
+        for (int i = 0; i < heroes.heroes.length; i++) {
+            pieza p = heroes.heroes[i];
+            if (!p.colocada) {
+                boolean colocada = false;
+                for (int intentos = 0; intentos < 100 && !colocada; intentos++) {
+                    int randomr = 6 + random.nextInt(4); // filas 0 a 3 (puedes ajustar)
+                    int randomc = random.nextInt(columnas);
+                    if (tablero[randomr][randomc] == null && !zonaProhibida[randomr][randomc]) {
+                        tablero[randomr][randomc] = p;
+                        p.fila = randomr;
+                        p.columna = randomc;
+                        p.colocada = true;
+                        colocadosHeroes++;
+                        System.out.println("Se colocó heroe: " + p.nombre + " (rango " + p.rango + ")");
+                        colocada = true;
                     }
                 }
-                if (contador == 0) {
-                    System.out.println("Debug(No hay de ese rango):" + rango);
-                    break;
+                if (!colocada) {
+                    System.out.println("No se pudo colocar heroe: " + p.nombre);
                 }
-                int posicionRandom = random.nextInt(contador);
-                pieza eleccion = posibles[posicionRandom];
-                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
-
-                int randomr, randomc;
-                do {
-                    randomr = 8 + random.nextInt(2);
-                    randomc = random.nextInt(columnas);
-                } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
-                tablero[randomr][randomc] = eleccion;
-                eleccion.fila = randomr;
-                eleccion.columna = randomc;
-                System.out.println("Se coloco heroe:" + eleccion.nombre);
-                eleccion.colocada = true;
-                colocados++;
-
             }
-
         }//Fin for rango
 
         //-------------------------------------------------------------------
@@ -171,6 +149,7 @@ public class GenerarTablero extends JPanel {
 
             @Override
             public void mouseClicked(MouseEvent click) {
+
                 int coordenadax = click.getX();
                 int coordenaday = click.getY();
 
@@ -182,12 +161,14 @@ public class GenerarTablero extends JPanel {
                 if (piezaSeleccionada == null) {
                     // Seleccionar pieza si existe en la celda
                     pieza seleccion = tablero[celday][celdax];
-                    if (seleccion != null) {
+                    if (seleccion != null && seleccion.heroe == turno) {
                         piezaSeleccionada = seleccion;
                         seleccionFila = celday;
                         seleccionColumna = celdax;
                         System.out.println("Seleccionada pieza: " + seleccion.nombre);
                         piezaSeleccionada.seleccionada = true;
+                    } else if (seleccion != null) {
+                        System.out.println("No es turno de este bando!");
                     }
                 } else {
                     // Intentar mover la pieza
@@ -203,37 +184,34 @@ public class GenerarTablero extends JPanel {
                         esMovimientoValido
                                 = (distanciaFila <= piezaSeleccionada.movimiento && distanciaColumna == 0)
                                 || (distanciaFila == 0 && distanciaColumna <= piezaSeleccionada.movimiento);
-                        
-                        if (distanciaFila > 1 && distanciaColumna==0) //Para vertical |
-                            {
-                                int inicioRecorrido = Math.min(seleccionFila,celday) +1;//+1 Para poder evitar nuestra ficha
-                                int finalRecorrido = Math.max(seleccionFila, celday);
-                            for (int i = inicioRecorrido ;i < finalRecorrido;i++){
+
+                        if (distanciaFila > 1 && distanciaColumna == 0) //Para vertical |
+                        {
+                            int inicioRecorrido = Math.min(seleccionFila, celday) + 1;//+1 Para poder evitar nuestra ficha
+                            int finalRecorrido = Math.max(seleccionFila, celday);
+                            for (int i = inicioRecorrido; i < finalRecorrido; i++) {
                                 System.out.println(tablero[i][piezaSeleccionada.columna]);
-                                if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna])
-                                 {
-                                 esMovimientoValido = false;
-                                 System.out.println("Columa "+piezaSeleccionada.columna + "  "+i);
-                                 break;
-                                 }
+                                if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna]) {
+                                    esMovimientoValido = false;
+                                    System.out.println("Columa " + piezaSeleccionada.columna + "  " + i);
+                                    break;
+                                }
                             }
-                                
-                            }
-                        else if (distanciaColumna > 1 && distanciaFila==0) //Para Horizontal ----
-                            {
-                                int inicioRecorrido = Math.min(seleccionColumna,celdax) +1;//+1 Para poder evitar nuestra ficha
-                                int finalRecorrido = Math.max(seleccionColumna, celdax);
-                            for (int i = inicioRecorrido ;i < finalRecorrido;i++){
+
+                        } else if (distanciaColumna > 1 && distanciaFila == 0) //Para Horizontal ----
+                        {
+                            int inicioRecorrido = Math.min(seleccionColumna, celdax) + 1;//+1 Para poder evitar nuestra ficha
+                            int finalRecorrido = Math.max(seleccionColumna, celdax);
+                            for (int i = inicioRecorrido; i < finalRecorrido; i++) {
                                 System.out.println(tablero[i][piezaSeleccionada.columna]);
-                                if (tablero[piezaSeleccionada.fila][i] != null || zonaProhibida[piezaSeleccionada.fila][i])
-                                 {
-                                 esMovimientoValido = false;
-                                     System.out.println(piezaSeleccionada.fila + "  "+i);
-                                 break;
-                                 }
+                                if (tablero[piezaSeleccionada.fila][i] != null || zonaProhibida[piezaSeleccionada.fila][i]) {
+                                    esMovimientoValido = false;
+                                    System.out.println(piezaSeleccionada.fila + "  " + i);
+                                    break;
+                                }
                             }
-                                
-                            }
+
+                        }
                     }
                     pieza objetivo = tablero[celday][celdax];
                     if (zonaProhibida[celday][celdax]) {
@@ -242,6 +220,7 @@ public class GenerarTablero extends JPanel {
                     if (esMovimientoValido) {
                         if (zonaProhibida[celday][celdax]) {
                             System.out.println("Zona Prohibida");
+                            reiniciarSeleccion();
                         } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
 
@@ -288,22 +267,27 @@ public class GenerarTablero extends JPanel {
                             System.out.println("No puedes atacar a tu propio equipo.");
 
                         }
+                        reiniciarSeleccion();
+                        turno = !turno; //Cambio de turno
+                        System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
+                        if(turno){
+                            juego.getTurno("Heroes");
+                        }else{
+                            juego.getTurno("Villanos");
+                        }
                     } else {
                         System.out.println(piezaSeleccionada.movimiento);
                         System.out.println("Movimiento inválido.");
+                        reiniciarSeleccion();
 
                     }
-                    piezaSeleccionada.seleccionada = false;
-                    piezaSeleccionada = null;
-                    seleccionFila = -1;
-                    seleccionColumna = -1;
                 }
 
                 repaint();
                 System.out.println("X" + celdax
                         + "\nY" + celday);
 
-                if (tablero[celday][celdax] != null) {
+                if (piezaSeleccionada == null && tablero[celday][celdax] != null) {
                     System.out.println("Pieza aqui");
                     System.out.println(tablero[celday][celdax].nombre);
                     tablero[celday][celdax].seleccionada = true;

@@ -20,7 +20,7 @@ public class pieza {
 //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
     {
     Image original = new ImageIcon(getClass().getResource(rutaImagen)).getImage();
-    this.imagen = original.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+    this.imagen = original.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
     //Consigue la distancia para escalar la imagen , y despues la imagen como tal para escalarla
     this.nombre = nombre;
     this.heroe = heroe;
@@ -31,5 +31,4 @@ public class pieza {
     this.seleccionada = false;
     this.colocada = false;
     }
-    
 }
