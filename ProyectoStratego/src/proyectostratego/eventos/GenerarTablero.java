@@ -39,13 +39,12 @@ public class GenerarTablero extends JPanel {
     private final int rango8 = 1;
     private final int rango9 = 1;
     private final int rango10 = 1;
-    
+
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
-    
 
     public GenerarTablero() {
-        
+
         zonaProhibida[4][2] = true;
         zonaProhibida[4][3] = true;
         zonaProhibida[5][2] = true;
@@ -54,11 +53,10 @@ public class GenerarTablero extends JPanel {
         zonaProhibida[4][7] = true;
         zonaProhibida[5][6] = true;
         zonaProhibida[5][7] = true;
-        
+
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
-        
         //eleccion de rangos 
         for (int rango = 1; rango <= 10; rango++) {
 
@@ -100,9 +98,7 @@ public class GenerarTablero extends JPanel {
             }
 
         }//Fin for rango
-        
-        
-        
+
         for (int rango = 1; rango <= 10; rango++) {
 
             int colocados = 0;//Variable para saber cuantos han sido colocados
@@ -169,8 +165,7 @@ public class GenerarTablero extends JPanel {
                 indexHeroes++;
             }
         }
-        */
-
+         */
         //El mouse listener para lo de click?
         this.addMouseListener(new MouseAdapter() {
 
@@ -200,29 +195,54 @@ public class GenerarTablero extends JPanel {
                     int distanciaColumna = Math.abs(celdax - seleccionColumna);
 
                     // Solo permitir si se mueve una casilla en una dirección (no diagonal)
-                    
                     boolean esMovimientoValido
                             = (distanciaFila == piezaSeleccionada.movimiento && distanciaColumna == 0)
                             || (distanciaFila == 0 && distanciaColumna == piezaSeleccionada.movimiento);
-                    
-                    if (piezaSeleccionada.rango == 2)
-                {
-                esMovimientoValido
-                            = (distanciaFila <= piezaSeleccionada.movimiento && distanciaColumna == 0)
-                            || (distanciaFila == 0 && distanciaColumna <= piezaSeleccionada.movimiento);
-                    System.out.println("Entro");
-                } 
+
+                    if (piezaSeleccionada.rango == 2) {
+                        esMovimientoValido
+                                = (distanciaFila <= piezaSeleccionada.movimiento && distanciaColumna == 0)
+                                || (distanciaFila == 0 && distanciaColumna <= piezaSeleccionada.movimiento);
+                        
+                        if (distanciaFila > 1 && distanciaColumna==0) //Para vertical |
+                            {
+                                int inicioRecorrido = Math.min(seleccionFila,celday) +1;//+1 Para poder evitar nuestra ficha
+                                int finalRecorrido = Math.max(seleccionFila, celday);
+                            for (int i = inicioRecorrido ;i < finalRecorrido;i++){
+                                System.out.println(tablero[i][piezaSeleccionada.columna]);
+                                if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna])
+                                 {
+                                 esMovimientoValido = false;
+                                 System.out.println("Columa "+piezaSeleccionada.columna + "  "+i);
+                                 break;
+                                 }
+                            }
+                                
+                            }
+                        else if (distanciaColumna > 1 && distanciaFila==0) //Para Horizontal ----
+                            {
+                                int inicioRecorrido = Math.min(seleccionColumna,celdax) +1;//+1 Para poder evitar nuestra ficha
+                                int finalRecorrido = Math.max(seleccionColumna, celdax);
+                            for (int i = inicioRecorrido ;i < finalRecorrido;i++){
+                                System.out.println(tablero[i][piezaSeleccionada.columna]);
+                                if (tablero[piezaSeleccionada.fila][i] != null || zonaProhibida[piezaSeleccionada.fila][i])
+                                 {
+                                 esMovimientoValido = false;
+                                     System.out.println(piezaSeleccionada.fila + "  "+i);
+                                 break;
+                                 }
+                            }
+                                
+                            }
+                    }
                     pieza objetivo = tablero[celday][celdax];
-                    if (zonaProhibida[celday][celdax])
-                    {
-                    
+                    if (zonaProhibida[celday][celdax]) {
+
                     }
                     if (esMovimientoValido) {
-                        if (zonaProhibida[celday][celdax])
-                    {
-                        System.out.println("Zona Prohibida");
-                    }
-                        else if (objetivo == null) {
+                        if (zonaProhibida[celday][celdax]) {
+                            System.out.println("Zona Prohibida");
+                        } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
 
                             tablero[celday][celdax] = piezaSeleccionada;
@@ -243,7 +263,6 @@ public class GenerarTablero extends JPanel {
                                 tablero[celday][celdax] = piezaSeleccionada;
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
-                                
 
                                 piezaSeleccionada.fila = celday;
                                 piezaSeleccionada.columna = celdax;
@@ -252,17 +271,15 @@ public class GenerarTablero extends JPanel {
                                 //Falta agregar la logica que se den vuelta y asi (Parecido a lo del juego)
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
-                                
+
                                 System.out.println("Gano la otra pieza");
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
-                                
-                                
+
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
                                 tablero[seleccionFila][seleccionColumna] = null;
-                                
-                               
+
                                 System.out.println("Mismo rango , las dos mueren");
                             }
 
@@ -307,9 +324,9 @@ public class GenerarTablero extends JPanel {
                 int x = c * base;
                 int y = r * altura;
                 if (zonaProhibida[r][c]) //No dibuja el cuadrito
-                    {
+                {
                     continue;
-                    }
+                }
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, altura, base); // Dibuja celda
 
