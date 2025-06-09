@@ -76,7 +76,7 @@ public class GenerarTablero extends JPanel {
             if (!p.colocada) {
                 boolean colocada = false;
                 for (int intentos = 0; intentos < 100 && !colocada; intentos++) {
-                    int randomr = random.nextInt(4); // filas 0 a 3 (puedes ajustar)
+                    int randomr = random.nextInt(2); // filas 0 a 1 (puedes ajustar)
                     int randomc = random.nextInt(columnas);
                     if (tablero[randomr][randomc] == null && !zonaProhibida[randomr][randomc]) {
                         tablero[randomr][randomc] = p;
@@ -100,7 +100,7 @@ public class GenerarTablero extends JPanel {
             if (!p.colocada) {
                 boolean colocada = false;
                 for (int intentos = 0; intentos < 100 && !colocada; intentos++) {
-                    int randomr = 6 + random.nextInt(4); // filas 0 a 3 (puedes ajustar)
+                    int randomr = 6 + random.nextInt(2); // filas 0 a 1(puedes ajustar)
                     int randomc = random.nextInt(columnas);
                     if (tablero[randomr][randomc] == null && !zonaProhibida[randomr][randomc]) {
                         tablero[randomr][randomc] = p;
@@ -194,6 +194,7 @@ public class GenerarTablero extends JPanel {
                                 if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna]) {
                                     esMovimientoValido = false;
                                     System.out.println("Columa " + piezaSeleccionada.columna + "  " + i);
+                                    System.out.println("No aceptada");
                                     break;
                                 }
                             }
@@ -207,6 +208,7 @@ public class GenerarTablero extends JPanel {
                                 if (tablero[piezaSeleccionada.fila][i] != null || zonaProhibida[piezaSeleccionada.fila][i]) {
                                     esMovimientoValido = false;
                                     System.out.println(piezaSeleccionada.fila + "  " + i);
+                                    System.out.println("No aceptada");
                                     break;
                                 }
                             }
@@ -214,13 +216,12 @@ public class GenerarTablero extends JPanel {
                         }
                     }
                     pieza objetivo = tablero[celday][celdax];
-                    if (zonaProhibida[celday][celdax]) {
-
-                    }
+                    
                     if (esMovimientoValido) {
                         if (zonaProhibida[celday][celdax]) {
                             System.out.println("Zona Prohibida");
                             reiniciarSeleccion();
+                            return;//Salia un error en consola entonces con el return se soluciono
                         } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
 
@@ -265,6 +266,8 @@ public class GenerarTablero extends JPanel {
                         } else {
                             // Mismo bando
                             System.out.println("No puedes atacar a tu propio equipo.");
+                            //No deberia contarte el turno realmente
+                            return;
 
                         }
                         reiniciarSeleccion();
