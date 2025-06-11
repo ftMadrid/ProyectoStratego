@@ -37,7 +37,7 @@ public class GenerarTablero extends JPanel {
     private final int rango3 = 1;
     private final int rango4 = 1;
     private final int rango5 = 1;
-    private final int rango6 = 1;
+    private final int rango6 = 5;
     private final int rango7 = 1;
     private final int rango8 = 1;
     private final int rango9 = 1;
@@ -69,52 +69,82 @@ public class GenerarTablero extends JPanel {
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
-        //sorteo de villanos 
-        int colocadosVillanos = 0;
-        for (int i = 0; i < villanos.villanos.length; i++) {
-            pieza p = villanos.villanos[i];
-            if (!p.colocada) {
-                boolean colocada = false;
-                for (int intentos = 0; intentos < 100 && !colocada; intentos++) {
-                    int randomr = random.nextInt(2); // filas 0 a 1 (puedes ajustar)
-                    int randomc = random.nextInt(columnas);
-                    if (tablero[randomr][randomc] == null && !zonaProhibida[randomr][randomc]) {
-                        tablero[randomr][randomc] = p;
-                        p.fila = randomr;
-                        p.columna = randomc;
-                        p.colocada = true;
-                        colocadosVillanos++;
-                        System.out.println("Se colocó villano: " + p.nombre + " (rango " + p.rango + ")");
-                        colocada = true;
+        //eleccion de rangos 
+        for (int rango = 1; rango <= 10; rango++) {
+
+            int colocados = 0;//Variable para saber cuantos han sido colocados
+            int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
+
+            while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
+                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
+                int contador = 0;
+
+                for (int i = 0; i < villanos.villanos.length; i++) {//Recorrer toooooodo el array
+                    pieza p = villanos.villanos[i];
+
+                    if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
+                        posibles[contador] = p;
+                        contador++;
                     }
                 }
-                if (!colocada) {
-                    System.out.println("No se pudo colocar villano: " + p.nombre);
+                if (contador == 0) {
+                    System.out.println("Debug(No hay de ese rango):" + rango);
+                    break;
                 }
+                int posicionRandom = random.nextInt(contador);
+                pieza eleccion = posibles[posicionRandom];
+                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
+
+                int randomr, randomc;
+                do {
+                    randomr = random.nextInt(2);
+                    randomc = random.nextInt(columnas);
+                } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
+                tablero[randomr][randomc] = eleccion;
+                eleccion.fila = randomr;
+                eleccion.columna = randomc;
+                System.out.println("Se coloco villano:" + eleccion.nombre);
+                eleccion.colocada = true;
+                colocados++;
             }
         }//Fin for rango
 
-        int colocadosHeroes = 0;
-        for (int i = 0; i < heroes.heroes.length; i++) {
-            pieza p = heroes.heroes[i];
-            if (!p.colocada) {
-                boolean colocada = false;
-                for (int intentos = 0; intentos < 100 && !colocada; intentos++) {
-                    int randomr = 6 + random.nextInt(2); // filas 0 a 1(puedes ajustar)
-                    int randomc = random.nextInt(columnas);
-                    if (tablero[randomr][randomc] == null && !zonaProhibida[randomr][randomc]) {
-                        tablero[randomr][randomc] = p;
-                        p.fila = randomr;
-                        p.columna = randomc;
-                        p.colocada = true;
-                        colocadosHeroes++;
-                        System.out.println("Se colocó heroe: " + p.nombre + " (rango " + p.rango + ")");
-                        colocada = true;
+        for (int rango = 1; rango <= 10; rango++) {
+
+            int colocados = 0;//Variable para saber cuantos han sido colocados
+            int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
+
+            while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
+                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
+                int contador = 0;
+
+                for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
+                    pieza p = heroes.heroes[i];
+
+                    if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
+                        posibles[contador] = p;
+                        contador++;
                     }
                 }
-                if (!colocada) {
-                    System.out.println("No se pudo colocar heroe: " + p.nombre);
+                if (contador == 0) {
+                    System.out.println("Debug(No hay de ese rango):" + rango);
+                    break;
                 }
+                int posicionRandom = random.nextInt(contador);
+                pieza eleccion = posibles[posicionRandom];
+                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
+
+                int randomr, randomc;
+                do {
+                    randomr = 8 + random.nextInt(2);
+                    randomc = random.nextInt(columnas);
+                } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
+                tablero[randomr][randomc] = eleccion;
+                eleccion.fila = randomr;
+                eleccion.columna = randomc;
+                System.out.println("Se coloco heroe:" + eleccion.nombre);
+                eleccion.colocada = true;
+                colocados++;
             }
         }//Fin for rango
 
