@@ -3,17 +3,21 @@ package proyectostratego.eventos;
 public class Jugador { //Plantilla para el objeto
 
     public static int nUsuariosTotal = 0;
+    public static int nUsuariosEliminadosTotal = 0;
     public static Jugador jugadorLog = null;
     public static boolean logged = false;
 
     public static Jugador[] jugadores = new Jugador[100]; //Crea la cantidad de jugadores y aqui se almacenan los jugadores como tal
     //La razon por la que son 100 , es porque es eso o crear uno que por cada user se vaya actualizando
+    public static Jugador[] jugadoresEliminados = new Jugador[100];
 
     public String username;
     public String password;
     public int puntos = 0;
     public int heroesPartidas = 0;
     public int villanosPartidas = 0; //Inicializar variables mayormente
+    public int victorias = 0;
+    public int derrotas = 0;
 
     public Jugador(String username, String password) {
         this.username = username; //Conseguir el user
@@ -21,6 +25,8 @@ public class Jugador { //Plantilla para el objeto
         this.puntos = 0;//Puntos user
         this.heroesPartidas = 0;//Partidas jugadas , no ganadas
         this.villanosPartidas = 0;//Lo mismo de arriba
+        this.victorias = 0;
+        this.derrotas = 0;
         //Para agregar mas stats o cosas extra , solo es poner this.[variable] = 0;
     }
 
@@ -35,7 +41,7 @@ public class Jugador { //Plantilla para el objeto
 
 //Puntos get/set
     public void setPuntos(int puntos) {
-        this.puntos = puntos;
+        this.puntos += puntos;
     }
 
     public int getPuntos() {
@@ -53,7 +59,7 @@ public class Jugador { //Plantilla para el objeto
 
 //Heroes partidas
     public void setHeroesPartidas(int heroesPartidas) {
-        this.heroesPartidas = heroesPartidas;
+        this.heroesPartidas += heroesPartidas;
     }
 
     public int getHeroesPartidas() {
@@ -62,7 +68,7 @@ public class Jugador { //Plantilla para el objeto
 
 //Villanos Partidas
     public void setVillanosPartidas(int villanosPartidas) {
-        this.villanosPartidas = villanosPartidas;
+        this.villanosPartidas += villanosPartidas;
     }
 
     public int getVillanosPartidas() {
@@ -78,6 +84,22 @@ public class Jugador { //Plantilla para el objeto
         this.password = nuevaPassword;
         //Metodo para cambiar la contraseña
     }
+    
+    public void setVictorias(int victorias){
+        this.victorias += victorias;
+    }
+    
+    public int getVictorias(){
+        return victorias;
+    }
+    
+    public void setDerrotas(int derrotas){
+        this.derrotas += derrotas;
+    }
+    
+    public int getDerrotas(){
+        return derrotas;
+    }
 
     public static void eliminarJugador(String username) {
 
@@ -85,6 +107,10 @@ public class Jugador { //Plantilla para el objeto
         for (int i = 0; i < Jugador.nUsuariosTotal; i++) {
             if (Jugador.jugadores[i].username.equalsIgnoreCase(username)) {
 
+                // Guardar usuarios eliminados
+                Jugador.jugadoresEliminados[nUsuariosEliminadosTotal] = jugadores[i];
+                nUsuariosEliminadosTotal++;
+                
                 //Mueve los demas jugadores para que quede de ultimo el usuario a eliminar para facilitar el proceso
                 for (int j = i; j < Jugador.nUsuariosTotal - 1; j++) {
                     Jugador.jugadores[j] = Jugador.jugadores[j + 1];
