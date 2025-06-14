@@ -32,7 +32,9 @@ public class GenerarTablero extends JPanel {
     private final int promedio = (base + altura) / 2;
     private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
-    private final int rango1 = 1;
+    private final int bombas = 6;
+    private final int tierra = 1;
+    private final int rango1 = 2;
     private final int rango2 = 2;
     private final int rango3 = 2;
     private final int rango4 = 2;
@@ -55,6 +57,59 @@ public class GenerarTablero extends JPanel {
         seleccionColumna = -1;
     }
 
+    private void colocarTierraYBombas(pieza[] grupo, int filaTierra, int filaFrente) {
+        int columna = 1 + random.nextInt(8); // columna entre 1 y 8
+
+        // aqui busco la tierra
+        pieza tierra = null;
+        for (pieza p : grupo) {
+            if (p.rango == 0 && !p.colocada) {
+                tierra = p;
+                break;
+            }
+        }
+
+        // aqui coloco la tierra
+        if (tierra != null) {
+            tablero[filaTierra][columna] = tierra;
+            tierra.fila = filaTierra;
+            tierra.columna = columna;
+            tierra.colocada = true;
+            System.out.println("Se colocó Tierra en (" + filaTierra + "," + columna + ")");
+        }
+
+        // setear coords para poner las bombas
+        int[][] bombasCoords = {
+            {filaTierra, columna - 1},
+            {filaTierra, columna + 1},
+            {filaFrente, columna}
+        };
+
+        // aqui coloco las bombas
+        for (int[] pos : bombasCoords) {
+            int r = pos[0];
+            int c = pos[1];
+
+            if (r >= 0 && r < rows && c >= 0 && c < columnas && tablero[r][c] == null) {
+                pieza bomba = null;
+                for (pieza p : grupo) {
+                    if (p.rango == -1 && !p.colocada) {
+                        bomba = p;
+                        break;
+                    }
+                }
+
+                if (bomba != null) {
+                    tablero[r][c] = bomba;
+                    bomba.fila = r;
+                    bomba.columna = c;
+                    bomba.colocada = true;
+                    System.out.println("Se colocó bomba en (" + r + "," + c + ")");
+                }
+            }
+        }
+    }
+
     public GenerarTablero(Juego juego) {
 
         this.juego = juego;
@@ -71,8 +126,13 @@ public class GenerarTablero extends JPanel {
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
+        colocarTierraYBombas(villanos.villanos, 0, 1);
+        colocarTierraYBombas(heroes.heroes, 9, 8);
+
         //eleccion de rangos 
-        for (int rango = 1; rango <= 10; rango++) {
+        for (int rango = -1; rango <= 10; rango++) {
+            
+            if(rango == 0) continue; // para que se salte la logica en el rango de la tierra
 
             int colocados = 0;//Variable para saber cuantos han sido colocados
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
@@ -111,7 +171,9 @@ public class GenerarTablero extends JPanel {
             }
         }//Fin for rango
 
-        for (int rango = 1; rango <= 10; rango++) {
+        for (int rango = -1; rango <= 10; rango++) {
+            
+            if(rango == 0) continue; // para que se salte la logica en el rango de la tierra
 
             int colocados = 0;//Variable para saber cuantos han sido colocados
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
@@ -274,7 +336,7 @@ public class GenerarTablero extends JPanel {
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
                                 piezaSeleccionada.colocada = false;
                                 objetivo.colocada = false;
-                                
+
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
                                 tablero[objetivo.fila][objetivo.columna] = null;
 
@@ -374,6 +436,10 @@ public class GenerarTablero extends JPanel {
 
     private int getMinimoPorRango(int rango) {
         switch (rango) {
+            case -1:
+                return bombas;
+            case 0:
+                return tierra;
             case 1:
                 return rango1;
             case 2:
