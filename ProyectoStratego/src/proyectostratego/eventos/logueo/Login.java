@@ -24,11 +24,11 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new Fondos("/proyectostratego/imagenes/fondomenuprincipal.png");
         logo = new javax.swing.JLabel();
         botonLoguear = new javax.swing.JButton();
-        Password = new javax.swing.JTextField();
         User = new javax.swing.JTextField();
         labelUsuario = new javax.swing.JLabel();
         labelContra = new javax.swing.JLabel();
         botonSalir = new javax.swing.JButton();
+        Password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -44,8 +44,6 @@ public class Login extends javax.swing.JFrame {
                 botonLoguearActionPerformed(evt);
             }
         });
-
-        Password.setFont(new java.awt.Font("ITF Devanagari", 0, 18)); // NOI18N
 
         User.setFont(new java.awt.Font("ITF Devanagari", 0, 18)); // NOI18N
         User.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -99,21 +97,21 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(labelUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(labelContra)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(botonLoguear, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,14 +131,17 @@ public class Login extends javax.swing.JFrame {
     private void botonLoguearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLoguearActionPerformed
         // TODO add your handling code here:
         boolean encontrado = false;
-        if (User.getText().equals("") || Password.getText().equals("")) {
+        
+        String password = new String(Password.getPassword());
+        
+        if (User.getText().equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(this, "No puedes dejar los espacios solicitados en blanco");
         } else {
             for (int i = 0; i < Jugador.nUsuariosTotal; i++) {
                 if (User.getText().equalsIgnoreCase(Jugador.jugadores[i].username)) //If user valido basicamente
                 //Tambien ignore case porque tiene que ser unico
                 {
-                    if (Jugador.jugadores[i].validarPass(Password.getText())) // If la contra es correcta
+                    if (Jugador.jugadores[i].validarPass(password)) // If la contra es correcta
                     {
                         JOptionPane.showMessageDialog(this, "Logeado correctamente");
 
@@ -216,7 +217,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Password;
+    private javax.swing.JPasswordField Password;
     private javax.swing.JTextField User;
     private javax.swing.JButton botonLoguear;
     private javax.swing.JButton botonSalir;

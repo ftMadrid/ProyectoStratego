@@ -22,11 +22,11 @@ public class Register extends javax.swing.JFrame {
         jPanel1 = new Fondos("/proyectostratego/imagenes/fondomenuprincipal.png");
         jButton1 = new javax.swing.JButton();
         Usuario = new javax.swing.JTextField();
-        Contra = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        Contra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -45,12 +45,6 @@ public class Register extends javax.swing.JFrame {
         Usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsuarioActionPerformed(evt);
-            }
-        });
-
-        Contra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ContraActionPerformed(evt);
             }
         });
 
@@ -86,11 +80,9 @@ public class Register extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(Contra, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel3)
+                            .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Contra, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(141, 141, 141)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -101,9 +93,9 @@ public class Register extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -111,11 +103,11 @@ public class Register extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Contra, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,13 +128,12 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UsuarioActionPerformed
 
-    private void ContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ContraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ContraActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Registrar Usuario validando a ver si los dos tienen campos
+        
+        String password = new String(Contra.getPassword()); // constructor para obtener la contraseña y transformarla.
+        
         for (int j = 0; j < Jugador.nUsuariosTotal; j++) {
             if (Usuario.getText().equalsIgnoreCase(Jugador.jugadores[j].username)) {
                 JOptionPane.showMessageDialog(this, "Ya existe un usuario con ese nombre");
@@ -150,15 +141,15 @@ public class Register extends javax.swing.JFrame {
             }
         }
 
-        if (Usuario.getText().equals("") || Contra.getText().equals("")) {
+        if (Usuario.getText().equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(this, "No pueden estar vacios los campos!");
-        } else if (Contra.getText().contains(" ")) {
+        } else if (password.contains(" ")) {
             JOptionPane.showMessageDialog(this, "No puedes tener espacio en la contrasena");
-        } else if (Contra.getText().length() != 5) {
+        } else if (password.length() != 5) {
             JOptionPane.showMessageDialog(this, "La contrasena tiene que ser unicamente de 5 caracteres");
         } else {
 
-            Jugador nuevoJugador = new Jugador(Usuario.getText(), Contra.getText());
+            Jugador nuevoJugador = new Jugador(Usuario.getText(), password);
             Jugador.jugadores[Jugador.nUsuariosTotal] = nuevoJugador;
             Jugador.nUsuariosTotal++;
 
@@ -213,7 +204,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Contra;
+    private javax.swing.JPasswordField Contra;
     private javax.swing.JTextField Usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

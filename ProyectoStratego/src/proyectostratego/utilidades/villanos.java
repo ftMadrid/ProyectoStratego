@@ -9,7 +9,7 @@ public class villanos {//Codigo para villanos
     public pieza[] villanos; //Public object array heroes
 
     public villanos() {
-        villanos = new pieza[33];//piezas nomas
+        villanos = new pieza[34];//piezas nomas
         //Formato
         //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
         villanos[0] = new pieza("Dr Doom", "/proyectostratego/imagenesvillanos/1DrDoom.jpg", 10, 1, -1, -1, false);//10
@@ -45,6 +45,7 @@ public class villanos {//Codigo para villanos
         villanos[30] = new pieza("Sentinel 2", "/proyectostratego/imagenesvillanos/31Sentinel2.png", 2, 10, -1, -1, false);
         villanos[31] = new pieza("Elektro", "/proyectostratego/imagenesvillanos/32Elektro.png", 2, 10, -1, -1, false);
         villanos[32] = new pieza("Black Widow", "/proyectostratego/imagenesvillanos/33BlackWidow.png", 1, 1, -1, -1, false);//1
+        villanos[33] = new pieza("Tierra Villanos", "/proyectostratego/imagenesvillanos/33BlackWidow.png", 0, 0, -1, -1, false);//1
         
      
     }

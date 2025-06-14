@@ -33,30 +33,32 @@ public class GenerarTablero extends JPanel {
     private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
     private final int rango1 = 1;
-    private final int rango2 = 1;
-    private final int rango3 = 1;
-    private final int rango4 = 1;
-    private final int rango5 = 1;
-    private final int rango6 = 5;
-    private final int rango7 = 1;
-    private final int rango8 = 1;
-    private final int rango9 = 1;
-    private final int rango10 = 1;
+    private final int rango2 = 2;
+    private final int rango3 = 2;
+    private final int rango4 = 2;
+    private final int rango5 = 2;
+    private final int rango6 = 2;
+    private final int rango7 = 2;
+    private final int rango8 = 2;
+    private final int rango9 = 2;
+    private final int rango10 = 2;
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
 
     private void reiniciarSeleccion() {
-        piezaSeleccionada.seleccionada = false;
+        if (piezaSeleccionada != null) {
+            piezaSeleccionada.seleccionada = false; // Quitar la marca visual
+        }
         piezaSeleccionada = null;
         seleccionFila = -1;
         seleccionColumna = -1;
     }
 
     public GenerarTablero(Juego juego) {
-        
+
         this.juego = juego;
-        
+
         zonaProhibida[4][2] = true;
         zonaProhibida[4][3] = true;
         zonaProhibida[5][2] = true;
@@ -97,7 +99,7 @@ public class GenerarTablero extends JPanel {
 
                 int randomr, randomc;
                 do {
-                    randomr = random.nextInt(2);
+                    randomr = random.nextInt(4);
                     randomc = random.nextInt(columnas);
                 } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
                 tablero[randomr][randomc] = eleccion;
@@ -148,32 +150,6 @@ public class GenerarTablero extends JPanel {
             }
         }//Fin for rango
 
-        //-------------------------------------------------------------------
-        // Colocar villanos en filas 0 y 1 
-        /*int indexVillanos = 0;//Cuantos villanos hay
-        while (indexVillanos < villanos.villanos.length) {
-            int randomr = random.nextInt(2); // 0 o 1
-            int randomc = random.nextInt(columnas);
-            if (tablero[randomr][randomc] == null) {
-                tablero[randomr][randomc] = villanos.villanos[indexVillanos];
-                villanos.villanos[indexVillanos].fila = randomr;
-                villanos.villanos[indexVillanos].columna = randomc;
-                indexVillanos++;
-            }
-        }
-        // Colocar heroes en filas 8 y 9
-        int indexHeroes = 0;//Cuantos heroes hay
-        while (indexHeroes < heroes.heroes.length) {
-            int randomr = 8 + random.nextInt(2); // 8 o 9
-            int randomc = random.nextInt(columnas);
-            if (tablero[randomr][randomc] == null) {
-                tablero[randomr][randomc] = heroes.heroes[indexHeroes];
-                heroes.heroes[indexHeroes].fila = randomr;
-                heroes.heroes[indexHeroes].columna = randomc;
-                indexHeroes++;
-            }
-        }
-         */
         //El mouse listener para lo de click?
         this.addMouseListener(new MouseAdapter() {
 
@@ -190,6 +166,14 @@ public class GenerarTablero extends JPanel {
 
                 if (piezaSeleccionada == null) {
                     // Seleccionar pieza si existe en la celda
+
+                    for (int i = 0; i < tablero.length; i++) {
+                        for (int j = 0; j < tablero[i].length; j++) {
+                            if (tablero[i][j] != null) {
+                                tablero[i][j].seleccionada = false;
+                            }
+                        }
+                    }
                     pieza seleccion = tablero[celday][celdax];
                     if (seleccion != null && seleccion.heroe == turno) {
                         piezaSeleccionada = seleccion;
@@ -246,7 +230,7 @@ public class GenerarTablero extends JPanel {
                         }
                     }
                     pieza objetivo = tablero[celday][celdax];
-                    
+
                     if (esMovimientoValido) {
                         if (zonaProhibida[celday][celdax]) {
                             System.out.println("Zona Prohibida");
@@ -255,11 +239,14 @@ public class GenerarTablero extends JPanel {
                         } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
 
-                            tablero[celday][celdax] = piezaSeleccionada;
+                            pieza piezaMovida = piezaSeleccionada;
+                            piezaMovida.seleccionada = false; // Quitar remarcado visual antes de mover
+
+                            tablero[celday][celdax] = piezaMovida;
                             tablero[seleccionFila][seleccionColumna] = null;
-//
-                            piezaSeleccionada.fila = celday;
-                            piezaSeleccionada.columna = celdax;
+
+                            piezaMovida.fila = celday;
+                            piezaMovida.columna = celdax;
 
                             System.out.println("Movida a: " + celday + ", " + celdax);
 
@@ -276,6 +263,7 @@ public class GenerarTablero extends JPanel {
 
                                 piezaSeleccionada.fila = celday;
                                 piezaSeleccionada.columna = celdax;
+
                             } else if (piezaSeleccionada.rango < objetivo.rango) {
                                 //Si son del mismo rango pierden las dos , si la que esta atacando es menor pierde
                                 //Falta agregar la logica que se den vuelta y asi (Parecido a lo del juego)
@@ -284,11 +272,11 @@ public class GenerarTablero extends JPanel {
 
                                 System.out.println("Gano la otra pieza");
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
-                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
-                                tablero[seleccionFila][seleccionColumna].colocada = false;
-
+                                piezaSeleccionada.colocada = false;
+                                objetivo.colocada = false;
+                                
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
-                                tablero[seleccionFila][seleccionColumna] = null;
+                                tablero[objetivo.fila][objetivo.columna] = null;
 
                                 System.out.println("Mismo rango , las dos mueren");
                             }
@@ -303,9 +291,9 @@ public class GenerarTablero extends JPanel {
                         reiniciarSeleccion();
                         turno = !turno; //Cambio de turno
                         System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
-                        if(turno){
+                        if (turno) {
                             juego.getTurno("Heroes");
-                        }else{
+                        } else {
                             juego.getTurno("Villanos");
                         }
                     } else {
@@ -320,12 +308,11 @@ public class GenerarTablero extends JPanel {
                 System.out.println("X" + celdax
                         + "\nY" + celday);
 
-                if (piezaSeleccionada == null && tablero[celday][celdax] != null) {
+                /*if (piezaSeleccionada == null && tablero[celday][celdax] != null) {
                     System.out.println("Pieza aqui");
                     System.out.println(tablero[celday][celdax].nombre);
                     tablero[celday][celdax].seleccionada = true;
-                }
-
+                }*/
                 repaint();
             }
         });
@@ -347,6 +334,23 @@ public class GenerarTablero extends JPanel {
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, altura, base); // Dibuja celda
 
+                if (piezaSeleccionada != null) {
+                    int distFila = Math.abs(r - seleccionFila);
+                    int distCol = Math.abs(c - seleccionColumna);
+
+                    // verificar que está a distancia permitida (horizontal o vertical)
+                    if (((distFila <= piezaSeleccionada.movimiento && distCol == 0)
+                            || (distCol <= piezaSeleccionada.movimiento && distFila == 0))
+                            && !(r == seleccionFila && c == seleccionColumna)) {
+
+                        // pintar el fondo semitransparente verde para posible movimiento
+                        g.setColor(Color.GREEN);
+                        g.drawRect(x, y, base, altura);
+                        g.drawRect(x + 1, y + 1, base - 2, altura - 2);
+                        g.drawRect(x + 2, y + 2, base - 4, altura - 4);
+                    }
+                }
+
                 pieza p = tablero[r][c];
 
                 if (p != null && p.imagen != null) {
@@ -354,17 +358,16 @@ public class GenerarTablero extends JPanel {
                     g.drawImage(p.imagen, x, y, base, altura, this); // Dibuja imagen de la pieza
                 }
 
-                /*if (tablero[r][c] != null && tablero[r][c].seleccionada) {
+                if (tablero[r][c] != null && tablero[r][c].seleccionada) {
                     g.setColor(Color.BLUE);
-                    g.drawRect(x, y, altura, base); // Resalta selección
+                    // dibujo mas cuadritos encimas para remarcarlos mas
+                    g.drawRect(x, y, base, altura);
+                    g.drawRect(x + 1, y + 1, base - 2, altura - 2);
+                    g.drawRect(x + 2, y + 2, base - 4, altura - 4);
+                } else {
                     g.setColor(Color.BLACK);
+                    g.drawRect(x, y, altura, base);
                 }
-                else
-                {
-                g.setColor(Color.black);
-                g.drawRect(x, y, altura, base);
-                }
-                 */
             }
         }
     }
