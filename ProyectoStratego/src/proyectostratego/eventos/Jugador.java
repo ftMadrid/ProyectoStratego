@@ -5,6 +5,7 @@ public class Jugador { //Plantilla para el objeto
     public static int nUsuariosTotal = 0;
     public static int nUsuariosEliminadosTotal = 0;
     public static Jugador jugadorLog = null;
+    public static Jugador jugadorContrincante = null;
     public static boolean logged = false;
 
     public static Jugador[] jugadores = new Jugador[100]; //Crea la cantidad de jugadores y aqui se almacenan los jugadores como tal

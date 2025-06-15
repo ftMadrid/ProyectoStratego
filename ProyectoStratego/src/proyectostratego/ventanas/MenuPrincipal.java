@@ -11,7 +11,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         setTitle("Stratego Marvel Heroes");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -136,6 +136,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jugarActionPerformed
         // TODO add your handling code here:
+
+        if (Jugador.nUsuariosTotal > 1) {
+            MarvelHeroes marvel = new MarvelHeroes();
+            marvel.setVisible(true);
+            marvel.setLocationRelativeTo(null);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "No existen jugadores para poder jugar.");
+        }
     }//GEN-LAST:event_jugarActionPerformed
 
     private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuracionActionPerformed
@@ -157,10 +166,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void cerrarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarsesionActionPerformed
         // TODO add your handling code here:
-        
+
         int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
-        
-        if(opcion == JOptionPane.YES_OPTION){
+
+        if (opcion == JOptionPane.YES_OPTION) {
             MenuInicial menuinicial = new MenuInicial();
             Jugador.jugadorLog = null;
             Jugador.logged = false;
