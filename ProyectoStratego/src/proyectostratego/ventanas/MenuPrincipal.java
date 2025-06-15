@@ -162,6 +162,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void universoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_universoActionPerformed
         // TODO add your handling code here:
+        
+        UniversoMarvel umarvel = new UniversoMarvel();
+        umarvel.setVisible(true);
+        umarvel.setLocationRelativeTo(null);
+        dispose();
+        
     }//GEN-LAST:event_universoActionPerformed
 
     private void cerrarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarsesionActionPerformed
