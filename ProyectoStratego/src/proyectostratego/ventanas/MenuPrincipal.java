@@ -149,7 +149,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuracionActionPerformed
         // TODO add your handling code here:
-        Jugador.jugadorLog.setPuntos(3);
     }//GEN-LAST:event_configuracionActionPerformed
 
     private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
