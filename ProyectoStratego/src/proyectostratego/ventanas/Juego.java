@@ -13,7 +13,7 @@ public class Juego extends javax.swing.JFrame {
         jLabel1.add(generar); //Se agrega al mismo jlabel
     }
     
-    public void getTurno(String turno) {
+    public static void getTurno(String turno) {
         showTurno.setText(turno);
     }
     
@@ -101,6 +101,6 @@ public class Juego extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelTurno;
-    private javax.swing.JLabel showTurno;
+    private static javax.swing.JLabel showTurno;
     // End of variables declaration//GEN-END:variables
 }
