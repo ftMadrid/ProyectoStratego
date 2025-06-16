@@ -34,16 +34,16 @@ public class GenerarTablero extends JPanel {
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
     private final int bombas = 6;
     private final int tierra = 1;
-    private final int rango1 = 2;
-    private final int rango2 = 2;
+    private final int rango1 = 1;
+    private final int rango2 = 8;
     private final int rango3 = 2;
     private final int rango4 = 2;
     private final int rango5 = 2;
-    private final int rango6 = 2;
-    private final int rango7 = 2;
-    private final int rango8 = 2;
-    private final int rango9 = 2;
-    private final int rango10 = 2;
+    private final int rango6 = 1;
+    private final int rango7 = 1;
+    private final int rango8 = 1;
+    private final int rango9 = 1;
+    private final int rango10 = 1;
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
@@ -129,7 +129,7 @@ public class GenerarTablero extends JPanel {
         colocarTierraYBombas(villanos.villanos, 0, 1);
         colocarTierraYBombas(heroes.heroes, 9, 8);
 
-        //eleccion de rangos 
+        //eleccion de rangos VILLANOS
         for (int rango = -1; rango <= 10; rango++) {
             
             if(rango == 0 || rango == -1) continue; // para que se salte la logica en el rango de la tierra
@@ -155,6 +155,8 @@ public class GenerarTablero extends JPanel {
                 }
                 int posicionRandom = random.nextInt(contador);
                 pieza eleccion = posibles[posicionRandom];
+                
+                
                 //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
 
                 int randomr, randomc;
@@ -171,9 +173,10 @@ public class GenerarTablero extends JPanel {
             }
         }//Fin for rango
 
+        //HEROES
         for (int rango = -1; rango <= 10; rango++) {
             
-            if(rango == 0 || rango == -1) continue; // para que se salte la logica en el rango de la tierra y bomba
+            if(rango == 0) continue; // para que se salte la logica en el rango de la tierra y bomba
 
             int colocados = 0;//Variable para saber cuantos han sido colocados
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
@@ -184,10 +187,19 @@ public class GenerarTablero extends JPanel {
 
                 for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
                     pieza p = heroes.heroes[i];
-
+                    if (p == null)
+                    {
+                        System.out.println("NULL");
+                    continue;
+                    }
                     if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
                         posibles[contador] = p;
                         contador++;
+                        System.out.println("Contador DEBUG");
+                        if (p.rango == -1)
+                    {
+                        System.out.println("BOMBOCLAAAT");
+                    }
                     }
                 }
                 if (contador == 0) {
@@ -199,10 +211,32 @@ public class GenerarTablero extends JPanel {
                 //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
 
                 int randomr, randomc;
+                int intentos = 0;
                 do {
+                    if (eleccion.rango == -1)
+                    {
                     randomr = 8 + random.nextInt(2);
                     randomc = random.nextInt(columnas);
-                } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
+                    }
+                    else 
+                    {
+                    randomr = 6 + random.nextInt(2);
+                    randomc = random.nextInt(columnas);
+                    }
+                    intentos++;
+                    System.out.println("Entro al do");
+                    
+                    if (intentos > 50) {
+                        System.out.println("No hay espacio para colocar heroe de rango" + rango);
+                                
+                        break; // rompe el bucle para evitar ciclo infinito
+                    }
+                } while (tablero[randomr][randomc] != null);
+                if (tablero[randomr][randomc] != null){
+                System.out.println(tablero[randomr][randomc].nombre);
+                    System.out.println("DEBUG - Agarro una pieza no nula");
+                    break;
+                }
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
