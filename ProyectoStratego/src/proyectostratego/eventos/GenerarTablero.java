@@ -14,7 +14,6 @@ import proyectostratego.ventanas.Juego;
 public class GenerarTablero extends JPanel {
 
     Random random = new Random();
-    private Juego juego;
 
     private pieza piezaSeleccionada = null;
     private int seleccionFila = -1;
@@ -111,8 +110,6 @@ public class GenerarTablero extends JPanel {
     }
 
     public GenerarTablero(Juego juego) {
-
-        this.juego = juego;
 
         zonaProhibida[4][2] = true;
         zonaProhibida[4][3] = true;
@@ -388,9 +385,9 @@ public class GenerarTablero extends JPanel {
                         turno = !turno; //Cambio de turno
                         System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
                         if (turno) {
-                            juego.getTurno("Heroes");
+                            Juego.getTurno("Heroes");
                         } else {
-                            juego.getTurno("Villanos");
+                            Juego.getTurno("Villanos");
                         }
                     } else {
                         System.out.println(piezaSeleccionada.movimiento);
