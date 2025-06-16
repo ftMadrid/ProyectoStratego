@@ -132,13 +132,13 @@ public class GenerarTablero extends JPanel {
         //eleccion de rangos 
         for (int rango = -1; rango <= 10; rango++) {
             
-            if(rango == 0) continue; // para que se salte la logica en el rango de la tierra
+            if(rango == 0 || rango == -1) continue; // para que se salte la logica en el rango de la tierra
 
             int colocados = 0;//Variable para saber cuantos han sido colocados
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
 
             while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
-                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
+                pieza[] posibles = new pieza[40];//No hay mas de 20 fichas posibles nunca
                 int contador = 0;
 
                 for (int i = 0; i < villanos.villanos.length; i++) {//Recorrer toooooodo el array
@@ -165,7 +165,7 @@ public class GenerarTablero extends JPanel {
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
-                System.out.println("Se coloco villano:" + eleccion.nombre);
+                System.out.println("Se coloco villano:" + eleccion.nombre + "En "+randomr + "," + randomc );
                 eleccion.colocada = true;
                 colocados++;
             }
@@ -173,13 +173,13 @@ public class GenerarTablero extends JPanel {
 
         for (int rango = -1; rango <= 10; rango++) {
             
-            if(rango == 0) continue; // para que se salte la logica en el rango de la tierra
+            if(rango == 0 || rango == -1) continue; // para que se salte la logica en el rango de la tierra y bomba
 
             int colocados = 0;//Variable para saber cuantos han sido colocados
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
 
             while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
-                pieza[] posibles = new pieza[20];//No hay mas de 20 fichas posibles nunca
+                pieza[] posibles = new pieza[40];//No hay mas de 20 fichas posibles nunca
                 int contador = 0;
 
                 for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
@@ -206,7 +206,7 @@ public class GenerarTablero extends JPanel {
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
-                System.out.println("Se coloco heroe:" + eleccion.nombre);
+                System.out.println("Se coloco heroe:" + eleccion.nombre + "En "+randomr + "," + randomc );
                 eleccion.colocada = true;
                 colocados++;
             }
