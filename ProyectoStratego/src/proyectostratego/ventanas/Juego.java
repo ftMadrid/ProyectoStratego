@@ -1,11 +1,15 @@
 package proyectostratego.ventanas;
 
 import proyectostratego.eventos.GenerarTablero;
+import proyectostratego.eventos.Jugador;
 
 public class Juego extends javax.swing.JFrame {
     
+    Jugador heroe = Jugador.jugadorLog.setHeroe();
+    
     public Juego() {
         initComponents();
+        showTurno.setText(heroe.username);
         GenerarTablero generar = new GenerarTablero(this);
         generar.setOpaque(false);
         generar.setBounds(0, 0, jLabel1.getWidth(), jLabel1.getHeight()); // Mismo tamaño que el tablero (La ventana)

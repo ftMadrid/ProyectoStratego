@@ -176,9 +176,13 @@ public class CfgPartida extends javax.swing.JFrame {
         
         // agrega las estadisticas a los jugadores
         if (jComboBox1.getSelectedItem().equals("Heroes")) {
+            Jugador.jugadorLog.setBando(true);
+            Jugador.jugadorContrincante.setBando(false);
             Jugador.jugadorLog.setHeroesPartidas(1);
             Jugador.jugadorContrincante.setVillanosPartidas(1);
         } else {
+            Jugador.jugadorContrincante.setBando(true);
+            Jugador.jugadorLog.setBando(false);
             Jugador.jugadorLog.setVillanosPartidas(1);
             Jugador.jugadorContrincante.setHeroesPartidas(1);
         }

@@ -19,6 +19,7 @@ public class Jugador { //Plantilla para el objeto
     public int villanosPartidas = 0; //Inicializar variables mayormente
     public int victorias = 0;
     public int derrotas = 0;
+    public boolean bando = true;
 
     public Jugador(String username, String password) {
         this.username = username; //Conseguir el user
@@ -32,6 +33,18 @@ public class Jugador { //Plantilla para el objeto
     }
 
 //Username get/set
+    
+    public void setBando(boolean bando){
+        this.bando = bando;
+    }
+    
+    public Jugador setHeroe(){
+        return bando ? jugadorLog : jugadorContrincante;
+    }
+    
+    public Jugador setVillano(){
+        return bando ? jugadorContrincante : jugadorLog;
+    }
     
     public void setUsername(String username) {
         this.username = username;
