@@ -38,12 +38,12 @@ public class Jugador { //Plantilla para el objeto
         this.bando = bando;
     }
     
-    public Jugador setHeroe(){
-        return bando ? jugadorLog : jugadorContrincante;
+    public static Jugador getHeroe(){
+        return jugadorLog.bando ? jugadorLog : jugadorContrincante;
     }
     
-    public Jugador setVillano(){
-        return bando ? jugadorContrincante : jugadorLog;
+    public static Jugador getVillano(){
+        return jugadorLog.bando ? jugadorContrincante : jugadorLog;
     }
     
     public void setUsername(String username) {

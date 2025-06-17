@@ -25,8 +25,8 @@ public class GenerarTablero extends JPanel {
     private int celday = -1;
     private int celdax = -1;
     private boolean turno = true; //true = Heroes, false = Villanos;
-    Jugador heroe = Jugador.jugadorLog.setHeroe();
-    Jugador villano = Jugador.jugadorLog.setVillano();
+    Jugador heroe = Jugador.getHeroe();
+    Jugador villano = Jugador.getVillano();
 
     private final int base = 70;//Width
     private final int altura = 70;//Length

@@ -5,7 +5,7 @@ import proyectostratego.eventos.Jugador;
 
 public class Juego extends javax.swing.JFrame {
     
-    Jugador heroe = Jugador.jugadorLog.setHeroe();
+    Jugador heroe = Jugador.getHeroe();
     
     public Juego() {
         initComponents();
