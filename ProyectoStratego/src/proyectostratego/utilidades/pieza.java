@@ -14,14 +14,26 @@ public class pieza {
     public boolean heroe; //Pongamos que true = heroe , false = villano pa no complicarla
     public boolean seleccionada; //Pa saber si esta seleccionada
     public boolean colocada;
+    public Image imagenOriginal; // imagen original
+    public Image reverso;
+    public boolean revelada;
+    
     
     public pieza(String nombre,String rutaImagen , int rango, int movimiento, int fila, int columna, boolean heroe) 
 //    
 //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
     {
     Image original = new ImageIcon(getClass().getResource(rutaImagen)).getImage();
-    this.imagen = original.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-    //Consigue la distancia para escalar la imagen , y despues la imagen como tal para escalarla
+    Image reverso = new ImageIcon(getClass().getResource("/proyectostratego/imagenes/Pieza.png")).getImage();
+    //Explicacion
+    /*
+    Basicamente reverso es la imagen reverso , consigue su ruta imagen (Y como son las mismas para todos pues no importa)
+    */
+    
+    
+    this.imagen = original.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+    this.imagenOriginal = this.imagen;
+    this.reverso = reverso;
     this.nombre = nombre;
     this.heroe = heroe;
     this.rango = rango;
@@ -30,5 +42,7 @@ public class pieza {
     this.columna = columna;
     this.seleccionada = false;
     this.colocada = false;
+    this.revelada = false;
+    //Agrege revelada para ver si no esta revelada la pieza
     }
 }

@@ -56,7 +56,7 @@ public class GenerarTablero extends JPanel {
         seleccionColumna = -1;
     }
 
-    private void colocarTierraYBombas(pieza[] grupo, int filaTierra, int filaFrente) {
+    private void colocarTierraYBombas(pieza[] grupo, int filaTierra, int filaFrente, boolean heroe) {
         int columna = 1 + random.nextInt(8); // columna entre 1 y 8
 
         // aqui busco la tierra
@@ -74,6 +74,10 @@ public class GenerarTablero extends JPanel {
             tierra.fila = filaTierra;
             tierra.columna = columna;
             tierra.colocada = true;
+            if (!heroe) {
+                tierra.imagen = tierra.reverso;
+
+            }
             System.out.println("Se colocó Tierra en (" + filaTierra + "," + columna + ")");
         }
 
@@ -103,6 +107,10 @@ public class GenerarTablero extends JPanel {
                     bomba.fila = r;
                     bomba.columna = c;
                     bomba.colocada = true;
+                    if (!heroe) {
+                        bomba.imagen = bomba.reverso;
+
+                    }
                     System.out.println("Se colocó bomba en (" + r + "," + c + ")");
                 }
             }
@@ -123,14 +131,15 @@ public class GenerarTablero extends JPanel {
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
-        colocarTierraYBombas(villanos.villanos, 0, 1);
-        colocarTierraYBombas(heroes.heroes, 9, 8);
+        colocarTierraYBombas(villanos.villanos, 0, 1, false);//False para villano
+        colocarTierraYBombas(heroes.heroes, 9, 8, true);//True para heroe
 
         //eleccion de rangos VILLANOS
         for (int rango = -1; rango <= 10; rango++) {
-            
-            if(rango == 0 || rango == -1) continue; // para que se salte la logica en el rango de la tierra
 
+            if (rango == 0) {
+                continue; // para que se salte la logica en el rango de la tierra
+            }
             int colocados = 0;//Variable para saber cuantos han sido colocados
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
 
@@ -152,19 +161,24 @@ public class GenerarTablero extends JPanel {
                 }
                 int posicionRandom = random.nextInt(contador);
                 pieza eleccion = posibles[posicionRandom];
-                
-                
-                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
 
+                //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
                 int randomr, randomc;
                 do {
-                    randomr = random.nextInt(4);
-                    randomc = random.nextInt(columnas);
+                    if (eleccion.rango == -1) {
+                        randomr = random.nextInt(2);
+                        randomc = random.nextInt(columnas);
+                        System.out.println("A");
+                    } else {
+                        randomr = 2 + random.nextInt(2);
+                        randomc = random.nextInt(columnas);
+                    }
                 } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
-                System.out.println("Se coloco villano:" + eleccion.nombre + "En "+randomr + "," + randomc );
+                eleccion.imagen = eleccion.reverso;//Para que spawnee dada vuelta
+                System.out.println("Se coloco villano:" + eleccion.nombre + "En " + randomr + "," + randomc);
                 eleccion.colocada = true;
                 colocados++;
             }
@@ -172,9 +186,10 @@ public class GenerarTablero extends JPanel {
 
         //HEROES
         for (int rango = -1; rango <= 10; rango++) {
-            
-            if(rango == 0) continue; // para que se salte la logica en el rango de la tierra y bomba
 
+            if (rango == 0) {
+                continue; // para que se salte la logica en el rango de la tierra y bomba
+            }
             int colocados = 0;//Variable para saber cuantos han sido colocados
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
 
@@ -184,19 +199,17 @@ public class GenerarTablero extends JPanel {
 
                 for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
                     pieza p = heroes.heroes[i];
-                    if (p == null)
-                    {
+                    if (p == null) {
                         System.out.println("NULL");
-                    continue;
+                        continue;
                     }
                     if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
                         posibles[contador] = p;
                         contador++;
                         System.out.println("Contador DEBUG");
-                        if (p.rango == -1)
-                    {
-                        System.out.println("BOMBOCLAAAT");
-                    }
+                        if (p.rango == -1) {
+                            System.out.println("BOMBOCLAAAT");
+                        }
                     }
                 }
                 if (contador == 0) {
@@ -210,34 +223,31 @@ public class GenerarTablero extends JPanel {
                 int randomr, randomc;
                 int intentos = 0;
                 do {
-                    if (eleccion.rango == -1)
-                    {
-                    randomr = 8 + random.nextInt(2);
-                    randomc = random.nextInt(columnas);
-                    }
-                    else 
-                    {
-                    randomr = 6 + random.nextInt(2);
-                    randomc = random.nextInt(columnas);
+                    if (eleccion.rango == -1) {
+                        randomr = 8 + random.nextInt(2);
+                        randomc = random.nextInt(columnas);
+                    } else {
+                        randomr = 6 + random.nextInt(2);
+                        randomc = random.nextInt(columnas);
                     }
                     intentos++;
                     System.out.println("Entro al do");
-                    
+
                     if (intentos > 50) {
                         System.out.println("No hay espacio para colocar heroe de rango" + rango);
-                                
+
                         break; // rompe el bucle para evitar ciclo infinito
                     }
                 } while (tablero[randomr][randomc] != null);
-                if (tablero[randomr][randomc] != null){
-                System.out.println(tablero[randomr][randomc].nombre);
+                if (tablero[randomr][randomc] != null) {
+                    System.out.println(tablero[randomr][randomc].nombre);
                     System.out.println("DEBUG - Agarro una pieza no nula");
                     break;
                 }
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
-                System.out.println("Se coloco heroe:" + eleccion.nombre + "En "+randomr + "," + randomc );
+                System.out.println("Se coloco heroe:" + eleccion.nombre + "En " + randomr + "," + randomc);
                 eleccion.colocada = true;
                 colocados++;
             }
@@ -321,6 +331,10 @@ public class GenerarTablero extends JPanel {
                             }
 
                         }
+
+                        if (esMovimientoValido && (distanciaColumna > 1 || distanciaFila > 1)) {
+                            piezaSeleccionada.revelada = true;
+                        }
                     }
                     pieza objetivo = tablero[celday][celdax];
 
@@ -329,6 +343,21 @@ public class GenerarTablero extends JPanel {
                             System.out.println("Zona Prohibida");
                             reiniciarSeleccion();
                             return;//Salia un error en consola entonces con el return se soluciono
+                        } else if (objetivo != null && objetivo.rango == -1) {//Bombas
+                            //Logica para que explote la pieza a menos que sea rango 3
+                            if (piezaSeleccionada.rango == 3) {
+                                System.out.println("Come la bomba");
+                                piezaSeleccionada.seleccionada = false;
+                                piezaSeleccionada.revelada = true;//La revela
+                                tablero[celday][celdax] = piezaSeleccionada;
+                                tablero[seleccionFila][seleccionColumna].colocada = false;
+                                tablero[seleccionFila][seleccionColumna] = null;
+                            } else {
+                                piezaSeleccionada.seleccionada = false;
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
+                            }
+
                         } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
 
@@ -349,8 +378,9 @@ public class GenerarTablero extends JPanel {
                             if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
                                 //La parte es por la excepcion de black widow , despues agregar las de rango 3
                                 System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
-
                                 tablero[celday][celdax] = piezaSeleccionada;
+                                piezaSeleccionada.revelada = true;
+                                objetivo.revelada = true;
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
 
@@ -386,8 +416,24 @@ public class GenerarTablero extends JPanel {
                         System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
                         if (turno) {
                             Juego.getTurno("Heroes");
+                            for (int i = 0; i < 40; i++) {
+                                if (heroes.heroes[i].colocada) {
+                                    heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
+                                }
+                                if (villanos.villanos[i].colocada && !villanos.villanos[i].revelada) {
+                                    villanos.villanos[i].imagen = villanos.villanos[i].reverso;
+                                }
+                            }
                         } else {
                             Juego.getTurno("Villanos");
+                            for (int i = 0; i < 40; i++) {
+                                if (heroes.heroes[i].colocada && !heroes.heroes[i].revelada) {
+                                    heroes.heroes[i].imagen = heroes.heroes[i].reverso;
+                                }
+                                if (villanos.villanos[i].colocada) {
+                                    villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
+                                }
+                            }
                         }
                     } else {
                         System.out.println(piezaSeleccionada.movimiento);
@@ -431,16 +477,46 @@ public class GenerarTablero extends JPanel {
                     int distFila = Math.abs(r - seleccionFila);
                     int distCol = Math.abs(c - seleccionColumna);
 
-                    // verificar que está a distancia permitida (horizontal o vertical)
+                    // verificar distancia (horizontal o vertical)
                     if (((distFila <= piezaSeleccionada.movimiento && distCol == 0)
                             || (distCol <= piezaSeleccionada.movimiento && distFila == 0))
                             && !(r == seleccionFila && c == seleccionColumna)) {
 
-                        // pintar el fondo semitransparente verde para posible movimiento
-                        g.setColor(Color.GREEN);
-                        g.drawRect(x, y, base, altura);
-                        g.drawRect(x + 1, y + 1, base - 2, altura - 2);
-                        g.drawRect(x + 2, y + 2, base - 4, altura - 4);
+                        boolean disponible = true;
+
+                        // mirar si hay algo en el camino (piezas o zona prohibida)
+                        if (distFila > 0 && distCol == 0) { // Movimiento vertical
+                            int inicio = Math.min(seleccionFila, r) + 1;//No tomar en cuenta la de inicio
+                            int fin = Math.max(seleccionFila, r);
+                            for (int i = inicio; i < fin; i++) {
+                                if (tablero[i][c] != null || zonaProhibida[i][c]) {
+                                    disponible = false;
+                                    break;
+                                }
+                            }
+                        } else if (distCol > 0 && distFila == 0) { // Horizontal
+                            int inicio = Math.min(seleccionColumna, c) + 1;//No tomar en cuenta la de inicio
+                            int fin = Math.max(seleccionColumna, c);
+                            for (int i = inicio; i < fin; i++) {
+                                if (tablero[r][i] != null || zonaProhibida[r][i]) {
+                                    disponible = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        // verificar zona prohibida :D
+                        if (zonaProhibida[r][c]) {
+                            disponible = false;
+                        }
+
+                        // Si esta disponible o no
+                        if (disponible) {
+                            g.setColor(Color.GREEN);
+                            g.drawRect(x, y, base, altura);
+                            g.drawRect(x + 1, y + 1, base - 2, altura - 2);
+                            g.drawRect(x + 2, y + 2, base - 4, altura - 4);
+                        }
                     }
                 }
 
