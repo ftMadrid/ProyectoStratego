@@ -11,7 +11,6 @@ import java.awt.event.MouseAdapter; //Libreria para los mouse
 import java.awt.event.MouseEvent;
 import proyectostratego.ventanas.Juego;
 
-
 public class GenerarTablero extends JPanel {
 
     Random random = new Random();
@@ -57,7 +56,7 @@ public class GenerarTablero extends JPanel {
         seleccionColumna = -1;
     }
 
-    private void colocarTierraYBombas(pieza[] grupo, int filaTierra, int filaFrente) {
+    private void colocarTierraYBombas(pieza[] grupo, int filaTierra, int filaFrente, boolean heroe) {
         int columna = 1 + random.nextInt(8); // columna entre 1 y 8
 
         // aqui busco la tierra
@@ -75,6 +74,10 @@ public class GenerarTablero extends JPanel {
             tierra.fila = filaTierra;
             tierra.columna = columna;
             tierra.colocada = true;
+            if (!heroe) {
+                tierra.imagen = tierra.reverso;
+
+            }
             System.out.println("Se colocó Tierra en (" + filaTierra + "," + columna + ")");
         }
 
@@ -104,6 +107,10 @@ public class GenerarTablero extends JPanel {
                     bomba.fila = r;
                     bomba.columna = c;
                     bomba.colocada = true;
+                    if (!heroe) {
+                        bomba.imagen = bomba.reverso;
+
+                    }
                     System.out.println("Se colocó bomba en (" + r + "," + c + ")");
                 }
             }
@@ -124,8 +131,8 @@ public class GenerarTablero extends JPanel {
         heroes heroes = new heroes();//Llama el array
         villanos villanos = new villanos();//Llama el array
 
-        colocarTierraYBombas(villanos.villanos, 0, 1);
-        colocarTierraYBombas(heroes.heroes, 9, 8);
+        colocarTierraYBombas(villanos.villanos, 0, 1, false);//False para villano
+        colocarTierraYBombas(heroes.heroes, 9, 8, true);//True para heroe
 
         //eleccion de rangos VILLANOS
         for (int rango = -1; rango <= 10; rango++) {
@@ -170,6 +177,7 @@ public class GenerarTablero extends JPanel {
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
+                eleccion.imagen = eleccion.reverso;//Para que spawnee dada vuelta
                 System.out.println("Se coloco villano:" + eleccion.nombre + "En " + randomr + "," + randomc);
                 eleccion.colocada = true;
                 colocados++;
