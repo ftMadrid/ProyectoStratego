@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter; //Libreria para los mouse
 import java.awt.event.MouseEvent;
 import proyectostratego.ventanas.Juego;
 
+
 public class GenerarTablero extends JPanel {
 
     Random random = new Random();
@@ -322,6 +323,10 @@ public class GenerarTablero extends JPanel {
                             }
 
                         }
+
+                        if (esMovimientoValido && (distanciaColumna > 1 || distanciaFila > 1)) {
+                            piezaSeleccionada.revelada = true;
+                        }
                     }
                     pieza objetivo = tablero[celday][celdax];
 
@@ -335,6 +340,7 @@ public class GenerarTablero extends JPanel {
                             if (piezaSeleccionada.rango == 3) {
                                 System.out.println("Come la bomba");
                                 piezaSeleccionada.seleccionada = false;
+                                piezaSeleccionada.revelada = true;//La revela
                                 tablero[celday][celdax] = piezaSeleccionada;
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
@@ -364,8 +370,9 @@ public class GenerarTablero extends JPanel {
                             if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
                                 //La parte es por la excepcion de black widow , despues agregar las de rango 3
                                 System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
-
                                 tablero[celday][celdax] = piezaSeleccionada;
+                                piezaSeleccionada.revelada = true;
+                                objetivo.revelada = true;
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
 
@@ -401,8 +408,24 @@ public class GenerarTablero extends JPanel {
                         System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
                         if (turno) {
                             Juego.getTurno("Heroes");
+                            for (int i = 0; i < 40; i++) {
+                                if (heroes.heroes[i].colocada) {
+                                    heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
+                                }
+                                if (villanos.villanos[i].colocada && !villanos.villanos[i].revelada) {
+                                    villanos.villanos[i].imagen = villanos.villanos[i].reverso;
+                                }
+                            }
                         } else {
                             Juego.getTurno("Villanos");
+                            for (int i = 0; i < 40; i++) {
+                                if (heroes.heroes[i].colocada && !heroes.heroes[i].revelada) {
+                                    heroes.heroes[i].imagen = heroes.heroes[i].reverso;
+                                }
+                                if (villanos.villanos[i].colocada) {
+                                    villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
+                                }
+                            }
                         }
                     } else {
                         System.out.println(piezaSeleccionada.movimiento);
