@@ -20,6 +20,8 @@ public class Jugador { //Plantilla para el objeto
     public int victorias = 0;
     public int derrotas = 0;
     public boolean bando = true;
+    
+    
 
     public Jugador(String username, String password) {
         this.username = username; //Conseguir el user
@@ -31,6 +33,7 @@ public class Jugador { //Plantilla para el objeto
         this.derrotas = 0;
         //Para agregar mas stats o cosas extra , solo es poner this.[variable] = 0;
     }
+    
 
 //Username get/set
     
