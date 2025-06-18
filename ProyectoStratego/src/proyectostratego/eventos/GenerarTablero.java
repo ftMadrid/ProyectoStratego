@@ -24,9 +24,9 @@ public class GenerarTablero extends JPanel {
 
     private int celday = -1;
     private int celdax = -1;
-    private boolean turno = true; //true = Heroes, false = Villanos;
-    Jugador heroe = Jugador.getHeroe();
-    Jugador villano = Jugador.getVillano();
+    private static boolean turno = true; //true = Heroes, false = Villanos;
+    static Jugador heroe = Jugador.getHeroe();
+    static Jugador villano = Jugador.getVillano();
 
     private final int base = 70;//Width
     private final int altura = 70;//Length
@@ -49,6 +49,22 @@ public class GenerarTablero extends JPanel {
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
 
+    
+    public static void Rendirse(){
+        if(turno){
+            villano.setPuntos(3);
+            System.out.println("Se rindio: "+heroe.username+" y "+villano.username+" recibio 3 puntos");
+        }else{
+            heroe.setPuntos(3);
+            System.out.println("Se rindio: "+villano.username+" y "+heroe.username+" recibio 3 puntos");
+        }
+        
+        turno = true;
+        heroe = Jugador.getHeroe();
+        villano = Jugador.getVillano();
+        
+    }
+    
     private void reiniciarSeleccion() {
         if (piezaSeleccionada != null) {
             piezaSeleccionada.seleccionada = false; // Quitar la marca visual
@@ -417,7 +433,7 @@ public class GenerarTablero extends JPanel {
                         turno = !turno; //Cambio de turno
                         System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
                         if (turno) {
-                            Juego.getTurno(heroe.username);
+                            Juego.setTurno(heroe.username);
                             for (int i = 0; i < 40; i++) {
                                 if (heroes.heroes[i].colocada) {
                                     heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
@@ -427,7 +443,7 @@ public class GenerarTablero extends JPanel {
                                 }
                             }
                         } else {
-                            Juego.getTurno(villano.username);
+                            Juego.setTurno(villano.username);
                             for (int i = 0; i < 40; i++) {
                                 if (heroes.heroes[i].colocada && !heroes.heroes[i].revelada) {
                                     heroes.heroes[i].imagen = heroes.heroes[i].reverso;

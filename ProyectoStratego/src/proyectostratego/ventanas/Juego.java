@@ -1,12 +1,13 @@
 package proyectostratego.ventanas;
 
+import javax.swing.JOptionPane;
 import proyectostratego.eventos.GenerarTablero;
 import proyectostratego.eventos.Jugador;
 
 public class Juego extends javax.swing.JFrame {
-    
+
     Jugador heroe = Jugador.getHeroe();
-    
+
     public Juego() {
         initComponents();
         showTurno.setText(heroe.username);
@@ -16,11 +17,11 @@ public class Juego extends javax.swing.JFrame {
         jLabel1.setLayout(null); // Se sobrepone por asi decirlo
         jLabel1.add(generar); //Se agrega al mismo jlabel
     }
-    
-    public static void getTurno(String turno) {
+
+    public static void setTurno(String turno) {
         showTurno.setText(turno);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -28,6 +29,7 @@ public class Juego extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         labelTurno = new javax.swing.JLabel();
         showTurno = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -40,6 +42,15 @@ public class Juego extends javax.swing.JFrame {
         showTurno.setFont(new java.awt.Font("Kefa", 1, 36)); // NOI18N
         showTurno.setText("Heroes");
 
+        jButton1.setFont(new java.awt.Font("Kefa", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 0, 0));
+        jButton1.setText("Rendirse");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -48,9 +59,12 @@ public class Juego extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelTurno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(showTurno)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelTurno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(showTurno))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(189, 189, 189))
         );
         layout.setVerticalGroup(
@@ -64,11 +78,30 @@ public class Juego extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTurno)
                     .addComponent(showTurno))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación para Rendirse", JOptionPane.YES_NO_OPTION);
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            
+            GenerarTablero.Rendirse();
+            
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(null);
+            dispose();
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -103,6 +136,7 @@ public class Juego extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelTurno;
     private static javax.swing.JLabel showTurno;
