@@ -54,6 +54,21 @@ public class GenerarTablero extends JPanel {
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
+    
+    public void Rendirse(){
+        if(turno){
+            villano.setPuntos(3);
+            System.out.println("Se rindio: "+heroe.username+" y "+villano.username+" recibio 3 puntos");
+        }else{
+            heroe.setPuntos(3);
+            System.out.println("Se rindio: "+villano.username+" y "+heroe.username+" recibio 3 puntos");
+        }
+        
+        turno = true;
+        heroe = Jugador.getHeroe();
+        villano = Jugador.getVillano();
+        
+    }
 
     private void reiniciarSeleccion() {
         if (piezaSeleccionada != null) {
@@ -484,7 +499,7 @@ public class GenerarTablero extends JPanel {
                         System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
                         if (turno) {
 
-                            Juego.getTurno(heroe.username);
+                            Juego.setTurno(heroe.username);
 
                             if (villanosC == 0) {
                                 getGanador(heroe, villano);
@@ -498,7 +513,7 @@ public class GenerarTablero extends JPanel {
                                 }
                             }
                         } else {
-                            Juego.getTurno(villano.username);
+                            Juego.setTurno(villano.username);
                             if (villanosC == 0) {
                                 getGanador(villano, heroe);
                             }

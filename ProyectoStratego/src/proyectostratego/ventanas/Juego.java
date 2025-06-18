@@ -7,15 +7,16 @@ import proyectostratego.eventos.Jugador;
 public class Juego extends javax.swing.JFrame {
 
     Jugador heroe = Jugador.getHeroe();
+    private GenerarTablero tablero;
 
     public Juego() {
         initComponents();
         showTurno.setText(heroe.username);
-        GenerarTablero generar = new GenerarTablero(this);
-        generar.setOpaque(false);
-        generar.setBounds(0, 0, jLabel1.getWidth(), jLabel1.getHeight()); // Mismo tamaño que el tablero (La ventana)
+        tablero = new GenerarTablero(this);
+        tablero.setOpaque(false);
+        tablero.setBounds(0, 0, jLabel1.getWidth(), jLabel1.getHeight()); // Mismo tamaño que el tablero (La ventana)
         jLabel1.setLayout(null); // Se sobrepone por asi decirlo
-        jLabel1.add(generar); //Se agrega al mismo jlabel
+        jLabel1.add(tablero); //Se agrega al mismo jlabel
     }
 
     public static void setTurno(String turno) {
@@ -93,7 +94,7 @@ public class Juego extends javax.swing.JFrame {
 
         if (opcion == JOptionPane.YES_OPTION) {
             
-            GenerarTablero.Rendirse();
+            tablero.Rendirse();
             
             MenuPrincipal menu = new MenuPrincipal();
             menu.setVisible(true);
