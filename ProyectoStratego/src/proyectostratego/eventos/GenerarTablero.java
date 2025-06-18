@@ -37,12 +37,12 @@ public class GenerarTablero extends JPanel {
     private final int tierra = 1;
     private final int rango1 = 1;
     private final int rango2 = 8;
-    private final int rango3 = 2;
-    private final int rango4 = 2;
-    private final int rango5 = 2;
-    private final int rango6 = 1;
-    private final int rango7 = 1;
-    private final int rango8 = 1;
+    private final int rango3 = 5;
+    private final int rango4 = 4;
+    private final int rango5 = 4;
+    private final int rango6 = 4;
+    private final int rango7 = 3;
+    private final int rango8 = 2;
     private final int rango9 = 1;
     private final int rango10 = 1;
 
@@ -172,7 +172,7 @@ public class GenerarTablero extends JPanel {
                         randomc = random.nextInt(columnas);
                         System.out.println("A");
                     } else {
-                        randomr = 2 + random.nextInt(2);
+                        randomr = 0 + random.nextInt(4);
                         randomc = random.nextInt(columnas);
                     }
                 } while (tablero[randomr][randomc] != null); //Para que no exista ya una pieza ahi
@@ -229,7 +229,7 @@ public class GenerarTablero extends JPanel {
                         randomr = 8 + random.nextInt(2);
                         randomc = random.nextInt(columnas);
                     } else {
-                        randomr = 6 + random.nextInt(2);
+                        randomr = 6 + random.nextInt(4);
                         randomc = random.nextInt(columnas);
                     }
                     intentos++;
