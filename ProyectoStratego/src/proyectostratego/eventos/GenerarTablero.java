@@ -467,7 +467,7 @@ public class GenerarTablero extends JPanel {
                                     villanosC--;
                                 }
                                 empate();
-                                return;
+                                
                             } else if (piezaSeleccionada.rango < objetivo.rango) {
                                 //Si son del mismo rango pierden las dos , si la que esta atacando es menor pierde
                                 //Falta agregar la logica que se den vuelta y asi (Parecido a lo del juego)
@@ -489,7 +489,7 @@ public class GenerarTablero extends JPanel {
 
                                 empate();
                                 reiniciarSeleccion();
-                                return;
+                                
                             }
 
                         } else {
