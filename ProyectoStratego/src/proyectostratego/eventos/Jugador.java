@@ -21,8 +21,6 @@ public class Jugador { //Plantilla para el objeto
     public int derrotas = 0;
     public boolean bando = true;
     
-    
-
     public Jugador(String username, String password) {
         this.username = username; //Conseguir el user
         this.password = password;//La password del user
