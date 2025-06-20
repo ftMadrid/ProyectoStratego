@@ -436,6 +436,7 @@ public class GenerarTablero extends JPanel {
                             } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
                                 //La parte es por la excepcion de black widow , despues agregar las de rango 3
                                 System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
+                                juego.agregarPiezaMuerta(objetivo);
                                 tablero[celday][celdax] = piezaSeleccionada;
                                 //piezaSeleccionada.revelada = true;
                                 //objetivo.revelada = true;
@@ -449,17 +450,16 @@ public class GenerarTablero extends JPanel {
 
                                 if (piezaSeleccionada.heroe) {
                                     heroesC--;
-                                } else if (!piezaSeleccionada.heroe) {
+                                } else {
                                     villanosC--;
                                 }
                                 empate();
 
                             } else if (piezaSeleccionada.rango < objetivo.rango) {
-                                //Si son del mismo rango pierden las dos , si la que esta atacando es menor pierde
-                                //Falta agregar la logica que se den vuelta y asi (Parecido a lo del juego)
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
 
+                                juego.agregarPiezaMuerta(piezaSeleccionada);
                                 System.out.println("Gano la otra pieza");
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
 
@@ -469,6 +469,9 @@ public class GenerarTablero extends JPanel {
                                 tablero[objetivo.fila][objetivo.columna] = null;
 
                                 System.out.println("Mismo rango , las dos mueren");
+
+                                juego.agregarPiezaMuerta(piezaSeleccionada);
+                                juego.agregarPiezaMuerta(objetivo);
 
                                 heroesC--;
                                 villanosC--;
