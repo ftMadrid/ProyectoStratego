@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter; //Libreria para los mouse
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import proyectostratego.utilidades.StatsGlobales;
 import proyectostratego.ventanas.Juego;
 import proyectostratego.ventanas.MenuPrincipal;
 
@@ -39,36 +40,21 @@ public class GenerarTablero extends JPanel {
     private final int promedio = (base + altura) / 2;
     private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
-    private final int bombas = 6;
+    private final int bombas = 3;
     private final int tierra = 1;
     private final int rango1 = 1;
-    private final int rango2 = 8;
-    private final int rango3 = 5;
-    private final int rango4 = 4;
-    private final int rango5 = 4;
-    private final int rango6 = 4;
-    private final int rango7 = 3;
-    private final int rango8 = 2;
+    private final int rango2 = 1;
+    private final int rango3 = 1;
+    private final int rango4 = 1;
+    private final int rango5 = 1;
+    private final int rango6 = 1;
+    private final int rango7 = 1;
+    private final int rango8 = 1;
     private final int rango9 = 1;
     private final int rango10 = 1;
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
-
-    public void Rendirse() {
-        if (turno) {
-            villano.setPuntos(3);
-            System.out.println("Se rindio: " + heroe.username + " y " + villano.username + " recibio 3 puntos");
-        } else {
-            heroe.setPuntos(3);
-            System.out.println("Se rindio: " + villano.username + " y " + heroe.username + " recibio 3 puntos");
-        }
-
-        turno = true;
-        heroe = Jugador.getHeroe();
-        villano = Jugador.getVillano();
-
-    }
 
     private void reiniciarSeleccion() {
         if (piezaSeleccionada != null) {
@@ -454,7 +440,7 @@ public class GenerarTablero extends JPanel {
                                 //piezaSeleccionada.revelada = true;
                                 //objetivo.revelada = true;
                                 //Logica de revelacion TODO
-                                
+
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
 
@@ -467,7 +453,7 @@ public class GenerarTablero extends JPanel {
                                     villanosC--;
                                 }
                                 empate();
-                                
+
                             } else if (piezaSeleccionada.rango < objetivo.rango) {
                                 //Si son del mismo rango pierden las dos , si la que esta atacando es menor pierde
                                 //Falta agregar la logica que se den vuelta y asi (Parecido a lo del juego)
@@ -489,7 +475,7 @@ public class GenerarTablero extends JPanel {
 
                                 empate();
                                 reiniciarSeleccion();
-                                
+
                             }
 
                         } else {
@@ -667,15 +653,30 @@ public class GenerarTablero extends JPanel {
         }
     }
 
+    public void Rendirse() {
+        if (turno) {
+            getGanador(villano, heroe);
+            System.out.println("Se rindio: " + heroe.username + " y " + villano.username + " recibio 3 puntos");
+        } else {
+            getGanador(heroe, villano);
+            System.out.println("Se rindio: " + villano.username + " y " + heroe.username + " recibio 3 puntos");
+        }
+
+        turno = true;
+        heroe = Jugador.getHeroe();
+        villano = Jugador.getVillano();
+    }
+
     private void getGanador(Jugador ganador, Jugador perdedor) {
         if (ganador == villano) {
             System.out.println("Gano villano");
             ganador.setVictorias(1);
             ganador.setPuntos(3);
+            StatsGlobales.setVictoriasVillanos();
             System.out.println(ganador.villanosPartidas);
             System.out.println(ganador.victorias);
 
-            perdedor.setDerrotas(+1);
+            perdedor.setDerrotas(1);
             System.out.println(perdedor.heroesPartidas);
             System.out.println(perdedor.derrotas);
         } else {
@@ -683,6 +684,7 @@ public class GenerarTablero extends JPanel {
 
             ganador.setVictorias(1);
             ganador.setPuntos(3);
+            StatsGlobales.setVictoriasHeroes();
             System.out.println(ganador.heroesPartidas);
             System.out.println(ganador.victorias);
 

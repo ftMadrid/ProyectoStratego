@@ -1,12 +1,15 @@
 package proyectostratego.ventanas;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import proyectostratego.eventos.GenerarTablero;
 import proyectostratego.eventos.Jugador;
 
 public class Juego extends javax.swing.JFrame {
 
     Jugador heroe = Jugador.getHeroe();
+    MenuPrincipal menu = new MenuPrincipal();
     private GenerarTablero tablero;
 
     public Juego() {
@@ -93,14 +96,17 @@ public class Juego extends javax.swing.JFrame {
         int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación para Rendirse", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
-            
+
             tablero.Rendirse();
-            
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(null);
-            dispose();
-            
+
+            JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
+            if (ventana != null) {
+                MenuPrincipal ventanas = new MenuPrincipal();
+                ventanas.setVisible(true);
+                ventanas.setLocationRelativeTo(null);
+                ventana.dispose();
+            }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

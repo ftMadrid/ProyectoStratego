@@ -3,10 +3,9 @@ package proyectostratego.ventanas;
 import javax.swing.DefaultComboBoxModel;
 import proyectostratego.eventos.Jugador;
 import proyectostratego.utilidades.Fondos;
+import proyectostratego.utilidades.StatsGlobales;
 
 public class CfgPartida extends javax.swing.JFrame {
-    
-    private static int partidas = 0;
 
     public CfgPartida() {
         initComponents();
@@ -23,14 +22,6 @@ public class CfgPartida extends javax.swing.JFrame {
             }
         }
         jComboBox2.setModel(modelo);
-    }
-    
-    public static void setPartidas(){
-        partidas++;
-    }
-    
-    public static int getPartidas(){
-        return partidas;
     }
 
     @SuppressWarnings("unchecked")
@@ -187,7 +178,7 @@ public class CfgPartida extends javax.swing.JFrame {
             Jugador.jugadorContrincante.setHeroesPartidas(1);
         }
 
-        setPartidas();
+        StatsGlobales.setPartidas();
         Juego juego = new Juego();
         juego.setVisible(true);
         juego.setLocationRelativeTo(null);
