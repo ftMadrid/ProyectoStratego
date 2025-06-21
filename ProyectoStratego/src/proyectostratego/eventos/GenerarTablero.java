@@ -450,6 +450,7 @@ public class GenerarTablero extends JPanel {
                                 tablero[seleccionFila][seleccionColumna] = null;
                                 piezaSeleccionada.fila = celday;
                                 piezaSeleccionada.columna = celdax;
+                                piezaSeleccionada.colocada = true;
                                 //La pieza seleccionada se come al a pieza objetivo
                                 if (piezaSeleccionada.heroe) {
                                     villanosC -= 1;
@@ -484,6 +485,7 @@ public class GenerarTablero extends JPanel {
                                 } else if (heroesC == 0 && villanosC != 0) {
                                     getGanador(villano, heroe);
                                 }*/
+                                empate();
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
                                 Juego.setPelea(objetivo.nombre + "[" + objetivo.rango + "] y " + piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "]" + " Se derrotan mutuamente");
                                 objetivo.colocada = false;
@@ -537,9 +539,12 @@ public class GenerarTablero extends JPanel {
                                 if (heroes.heroes[i].colocada) {
                                     
                                     heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
+                                    System.out.println(heroes.heroes[i].nombre);
+                                    
                                 }
                                 if (villanos.villanos[i].colocada ) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].reverso;
+                                    System.out.println(villanos.villanos[i].nombre);
                                    
                                 }
                             }
@@ -550,9 +555,11 @@ public class GenerarTablero extends JPanel {
                                 if (heroes.heroes[i].colocada ) {
                                     
                                     heroes.heroes[i].imagen = heroes.heroes[i].reverso;
+                                    System.out.println(heroes.heroes[i].nombre);
                                 }
                                 if (villanos.villanos[i].colocada) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
+                                    System.out.println(villanos.villanos[i].nombre);
                                     
                                 }
                             }
