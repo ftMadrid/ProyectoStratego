@@ -2,6 +2,7 @@ package proyectostratego.ventanas;
 
 import proyectostratego.eventos.Jugador;
 import proyectostratego.utilidades.Fondos;
+import proyectostratego.utilidades.StatsGlobales;
 
 public class Batallas extends javax.swing.JFrame {
 
@@ -13,9 +14,9 @@ public class Batallas extends javax.swing.JFrame {
         
         uActivos.setText(""+Jugador.nUsuariosTotal);
         uHistoricos.setText(""+(Jugador.nUsuariosTotal+Jugador.nUsuariosEliminadosTotal));
-        pJugadas.setText(""+ CfgPartida.getPartidas());
-        vHeroes.setText("0");
-        vVillanos.setText("0");
+        pJugadas.setText(""+ StatsGlobales.getPartidas());
+        vHeroes.setText(""+ StatsGlobales.getVictoriasHeroes());
+        vVillanos.setText(""+ StatsGlobales.getVictoriasVillanos());
         
         uActivos.setOpaque(true);
         labeluActivos.setOpaque(true);

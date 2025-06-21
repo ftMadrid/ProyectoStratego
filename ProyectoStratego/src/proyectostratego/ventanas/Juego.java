@@ -1,16 +1,27 @@
 package proyectostratego.ventanas;
 
+import java.awt.GridLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import proyectostratego.eventos.GenerarTablero;
 import proyectostratego.eventos.Jugador;
+import proyectostratego.utilidades.pieza;
 
 public class Juego extends javax.swing.JFrame {
 
     Jugador heroe = Jugador.getHeroe();
+    MenuPrincipal menu = new MenuPrincipal();
     private GenerarTablero tablero;
 
     public Juego() {
         initComponents();
+
+        panelHeroesMuertos.setLayout(new GridLayout(0, 8, 2, 2)); // 5 columnas, filas dinámicas
+        panelVillanosMuertos.setLayout(new GridLayout(0, 8, 2, 2));
+
         showTurno.setText(heroe.username);
         tablero = new GenerarTablero(this);
         tablero.setOpaque(false);
@@ -23,6 +34,19 @@ public class Juego extends javax.swing.JFrame {
         showTurno.setText(turno);
     }
 
+    public void agregarPiezaMuerta(pieza piezaMuerta) {
+        JLabel label = new JLabel(new ImageIcon(piezaMuerta.imagenOriginal));
+        if (piezaMuerta.heroe) {
+            panelHeroesMuertos.add(label);
+            panelHeroesMuertos.revalidate();
+            panelHeroesMuertos.repaint();
+        } else {
+            panelVillanosMuertos.add(label);
+            panelVillanosMuertos.revalidate();
+            panelVillanosMuertos.repaint();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -31,6 +55,8 @@ public class Juego extends javax.swing.JFrame {
         labelTurno = new javax.swing.JLabel();
         showTurno = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        panelVillanosMuertos = new javax.swing.JPanel();
+        panelHeroesMuertos = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +78,28 @@ public class Juego extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout panelVillanosMuertosLayout = new javax.swing.GroupLayout(panelVillanosMuertos);
+        panelVillanosMuertos.setLayout(panelVillanosMuertosLayout);
+        panelVillanosMuertosLayout.setHorizontalGroup(
+            panelVillanosMuertosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 630, Short.MAX_VALUE)
+        );
+        panelVillanosMuertosLayout.setVerticalGroup(
+            panelVillanosMuertosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelHeroesMuertosLayout = new javax.swing.GroupLayout(panelHeroesMuertos);
+        panelHeroesMuertos.setLayout(panelHeroesMuertosLayout);
+        panelHeroesMuertosLayout.setHorizontalGroup(
+            panelHeroesMuertosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelHeroesMuertosLayout.setVerticalGroup(
+            panelHeroesMuertosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,29 +107,37 @@ public class Juego extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelTurno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(showTurno))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(189, 189, 189))
+                        .addComponent(showTurno)
+                        .addContainerGap(564, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(panelVillanosMuertos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelHeroesMuertos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelTurno)
-                    .addComponent(showTurno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelVillanosMuertos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(showTurno)
+                            .addComponent(labelTurno))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelHeroesMuertos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,14 +149,17 @@ public class Juego extends javax.swing.JFrame {
         int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación para Rendirse", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
-            
+
             tablero.Rendirse();
-            
-            MenuPrincipal menu = new MenuPrincipal();
-            menu.setVisible(true);
-            menu.setLocationRelativeTo(null);
-            dispose();
-            
+
+            JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
+            if (ventana != null) {
+                MenuPrincipal ventanas = new MenuPrincipal();
+                ventanas.setVisible(true);
+                ventanas.setLocationRelativeTo(null);
+                ventana.dispose();
+            }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -140,6 +199,8 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelTurno;
+    private javax.swing.JPanel panelHeroesMuertos;
+    private javax.swing.JPanel panelVillanosMuertos;
     private static javax.swing.JLabel showTurno;
     // End of variables declaration//GEN-END:variables
 }
