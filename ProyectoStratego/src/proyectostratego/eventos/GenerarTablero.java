@@ -43,15 +43,15 @@ public class GenerarTablero extends JPanel {
     private final int bombas = 3;
     private final int tierra = 1;
     private final int rango1 = 1;
-    private final int rango2 = 0;
+    private final int rango2 = 1;
     private final int rango3 = 1;
-    private final int rango4 = 0;
-    private final int rango5 = 0;
-    private final int rango6 = 0;
-    private final int rango7 = 0;
-    private final int rango8 = 0;
-    private final int rango9 = 0;
-    private final int rango10 = 0;
+    private final int rango4 = 1;
+    private final int rango5 = 1;
+    private final int rango6 = 1;
+    private final int rango7 = 1;
+    private final int rango8 = 1;
+    private final int rango9 = 1;
+    private final int rango10 = 1;
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida

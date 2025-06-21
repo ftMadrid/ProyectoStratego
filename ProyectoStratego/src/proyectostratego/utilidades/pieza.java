@@ -7,6 +7,7 @@ public class pieza {
     
     public int rango;
     public Image imagen;
+    public Image imagenm;
     public String nombre;
     public int movimiento;
     public int fila;
@@ -15,6 +16,7 @@ public class pieza {
     public boolean seleccionada; //Pa saber si esta seleccionada
     public boolean colocada;
     public Image imagenOriginal; // imagen original
+    public Image imagenMuertes;
     public Image reverso;
     public boolean revelada;
     
@@ -31,7 +33,9 @@ public class pieza {
     */
     
     
-    this.imagen = original.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+    this.imagen = original.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+    this.imagenm = original.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+    this.imagenMuertes = this.imagenm;
     this.imagenOriginal = this.imagen;
     this.reverso = reverso;
     this.nombre = nombre;

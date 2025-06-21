@@ -59,7 +59,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="panelVillanosMuertos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="showTurno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="labelTurno" alignment="3" min="-2" max="-2" attributes="0"/>

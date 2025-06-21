@@ -54,18 +54,5 @@ public class heroes {//Codigo para heroes
         heroes[37] = new pieza("Nightcrawler", "/proyectostratego/imagenesheroes/31_Nightcrawler.png", 2, 10, -1, -1, true);
         heroes[38] = new pieza("Dr Strange", "/proyectostratego/imagenesheroes/32_DrStrange.png", 2, 10, -1, -1, true);
         heroes[39] = new pieza("Black Widow", "/proyectostratego/imagenesheroes/33_BlackWidow.png", 1, 1, -1, -1, true);//1
-        
-        
-        //heroes[40] = new pieza("Tierra Heroes", "/proyectostratego/imagenesheroes/Tierra.png", 0, 0, -1, -1, true);//1        
-        /*heroes[34] = new pieza("Bombas Heroes 1", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
-        heroes[35] = new pieza("Bombas Heroes 2", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
-        heroes[36] = new pieza("Bombas Heroes 3", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
-        heroes[37] = new pieza("Bombas Heroes 4", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
-        heroes[38] = new pieza("Bombas Heroes 5", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
-        heroes[39] = new pieza("Bombas Heroes 6", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1*/
-        
-     
-
     }
-
 }
