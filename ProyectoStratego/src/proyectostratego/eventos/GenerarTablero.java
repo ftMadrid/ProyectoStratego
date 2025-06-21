@@ -375,7 +375,7 @@ public class GenerarTablero extends JPanel {
                         } else if (objetivo != null && objetivo.rango == -1) {//Bombas
                             //Logica para que explote la pieza a menos que sea rango 3
                             if (piezaSeleccionada.rango == 3) {
-                                Juego.setPelea(piezaSeleccionada.nombre+"["+piezaSeleccionada.rango+"] desarma a "+objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] desarma a " + objetivo.nombre);
                                 System.out.println("Come la bomba");//Desarma la bomba
                                 piezaSeleccionada.seleccionada = false;
 
@@ -394,7 +394,7 @@ public class GenerarTablero extends JPanel {
                                 } else if (!piezaSeleccionada.heroe) {
                                     villanosC--;
                                 }
-                                Juego.setPelea(piezaSeleccionada.nombre+"["+piezaSeleccionada.rango+"] es explotada por "+objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] es explotada por " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
@@ -404,7 +404,7 @@ public class GenerarTablero extends JPanel {
                             }
                         } else if (piezaSeleccionada.rango == 1 && objetivo != null && objetivo.rango == 0) {//Logica captura de tierra
                             //Comer/Destruir tierra
-                            Juego.setPelea(piezaSeleccionada.nombre+"["+piezaSeleccionada.rango+"] captura "+objetivo.nombre);
+                            Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] captura " + objetivo.nombre);
                             if (!piezaSeleccionada.heroe) {
                                 getGanador(villano, heroe);//Ganador , perdedor
 
@@ -434,46 +434,58 @@ public class GenerarTablero extends JPanel {
                                 esMovimientoValido = false;
                                 System.out.println("Cancela el movimiento");
                                 reiniciarSeleccion();
-                                return;
+                                return;//Talvez quitar esto despues
 
                             } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
                                 //La parte es por la excepcion de black widow , despues agregar las de rango 3
                                 System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
-                                Juego.setPelea(piezaSeleccionada.nombre+"["+piezaSeleccionada.rango+"] se come a  "+objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] se come a  " + objetivo.nombre);
                                 juego.agregarPiezaMuerta(objetivo);
                                 tablero[celday][celdax] = piezaSeleccionada;
                                 //piezaSeleccionada.revelada = true;
                                 //objetivo.revelada = true;
                                 //Logica de revelacion TODO
-
+                                
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
-
                                 piezaSeleccionada.fila = celday;
                                 piezaSeleccionada.columna = celdax;
-
+                                //La pieza seleccionada se come al a pieza objetivo
                                 if (piezaSeleccionada.heroe) {
-                                    heroesC--;
+                                    villanosC -= 1;
+                                    System.out.println("Heroes--");
                                 } else {
-                                    villanosC--;
+                                    heroesC -= 1;
+                                    System.out.println("Villanos--");
                                 }
-                                if (villanosC == 0 && heroesC != 0) {
+                                /*if (villanosC == 0 && heroesC != 0) {
                                     getGanador(heroe, villano);
                                 } else if (heroesC == 0 && villanosC != 0) {
                                     getGanador(villano, heroe);
-                                }
+                                }*/
 
                                 empate();
 
                             } else if (piezaSeleccionada.rango < objetivo.rango) {
-                                Juego.setPelea(objetivo.nombre+"["+objetivo.rango+"] se come a atacante  "+piezaSeleccionada.nombre+"["+piezaSeleccionada.rango+"]");
+                                Juego.setPelea(objetivo.nombre + "[" + objetivo.rango + "] se come a atacante  " + piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "]");
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
 
                                 juego.agregarPiezaMuerta(piezaSeleccionada);
                                 System.out.println("Gano la otra pieza");
+                                if (piezaSeleccionada.heroe) {
+                                    heroesC -= 1;
+                                    System.out.println("Heroes--");
+                                } else {
+                                    villanosC -= 1;
+                                }
+                                /*if (villanosC == 0 && heroesC != 0) {
+                                    getGanador(heroe, villano);
+                                } else if (heroesC == 0 && villanosC != 0) {
+                                    getGanador(villano, heroe);
+                                }*/
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
-                                Juego.setPelea(objetivo.nombre+"["+objetivo.rango+"] y "+piezaSeleccionada.nombre+"["+piezaSeleccionada.rango+"]" +"Se derrotan mutuamente");
+                                Juego.setPelea(objetivo.nombre + "[" + objetivo.rango + "] y " + piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "]" + " Se derrotan mutuamente");
                                 objetivo.colocada = false;
 
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
@@ -484,14 +496,15 @@ public class GenerarTablero extends JPanel {
                                 juego.agregarPiezaMuerta(piezaSeleccionada);
                                 juego.agregarPiezaMuerta(objetivo);
 
-                                heroesC--;
-                                villanosC--;
+                                heroesC -= 1;
+                                villanosC -= 1;
 
-                                if (villanosC == 0 && heroesC != 0) {
+                                /*if (villanosC == 0 && heroesC != 0) {
                                     getGanador(heroe, villano);
                                 } else if (heroesC == 0 && villanosC != 0) {
                                     getGanador(villano, heroe);
-                                }
+                                }*/
+                                
 
                                 empate();
                                 reiniciarSeleccion();
@@ -505,6 +518,7 @@ public class GenerarTablero extends JPanel {
                             return;
 
                         }
+                        //Siempre entra aqui?
                         reiniciarSeleccion();
                         if (villanosC == 0 && heroesC != 0) {//Revisar si gano heroe Por falta de piezas
                             getGanador(heroe, villano);
@@ -521,21 +535,25 @@ public class GenerarTablero extends JPanel {
 
                             for (int i = 0; i < 40; i++) {
                                 if (heroes.heroes[i].colocada) {
+                                    
                                     heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
                                 }
-                                if (villanos.villanos[i].colocada && !villanos.villanos[i].revelada) {
+                                if (villanos.villanos[i].colocada ) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].reverso;
+                                   
                                 }
                             }
                         } else {
                             Juego.setTurno(villano.username);
 
                             for (int i = 0; i < 40; i++) {
-                                if (heroes.heroes[i].colocada && !heroes.heroes[i].revelada) {
+                                if (heroes.heroes[i].colocada ) {
+                                    
                                     heroes.heroes[i].imagen = heroes.heroes[i].reverso;
                                 }
                                 if (villanos.villanos[i].colocada) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
+                                    
                                 }
                             }
                         }
@@ -742,4 +760,5 @@ public class GenerarTablero extends JPanel {
             }
         }
     }
+
 }

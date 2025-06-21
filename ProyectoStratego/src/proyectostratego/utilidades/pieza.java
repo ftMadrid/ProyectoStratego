@@ -18,7 +18,7 @@ public class pieza {
     public Image imagenOriginal; // imagen original
     public Image imagenMuertes;
     public Image reverso;
-    public boolean revelada;
+    //public boolean revelada;
     
     
     public pieza(String nombre,String rutaImagen , int rango, int movimiento, int fila, int columna, boolean heroe) 
@@ -46,7 +46,7 @@ public class pieza {
     this.columna = columna;
     this.seleccionada = false;
     this.colocada = false;
-    this.revelada = false;
+    //this.revelada = false;
     //Agrege revelada para ver si no esta revelada la pieza
     }
 }
