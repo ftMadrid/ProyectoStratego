@@ -14,6 +14,7 @@ public class Ranking extends javax.swing.JFrame {
     private void actualizarRanking() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
+        
 
         for (int pos = 1; pos <= Jugador.nUsuariosTotal; pos++) {
             int mayor = -1;
