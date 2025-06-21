@@ -372,9 +372,9 @@ public class GenerarTablero extends JPanel {
                             reiniciarSeleccion();
                             return;//Salia un error en consola entonces con el return se soluciono
 
-                        } else if (objetivo != null && objetivo.rango == -1) {//Bombas
+                        } else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas
                             //Logica para que explote la pieza a menos que sea rango 3
-                            if (piezaSeleccionada.rango == 3) {
+                            if (piezaSeleccionada.rango == 3 && objetivo.heroe != piezaSeleccionada.heroe) {
                                 Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] desarma a " + objetivo.nombre);
                                 System.out.println("Come la bomba");//Desarma la bomba
                                 piezaSeleccionada.seleccionada = false;
@@ -389,9 +389,9 @@ public class GenerarTablero extends JPanel {
                                     villanosC--;
                                 }*/
                             } else {
-                                if (piezaSeleccionada.heroe) {
+                                if (piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     heroesC--;
-                                } else if (!piezaSeleccionada.heroe) {
+                                } else if (!piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     villanosC--;
                                 }
                                 Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] es explotada por " + objetivo.nombre);
