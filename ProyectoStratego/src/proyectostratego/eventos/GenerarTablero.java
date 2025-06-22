@@ -381,7 +381,9 @@ public class GenerarTablero extends JPanel {
                     if (esMovimientoValido) {
                         if (zonaProhibida[celday][celdax]) {
                             System.out.println("Zona Prohibida");
+                            JOptionPane.showMessageDialog(null, "No puedes moverte en zonas prohibidas.");
                             reiniciarSeleccion();
+                            repaint();
                             return;//Salia un error en consola entonces con el return se soluciono
 
                         } else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas

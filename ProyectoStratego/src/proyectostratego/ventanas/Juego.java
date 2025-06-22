@@ -26,6 +26,9 @@ public class Juego extends javax.swing.JFrame {
 
     public Juego() {
         initComponents();
+        
+        setTitle("Stratego Marvel Heroes | "+Jugador.jugadorLog.username+" vs "+Jugador.jugadorContrincante.username);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         // logica para la formacion de los paneles: 1 fila, 4 columnas
         panelHeroesMuertos.setLayout(new GridLayout(1, 4, 2, 2));
@@ -103,6 +106,7 @@ public class Juego extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/tablero.png"))); // NOI18N
         jLabel1.setText("jLabel1");
