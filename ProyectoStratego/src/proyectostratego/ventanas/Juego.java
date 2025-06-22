@@ -283,14 +283,6 @@ public class Juego extends javax.swing.JFrame {
 
             tablero.Rendirse();
 
-            JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);
-            if (ventana != null) {
-                MenuPrincipal ventanas = new MenuPrincipal();
-                ventanas.setVisible(true);
-                ventanas.setLocationRelativeTo(null);
-                ventana.dispose();
-            }
-
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

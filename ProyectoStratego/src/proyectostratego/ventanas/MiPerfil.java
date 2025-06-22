@@ -48,6 +48,7 @@ public class MiPerfil extends javax.swing.JFrame {
         labelVictorias = new javax.swing.JLabel();
         Derrotas = new javax.swing.JLabel();
         labelDerrotas = new javax.swing.JLabel();
+        cambiarPassword1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -58,7 +59,7 @@ public class MiPerfil extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ESTADISTICAS");
 
-        cambiarPassword.setFont(new java.awt.Font("Kefa", 1, 20)); // NOI18N
+        cambiarPassword.setFont(new java.awt.Font("Kefa", 1, 17)); // NOI18N
         cambiarPassword.setForeground(new java.awt.Color(0, 153, 255));
         cambiarPassword.setText("CAMBIAR PASSWORD");
         cambiarPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -68,7 +69,7 @@ public class MiPerfil extends javax.swing.JFrame {
             }
         });
 
-        eliminarCuenta.setFont(new java.awt.Font("Kefa", 1, 20)); // NOI18N
+        eliminarCuenta.setFont(new java.awt.Font("Kefa", 1, 17)); // NOI18N
         eliminarCuenta.setForeground(new java.awt.Color(0, 153, 255));
         eliminarCuenta.setText("ELIMINAR CUENTA");
         eliminarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -78,7 +79,7 @@ public class MiPerfil extends javax.swing.JFrame {
             }
         });
 
-        regresar.setFont(new java.awt.Font("Kefa", 1, 24)); // NOI18N
+        regresar.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         regresar.setForeground(new java.awt.Color(255, 0, 51));
         regresar.setText("Regresar");
         regresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -157,6 +158,16 @@ public class MiPerfil extends javax.swing.JFrame {
         labelDerrotas.setText("   Derrotas");
         labelDerrotas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0), 4));
 
+        cambiarPassword1.setFont(new java.awt.Font("Kefa", 1, 17)); // NOI18N
+        cambiarPassword1.setForeground(new java.awt.Color(0, 153, 255));
+        cambiarPassword1.setText("LOG PARTIDAS");
+        cambiarPassword1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cambiarPassword1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarPassword1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -197,15 +208,16 @@ public class MiPerfil extends javax.swing.JFrame {
                                     .addComponent(pVillanos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(labelpVillanos, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(cambiarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39))
+                                .addComponent(cambiarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cambiarPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,13 +226,6 @@ public class MiPerfil extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addComponent(titulo)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(cambiarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1)
@@ -245,7 +250,16 @@ public class MiPerfil extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Derrotas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelDerrotas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(labelDerrotas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(179, 179, 179)
+                        .addComponent(cambiarPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cambiarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -287,6 +301,16 @@ public class MiPerfil extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cambiarPasswordActionPerformed
 
+    private void cambiarPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPassword1ActionPerformed
+        // TODO add your handling code here:
+        
+        LogPartidas lgpartidas = new LogPartidas(Jugador.jugadorLog.getUsername());
+        lgpartidas.setVisible(true);
+        lgpartidas.setLocationRelativeTo(null);
+        dispose();
+        
+    }//GEN-LAST:event_cambiarPassword1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -324,6 +348,7 @@ public class MiPerfil extends javax.swing.JFrame {
     private javax.swing.JLabel Puntos;
     private javax.swing.JLabel Victorias;
     private javax.swing.JButton cambiarPassword;
+    private javax.swing.JButton cambiarPassword1;
     private javax.swing.JButton eliminarCuenta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

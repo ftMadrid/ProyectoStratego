@@ -88,16 +88,17 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="48" max="32767" attributes="0"/>
+                          <EmptySpace pref="61" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="cambiarPassword" min="-2" pref="242" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="cambiarPassword" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="eliminarCuenta" min="-2" pref="242" max="-2" attributes="0"/>
-                                      <Component id="regresar" min="-2" pref="242" max="-2" attributes="0"/>
+                                      <Component id="eliminarCuenta" min="-2" pref="218" max="-2" attributes="0"/>
+                                      <Component id="regresar" min="-2" pref="218" max="-2" attributes="0"/>
+                                      <Component id="cambiarPassword1" min="-2" pref="218" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -113,14 +114,6 @@
                   <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="titulo" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
-                          <Component id="cambiarPassword" min="-2" pref="86" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Component id="eliminarCuenta" min="-2" pref="86" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="regresar" min="-2" pref="86" max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -152,6 +145,16 @@
                               <Component id="labelDerrotas" alignment="3" min="-2" pref="70" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
+                          <Component id="cambiarPassword1" min="-2" pref="69" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="cambiarPassword" min="-2" pref="69" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="eliminarCuenta" min="-2" pref="69" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="regresar" min="-2" pref="69" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
               </Group>
@@ -180,7 +183,7 @@
         <Component class="javax.swing.JButton" name="cambiarPassword">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Kefa" size="20" style="1"/>
+              <Font name="Kefa" size="17" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -197,7 +200,7 @@
         <Component class="javax.swing.JButton" name="eliminarCuenta">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Kefa" size="20" style="1"/>
+              <Font name="Kefa" size="17" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="99" red="0" type="rgb"/>
@@ -214,7 +217,7 @@
         <Component class="javax.swing.JButton" name="regresar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Kefa" size="24" style="1"/>
+              <Font name="Kefa" size="18" style="1"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="0" red="ff" type="rgb"/>
@@ -453,6 +456,23 @@
               </Border>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="cambiarPassword1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Kefa" size="17" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="LOG PARTIDAS"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiarPassword1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

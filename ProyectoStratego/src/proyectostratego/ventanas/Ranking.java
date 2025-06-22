@@ -14,7 +14,6 @@ public class Ranking extends javax.swing.JFrame {
     private void actualizarRanking() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
-        
 
         for (int pos = 1; pos <= Jugador.nUsuariosTotal; pos++) {
             int mayor = -1;
@@ -36,7 +35,6 @@ public class Ranking extends javax.swing.JFrame {
                     }
                 }
             }
-
             if (indiceMayor != -1) {
                 Jugador jugador = Jugador.jugadores[indiceMayor];
                 modelo.addRow(new Object[]{pos+".", jugador.getUsername(), jugador.getPuntos()});
@@ -80,8 +78,6 @@ public class Ranking extends javax.swing.JFrame {
         jTable1.setGridColor(new java.awt.Color(0, 0, 0));
         jTable1.setRowHeight(30);
         jTable1.setShowGrid(true);
-        jTable1.setShowHorizontalLines(true);
-        jTable1.setShowVerticalLines(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);

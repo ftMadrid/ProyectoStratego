@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import proyectostratego.utilidades.StatsGlobales;
 import proyectostratego.ventanas.Juego;
+import proyectostratego.ventanas.LogPartidas;
 import proyectostratego.ventanas.MenuPrincipal;
 
 public class GenerarTablero extends JPanel {
@@ -313,11 +314,10 @@ public class GenerarTablero extends JPanel {
                         System.out.println("Seleccionada pieza: " + seleccion.nombre);
                         piezaSeleccionada.seleccionada = true;
                     } else if (seleccion != null) {
-                        
+
                         System.out.println("No es turno de este bando!");//O tambien cuando sea rango 0,-1
-                        
+
                         //Talvez agregar aqui?
-                        
                     }
                 } else {
                     // Intentar mover la pieza
@@ -453,7 +453,7 @@ public class GenerarTablero extends JPanel {
                                 //piezaSeleccionada.revelada = true;
                                 //objetivo.revelada = true;
                                 //Logica de revelacion TODO
-                                
+
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
                                 piezaSeleccionada.fila = celday;
@@ -514,8 +514,6 @@ public class GenerarTablero extends JPanel {
                                 } else if (heroesC == 0 && villanosC != 0) {
                                     getGanador(villano, heroe);
                                 }*/
-                                
-
                                 empate();
                                 reiniciarSeleccion();
 
@@ -533,12 +531,7 @@ public class GenerarTablero extends JPanel {
                         }
                         //Siempre entra aqui?
                         reiniciarSeleccion();
-                        if (villanosC == 0 && heroesC != 0) {//Revisar si gano heroe Por falta de piezas
-                            getGanador(heroe, villano);
-                            System.out.println("Gano heroe");
-                        } else if (heroesC == 0 && villanosC != 0) {//Revisar si gano villanos Por falta de piezas
-                            getGanador(villano, heroe);
-                        }
+                        getGanadorPiezas();
 
                         turno = !turno; //Cambio de turno
                         System.out.println("Turno de: " + (turno ? "Heroes" : "Villanos")); //Aviso en consola del cambio de turno
@@ -548,30 +541,30 @@ public class GenerarTablero extends JPanel {
 
                             for (int i = 0; i < 40; i++) {
                                 if (heroes.heroes[i].colocada) {
-                                    
+
                                     heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
                                     System.out.println(heroes.heroes[i].nombre);
-                                    
+
                                 }
-                                if (villanos.villanos[i].colocada ) {
+                                if (villanos.villanos[i].colocada) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].reverso;
                                     System.out.println(villanos.villanos[i].nombre);
-                                   
+
                                 }
                             }
                         } else {
                             Juego.setTurno(villano.username);
 
                             for (int i = 0; i < 40; i++) {
-                                if (heroes.heroes[i].colocada ) {
-                                    
+                                if (heroes.heroes[i].colocada) {
+
                                     heroes.heroes[i].imagen = heroes.heroes[i].reverso;
                                     System.out.println(heroes.heroes[i].nombre);
                                 }
                                 if (villanos.villanos[i].colocada) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
                                     System.out.println(villanos.villanos[i].nombre);
-                                    
+
                                 }
                             }
                         }
@@ -709,42 +702,89 @@ public class GenerarTablero extends JPanel {
         }
     }
 
+    private void itemsPartidas(Jugador ganador, Jugador perdedor) {
+        if (ganador == heroe) {
+            heroe.setVictorias(1);
+            heroe.setPuntos(3);
+            StatsGlobales.setVictoriasHeroes();
+            villano.setDerrotas(1);
+        } else {
+            villano.setVictorias(1);
+            villano.setPuntos(3);
+            StatsGlobales.setVictoriasVillanos();
+            villano.setDerrotas(1);
+        }
+
+    }
+
     public void Rendirse() {
         if (turno) {
-            getGanador(villano, heroe);
-            System.out.println("Se rindio: " + heroe.username + " y " + villano.username + " recibio 3 puntos");
+            LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
+                    + " usando HEROES se ha retirado del juego.");
+            System.out.println(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
+                    + " usando HEROES se ha retirado del juego.");
+            itemsPartidas(villano, heroe);
+
         } else {
-            getGanador(heroe, villano);
-            System.out.println("Se rindio: " + villano.username + " y " + heroe.username + " recibio 3 puntos");
+            LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
+                    + " usando VILLANOS se ha retirado del juego.");
+            System.out.println(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
+                    + " usando VILLANOS se ha retirado del juego.");;
+            itemsPartidas(heroe, villano);
         }
 
         turno = true;
         heroe = Jugador.getHeroe();
         villano = Jugador.getVillano();
+
+        JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this); // o pasá 'Juego' al constructor
+        if (ventana != null) {
+            MenuPrincipal m = new MenuPrincipal();
+            m.setVisible(true);
+            m.setLocationRelativeTo(null);
+            ventana.dispose();
+        }
+
+    }
+
+    private void getGanadorPiezas() {
+        if (villanosC == 0 && heroesC != 0) {
+            LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
+                    + heroe.getUsername());
+            System.out.println(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
+                    + heroe.getUsername());
+            itemsPartidas(heroe, villano);
+        } else if (heroesC == 0 && villanosC != 0) {
+            LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
+                    + villano.getUsername());
+            System.out.println(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
+                    + villano.getUsername());
+            itemsPartidas(villano, heroe);
+        }
     }
 
     private void getGanador(Jugador ganador, Jugador perdedor) {
         if (ganador == villano) {
             System.out.println("Gano villano");
-            ganador.setVictorias(1);
-            ganador.setPuntos(3);
-            StatsGlobales.setVictoriasVillanos();
+            itemsPartidas(villano, heroe);
             System.out.println(ganador.villanosPartidas);
             System.out.println(ganador.victorias);
 
-            perdedor.setDerrotas(1);
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername());
+            System.out.println(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername());
+
             System.out.println(perdedor.heroesPartidas);
             System.out.println(perdedor.derrotas);
         } else {
             System.out.println("Gano heroe!!!");
 
-            ganador.setVictorias(1);
-            ganador.setPuntos(3);
-            StatsGlobales.setVictoriasHeroes();
+            itemsPartidas(heroe, villano);
             System.out.println(ganador.heroesPartidas);
             System.out.println(ganador.victorias);
 
-            perdedor.setDerrotas(+1);
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername());
+            System.out.println(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername());
+
             System.out.println(perdedor.villanosPartidas);
             System.out.println(perdedor.derrotas);
 

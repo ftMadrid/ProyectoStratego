@@ -125,7 +125,7 @@ public class Jugador { //Plantilla para el objeto
 
     public static void eliminarJugador(String username) {
 
-        //Metodo para eliminar la cuenta (lo hice con metodo para ahorrar espacio en esa clase
+        // Metdo para eliminar la cuenta (lo hice con metodo para ahorrar espacio en esa clase
         for (int i = 0; i < Jugador.nUsuariosTotal; i++) {
             if (Jugador.jugadores[i].username.equalsIgnoreCase(username)) {
 
