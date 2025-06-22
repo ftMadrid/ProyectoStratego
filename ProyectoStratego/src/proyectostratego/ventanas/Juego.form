@@ -136,10 +136,7 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="showTurno" alignment="0" min="-2" pref="271" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="labelTurno" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="153" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="labelTurno" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="112" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
