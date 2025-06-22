@@ -16,10 +16,16 @@ import proyectostratego.utilidades.StatsGlobales;
 import proyectostratego.ventanas.Juego;
 import proyectostratego.ventanas.LogPartidas;
 import proyectostratego.ventanas.MenuPrincipal;
+import java.time.LocalDate;//Fecha actual
+import java.time.format.DateTimeFormatter;//Formatear fecha
+import static java.time.temporal.TemporalQueries.localDate;
 
 public class GenerarTablero extends JPanel {
 
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");//Year/month/day
+    
     Random random = new Random();
+    
 
     private pieza piezaSeleccionada = null;
     private int seleccionFila = -1;
@@ -89,7 +95,7 @@ public class GenerarTablero extends JPanel {
                 tierra.imagen = tierra.reverso;
 
             }
-            System.out.println("Se colocó Tierra en (" + filaTierra + "," + columna + ")");
+            //System.out.println("Se colocó Tierra en (" + filaTierra + "," + columna + ")");
         }
 
         // setear coords para poner las bombas
@@ -122,7 +128,7 @@ public class GenerarTablero extends JPanel {
                         bomba.imagen = bomba.reverso;
 
                     }
-                    System.out.println("Se colocó bomba en (" + r + "," + c + ")");
+                    //System.out.println("Se colocó bomba en (" + r + "," + c + ")");
                 }
             }
         }
@@ -167,7 +173,7 @@ public class GenerarTablero extends JPanel {
                     }
                 }
                 if (contador == 0) {
-                    System.out.println("Debug(No hay de ese rango):" + rango);
+                    //System.out.println("Debug(No hay de ese rango):" + rango);
                     break;
                 }
                 int posicionRandom = random.nextInt(contador);
@@ -179,11 +185,11 @@ public class GenerarTablero extends JPanel {
                     if (eleccion.rango == -1) {
                         randomr = random.nextInt(2);
                         randomc = random.nextInt(columnas);
-                        System.out.println("A");
+                        //System.out.println("A");
                     } else if (eleccion.rango == 2) {
                         randomr = 2 + random.nextInt(2);
                         randomc = random.nextInt(columnas);
-                        System.out.println("A");
+                        //System.out.println("A");
 
                     } else {
                         randomr = 0 + random.nextInt(4);
@@ -194,11 +200,11 @@ public class GenerarTablero extends JPanel {
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
                 eleccion.imagen = eleccion.reverso;//Para que spawnee dada vuelta
-                System.out.println("Se coloco villano:" + eleccion.nombre + "En " + randomr + "," + randomc);
+                //System.out.println("Se coloco villano:" + eleccion.nombre + "En " + randomr + "," + randomc);
                 eleccion.colocada = true;
                 if (eleccion.rango >= 1) {
                     villanosC++;
-                    System.out.println("Villano ++");
+                    //System.out.println("Villano ++");
                 }
                 colocados++;
             }
@@ -220,15 +226,15 @@ public class GenerarTablero extends JPanel {
                 for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
                     pieza p = heroes.heroes[i];
                     if (p == null) {
-                        System.out.println("NULL");
+                        //System.out.println("NULL");
                         continue;
                     }
                     if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
                         posibles[contador] = p;
                         contador++;
-                        System.out.println("Contador DEBUG");
+                        //System.out.println("Contador DEBUG");
                         if (p.rango == -1) {
-                            System.out.println("BOMBOCLAAAT");
+                            //System.out.println("BOMBOCLAAAT");
                         }
                     }
                 }
@@ -256,27 +262,27 @@ public class GenerarTablero extends JPanel {
                         randomc = random.nextInt(columnas);
                     }
                     intentos++;
-                    System.out.println("Entro al do");
+                    //System.out.println("Entro al do");
 
-                    if (intentos > 50) {
-                        System.out.println("No hay espacio para colocar heroe de rango" + rango);
+                    if (intentos > 100) {
+                        //System.out.println("No hay espacio para colocar heroe de rango" + rango);
 
                         break; // rompe el bucle para evitar ciclo infinito
                     }
                 } while (tablero[randomr][randomc] != null);
                 if (tablero[randomr][randomc] != null) {
-                    System.out.println(tablero[randomr][randomc].nombre);
+                    //System.out.println(tablero[randomr][randomc].nombre);
                     System.out.println("DEBUG - Agarro una pieza no nula");
                     break;
                 }
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
-                System.out.println("Se coloco heroe:" + eleccion.nombre + "En " + randomr + "," + randomc);
+                //System.out.println("Se coloco heroe:" + eleccion.nombre + "En " + randomr + "," + randomc);
                 eleccion.colocada = true;
                 if (eleccion.rango >= 1) {
                     heroesC++;
-                    System.out.println("Heroes++");
+                    //System.out.println("Heroes++");
                 }
                 colocados++;
             }
@@ -339,7 +345,7 @@ public class GenerarTablero extends JPanel {
                             int inicioRecorrido = Math.min(seleccionFila, celday) + 1;//+1 Para poder evitar nuestra ficha
                             int finalRecorrido = Math.max(seleccionFila, celday);
                             for (int i = inicioRecorrido; i < finalRecorrido; i++) {
-                                System.out.println(tablero[i][piezaSeleccionada.columna]);
+                                //System.out.println(tablero[i][piezaSeleccionada.columna]);
                                 if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna]) {
                                     esMovimientoValido = false;
                                     System.out.println("Columa " + piezaSeleccionada.columna + "  " + i);
@@ -718,18 +724,19 @@ public class GenerarTablero extends JPanel {
     }
 
     public void Rendirse() {
+        LocalDate localDate = LocalDate.now();
         if (turno) {
             LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
-                    + " usando HEROES se ha retirado del juego.");
+                    + " usando HEROES se ha retirado del juego-"+ "("+dtf.format(localDate)+")");
             System.out.println(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
-                    + " usando HEROES se ha retirado del juego.");
+                    + " usando HEROES se ha retirado del juego."+ "("+dtf.format(localDate)+")");
             itemsPartidas(villano, heroe);
 
         } else {
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
-                    + " usando VILLANOS se ha retirado del juego.");
+                    + " usando VILLANOS se ha retirado del juego-"+ "("+dtf.format(localDate)+")");
             System.out.println(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
-                    + " usando VILLANOS se ha retirado del juego.");;
+                    + " usando VILLANOS se ha retirado del juego-"+ "("+dtf.format(localDate)+")");
             itemsPartidas(heroe, villano);
         }
 
@@ -748,33 +755,36 @@ public class GenerarTablero extends JPanel {
     }
 
     private void getGanadorPiezas() {
+        LocalDate localDate = LocalDate.now();
         if (villanosC == 0 && heroesC != 0) {
             LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
-                    + heroe.getUsername());
+                    + heroe.getUsername()+ "-("+dtf.format(localDate)+")");
             System.out.println(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
-                    + heroe.getUsername());
+                    + heroe.getUsername()+ "("+dtf.format(localDate)+")");
             itemsPartidas(heroe, villano);
         } else if (heroesC == 0 && villanosC != 0) {
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
-                    + villano.getUsername());
+                    + villano.getUsername()+ "-("+dtf.format(localDate)+")");
             System.out.println(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
-                    + villano.getUsername());
+                    + villano.getUsername()+ "-("+dtf.format(localDate)+")");
             itemsPartidas(villano, heroe);
         }
     }
 
     private void getGanador(Jugador ganador, Jugador perdedor) {
+        LocalDate localDate = LocalDate.now();
         if (ganador == villano) {
             System.out.println("Gano villano");
             itemsPartidas(villano, heroe);
             System.out.println(ganador.villanosPartidas);
             System.out.println(ganador.victorias);
 
-            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername());
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername()+ "-("+dtf.format(localDate)+")");
             System.out.println(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername());
 
             System.out.println(perdedor.heroesPartidas);
             System.out.println(perdedor.derrotas);
+            JOptionPane.showMessageDialog(this, "Gano "+ganador.getUsername()+" (Villano)");
         } else {
             System.out.println("Gano heroe!!!");
 
@@ -782,17 +792,19 @@ public class GenerarTablero extends JPanel {
             System.out.println(ganador.heroesPartidas);
             System.out.println(ganador.victorias);
 
-            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername());
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername() + "-("+dtf.format(localDate)+")");
             System.out.println(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername());
 
             System.out.println(perdedor.villanosPartidas);
             System.out.println(perdedor.derrotas);
+            JOptionPane.showMessageDialog(this, "Gano "+ganador.getUsername()+" (Heroe)");
 
         }
 
         JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
         if (ventana != null) {
             //Falta poner cosas como "Gano tal jugador pero se hace despues"
+            
             MenuPrincipal ventanas = new MenuPrincipal();
             ventanas.setVisible(true);
             ventanas.setLocationRelativeTo(null);
