@@ -35,15 +35,15 @@ public class GenerarTablero extends JPanel {
     private int heroesC = 0;
     private int villanosC = 0;
 
-    private final int base = 70;//Width
-    private final int altura = 70;//Length
+    private final int base = 60;//Width
+    private final int altura = 60;//Length
     private final int promedio = (base + altura) / 2;
     private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
     private final int bombas = 3;
     private final int tierra = 1;
     private final int rango1 = 1;
-    private final int rango2 = 1;
+    private final int rango2 = 10;
     private final int rango3 = 1;
     private final int rango4 = 1;
     private final int rango5 = 1;

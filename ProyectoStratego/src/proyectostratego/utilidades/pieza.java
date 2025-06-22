@@ -34,7 +34,7 @@ public class pieza {
     
     
     this.imagen = original.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-    this.imagenm = original.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+    this.imagenm = original.getScaledInstance(59, 46, Image.SCALE_SMOOTH);
     this.imagenMuertes = this.imagenm;
     this.imagenOriginal = this.imagen;
     this.reverso = reverso;
