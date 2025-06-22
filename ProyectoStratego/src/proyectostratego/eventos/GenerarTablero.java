@@ -44,16 +44,16 @@ public class GenerarTablero extends JPanel {
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
     private final int bombas = 3;
     private final int tierra = 1;
-    private final int rango1 = 1;
-    private final int rango2 = 10;
+    private final int rango1 = 0;
+    private final int rango2 = 2;
     private final int rango3 = 1;
-    private final int rango4 = 1;
-    private final int rango5 = 1;
-    private final int rango6 = 1;
-    private final int rango7 = 1;
-    private final int rango8 = 1;
-    private final int rango9 = 1;
-    private final int rango10 = 1;
+    private final int rango4 = 0;
+    private final int rango5 = 0;
+    private final int rango6 = 0;
+    private final int rango7 = 0;
+    private final int rango8 = 0;
+    private final int rango9 = 0;
+    private final int rango10 = 0;
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
@@ -806,6 +806,15 @@ public class GenerarTablero extends JPanel {
         if (villanosC == 0 && heroesC == 0) {
             // Empate
             System.out.println("EMPATE");
+            StatsGlobales.setEmpates();
+            Jugador.jugadorLog.setEmpates(1);
+            Jugador.jugadorContrincante.setEmpates(1);
+            JOptionPane.showMessageDialog(this, "Los Jugadores "+Jugador.jugadorLog.username+" y "+Jugador.jugadorContrincante.username+" han empatado!", "Partida Empatada", JOptionPane.INFORMATION_MESSAGE);
+            
+            LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha quedado empatado con " + villano.getUsername()
+                    + " usando VILLANOS.");
+            System.out.println(heroe.getUsername() + " usando HEROES ha quedado empatado con " + villano.getUsername()
+                    + " usando VILLANOS.");
 
             JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
             if (ventana != null) {

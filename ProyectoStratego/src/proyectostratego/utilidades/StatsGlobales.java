@@ -5,6 +5,7 @@ public class StatsGlobales {
     private static int partidas = 0;
     private static int victoriasHeroes = 0;
     private static int victoriasVillanos = 0;
+    private static int empates = 0;
     
     public static void setPartidas(){
         partidas++;
@@ -19,6 +20,14 @@ public class StatsGlobales {
     
     public static int getVictoriasHeroes(){
         return victoriasHeroes;
+    }
+    
+    public static void setEmpates(){
+        empates++;
+    }
+    
+    public static int getEmpates(){
+        return empates;
     }
     
     public static void setVictoriasVillanos(){

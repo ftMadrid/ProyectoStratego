@@ -25,6 +25,7 @@ public class Jugador { //Plantilla para el objeto
     public int villanosPartidas = 0; //Inicializar variables mayormente
     public int victorias = 0;
     public int derrotas = 0;
+    public int empates = 0;
     public boolean bando = true;
     
     public Jugador(String username, String password) {
@@ -35,6 +36,7 @@ public class Jugador { //Plantilla para el objeto
         this.villanosPartidas = 0;//Lo mismo de arriba
         this.victorias = 0;
         this.derrotas = 0;
+        this.empates = 0;
         //Para agregar mas stats o cosas extra , solo es poner this.[variable] = 0;
     }
     
@@ -113,6 +115,14 @@ public class Jugador { //Plantilla para el objeto
     
     public int getVictorias(){
         return victorias;
+    }
+    
+    public void setEmpates(int empates){
+        this.empates += empates;
+    }
+    
+    public int getEmpates(){
+        return empates;
     }
     
     public void setDerrotas(int derrotas){
