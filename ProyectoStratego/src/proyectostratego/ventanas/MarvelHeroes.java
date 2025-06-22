@@ -95,6 +95,8 @@ public class MarvelHeroes extends javax.swing.JFrame {
 
     private void cambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPasswordActionPerformed
         // TODO add your handling code here:
+        System.out.println("[CONSOLE LOG] Saliendo del menu Marvel Heroes.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Config Partida.\n");
         CfgPartida config = new CfgPartida();
         config.setVisible(true);
         config.setLocationRelativeTo(null);
@@ -104,6 +106,8 @@ public class MarvelHeroes extends javax.swing.JFrame {
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
 
+        System.out.println("[CONSOLE LOG] Saliendo del menu Marvel Heroes.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Menu Principal.\n");
         MenuPrincipal menu = new MenuPrincipal();
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);

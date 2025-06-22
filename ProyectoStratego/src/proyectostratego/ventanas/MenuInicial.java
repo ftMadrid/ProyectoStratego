@@ -111,6 +111,8 @@ public class MenuInicial extends javax.swing.JFrame {
         Login login = new Login();
         login.setVisible(true);
         login.setLocationRelativeTo(null);
+        System.out.println("[CONSOLE LOG] Saliendo del menu Menu Inicial.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Log In.\n");
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -119,13 +121,16 @@ public class MenuInicial extends javax.swing.JFrame {
         Register register = new Register();
         register.setVisible(true);
         register.setLocationRelativeTo(null);
+        System.out.println("[CONSOLE LOG] Saliendo del menu Menu Inicial.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Crear Player.\n");
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        System.out.println("[CONSOLE LOG] Saliendo del juego.");
         dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

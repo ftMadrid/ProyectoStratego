@@ -84,7 +84,7 @@ public class MiPerfil extends javax.swing.JFrame {
             }
         });
 
-        regresar.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
+        regresar.setFont(new java.awt.Font("Kefa", 1, 20)); // NOI18N
         regresar.setForeground(new java.awt.Color(255, 0, 51));
         regresar.setText("Regresar");
         regresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -198,12 +198,6 @@ public class MiPerfil extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -241,17 +235,22 @@ public class MiPerfil extends javax.swing.JFrame {
                                     .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cambiarPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())))))
+                                .addContainerGap())))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(titulo)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
@@ -277,17 +276,18 @@ public class MiPerfil extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Empates, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelEmpates, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(179, 179, 179)
+                            .addComponent(labelEmpates, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(44, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cambiarPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cambiarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                        .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -306,6 +306,10 @@ public class MiPerfil extends javax.swing.JFrame {
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
+        
+        System.out.println("[CONSOLE LOG] Saliendo del menu Mi Perfil.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Menu Principal.\n");
+        
         MenuPrincipal menuprincipal = new MenuPrincipal();
         menuprincipal.setVisible(true);
         menuprincipal.setLocationRelativeTo(null);
@@ -314,6 +318,10 @@ public class MiPerfil extends javax.swing.JFrame {
 
     private void eliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCuentaActionPerformed
         // TODO add your handling code here:
+        
+        System.out.println("[CONSOLE LOG] Saliendo del menu Mi Perfil.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Eliminar Cuenta.\n");
+        
         EliminarCuenta eliminarcuenta = new EliminarCuenta();
         eliminarcuenta.setVisible(true);
         eliminarcuenta.setLocationRelativeTo(null);
@@ -322,6 +330,10 @@ public class MiPerfil extends javax.swing.JFrame {
 
     private void cambiarPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPasswordActionPerformed
         // TODO add your handling code here:
+        
+        System.out.println("[CONSOLE LOG] Saliendo del menu Mi Perfil.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Cambiar Password.\n");
+        
         CambiarPassword cpassword = new CambiarPassword();
         cpassword.setVisible(true);
         cpassword.setLocationRelativeTo(null);
@@ -330,6 +342,9 @@ public class MiPerfil extends javax.swing.JFrame {
 
     private void cambiarPassword1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarPassword1ActionPerformed
         // TODO add your handling code here:
+        
+        System.out.println("[CONSOLE LOG] Saliendo del menu Mi Perfil.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Log Partidas.\n");
         
         LogPartidas lgpartidas = new LogPartidas(Jugador.jugadorLog.getUsername());
         lgpartidas.setVisible(true);

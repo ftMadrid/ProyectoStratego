@@ -1,6 +1,7 @@
 package proyectostratego.ventanas;
 
 import javax.swing.JOptionPane;
+import proyectostratego.utilidades.Fecha;
 import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
 
@@ -30,11 +31,11 @@ public class CambiarPassword extends javax.swing.JFrame {
 
         titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/cambiarpasswordtext.png"))); // NOI18N
 
-        labelPasswordActual.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        labelPasswordActual.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         labelPasswordActual.setForeground(new java.awt.Color(255, 255, 255));
         labelPasswordActual.setText("Contraseña Actual:");
 
-        passwordActual.setFont(new java.awt.Font("ITF Devanagari", 0, 18)); // NOI18N
+        passwordActual.setFont(new java.awt.Font("Kefa", 0, 18)); // NOI18N
         passwordActual.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         passwordActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,11 +43,11 @@ public class CambiarPassword extends javax.swing.JFrame {
             }
         });
 
-        labelPasswordNueva.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        labelPasswordNueva.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         labelPasswordNueva.setForeground(new java.awt.Color(255, 255, 255));
         labelPasswordNueva.setText("Contraseña Nueva:");
 
-        passwordNueva.setFont(new java.awt.Font("ITF Devanagari", 0, 18)); // NOI18N
+        passwordNueva.setFont(new java.awt.Font("Kefa", 0, 18)); // NOI18N
         passwordNueva.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         passwordNueva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +55,7 @@ public class CambiarPassword extends javax.swing.JFrame {
             }
         });
 
-        botonCambiar.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        botonCambiar.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         botonCambiar.setForeground(new java.awt.Color(0, 204, 0));
         botonCambiar.setText("Cambiar");
         botonCambiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -64,7 +65,7 @@ public class CambiarPassword extends javax.swing.JFrame {
             }
         });
 
-        botonSalir.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        botonSalir.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         botonSalir.setForeground(new java.awt.Color(255, 51, 51));
         botonSalir.setText("Regresar");
         botonSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -87,16 +88,15 @@ public class CambiarPassword extends javax.swing.JFrame {
                         .addGap(159, 159, 159)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelPasswordNueva)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(botonCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(passwordNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelPasswordActual)
-                                    .addComponent(passwordActual, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(passwordActual, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,10 +113,10 @@ public class CambiarPassword extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(botonCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,24 +145,32 @@ public class CambiarPassword extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (Jugador.jugadorLog.validarPass(passwordActual.getText())) {
             if (passwordNueva.getText().contains(" ")) {
-                JOptionPane.showMessageDialog(this, "No puedes tener espacios en la contraseña");
+                JOptionPane.showMessageDialog(this, "No puedes tener espacios en la contraseña!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
             } else if (passwordNueva.getText().length() != 5) {
-                JOptionPane.showMessageDialog(this, "La contraseña tiene que ser unicamente de 5 caracteres");
+                JOptionPane.showMessageDialog(this, "La contraseña tiene que ser unicamente de 5 caracteres!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 Jugador.jugadorLog.nuevaPass(passwordNueva.getText());
-                JOptionPane.showMessageDialog(this, "Contraseña actualizada correctamente.");
+                JOptionPane.showMessageDialog(this, "Contraseña actualizada correctamente!", "CAMBIAR PASSWORD", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("[CONSOLE LOG] La contraseña del jugador " + Jugador.jugadorLog.getUsername() + " ha sido actualizada con exito. [" + Fecha.getFechaHora() + "]");
+
+                System.out.println("[CONSOLE LOG] Saliendo del menu Cambiar Password.");
+                System.out.println("[CONSOLE LOG] Ejecutando el menu Mi Perfil.\n");
                 MiPerfil miperfil = new MiPerfil();
                 miperfil.setVisible(true);
                 miperfil.setLocationRelativeTo(null);
                 dispose();
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "La contraseña actual ingresada es incorrecta.");
+        } else {
+            JOptionPane.showMessageDialog(this, "La contraseña actual ingresada es incorrecta!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_botonCambiarActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
+
+        System.out.println("[CONSOLE LOG] Saliendo del menu Cambiar Password.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Mi Perfil.\n");
+
         MiPerfil miperfil = new MiPerfil();
         miperfil.setVisible(true);
         miperfil.setLocationRelativeTo(null);

@@ -112,6 +112,9 @@ public class UniversoMarvel extends javax.swing.JFrame {
     private void rankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingActionPerformed
         // TODO add your handling code here:
         
+        System.out.println("[CONSOLE LOG] Saliendo del menu Universo Marvel.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Ranking.\n");
+        
         Ranking rankingg = new Ranking();
         rankingg.setVisible(true);
         rankingg.setLocationRelativeTo(null);
@@ -122,6 +125,9 @@ public class UniversoMarvel extends javax.swing.JFrame {
     private void batallasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batallasActionPerformed
         // TODO add your handling code here:
         
+        System.out.println("[CONSOLE LOG] Saliendo del menu Universo Marvel.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Batallas.\n");
+        
         Batallas batalla = new Batallas();
         batalla.setVisible(true);
         batalla.setLocationRelativeTo(null);
@@ -131,6 +137,9 @@ public class UniversoMarvel extends javax.swing.JFrame {
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
+        
+        System.out.println("[CONSOLE LOG] Saliendo del menu Universo Marvel.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Menu Principal.\n");
 
         MenuPrincipal menu = new MenuPrincipal();
         menu.setVisible(true);

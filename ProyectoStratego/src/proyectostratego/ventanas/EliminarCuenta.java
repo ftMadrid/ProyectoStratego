@@ -1,6 +1,7 @@
 package proyectostratego.ventanas;
 
 import javax.swing.JOptionPane;
+import proyectostratego.utilidades.Fecha;
 import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
 
@@ -29,15 +30,15 @@ public class EliminarCuenta extends javax.swing.JFrame {
 
         titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/eliminarcuentatext.png"))); // NOI18N
 
-        labelInstrucciones.setFont(new java.awt.Font("ITF Devanagari", 1, 16)); // NOI18N
+        labelInstrucciones.setFont(new java.awt.Font("Kefa", 1, 16)); // NOI18N
         labelInstrucciones.setForeground(new java.awt.Color(255, 255, 255));
         labelInstrucciones.setText("Para confirmar el proceso ingrese la contraseña de su cuenta");
 
-        labelPassword.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        labelPassword.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         labelPassword.setForeground(new java.awt.Color(255, 255, 255));
         labelPassword.setText("Contraseña:");
 
-        password.setFont(new java.awt.Font("ITF Devanagari", 0, 18)); // NOI18N
+        password.setFont(new java.awt.Font("Kefa", 0, 18)); // NOI18N
         password.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -45,7 +46,7 @@ public class EliminarCuenta extends javax.swing.JFrame {
             }
         });
 
-        botonConfirmar.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        botonConfirmar.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         botonConfirmar.setForeground(new java.awt.Color(0, 204, 0));
         botonConfirmar.setText("Confirmar");
         botonConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -78,17 +79,15 @@ public class EliminarCuenta extends javax.swing.JFrame {
                 .addComponent(titulo)
                 .addGap(94, 94, 94))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(158, 158, 158)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelPassword)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(244, 244, 244)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(labelPassword)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,11 +101,11 @@ public class EliminarCuenta extends javax.swing.JFrame {
                 .addComponent(labelPassword)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -131,18 +130,26 @@ public class EliminarCuenta extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (Jugador.jugadorLog.validarPass(password.getText())) {
             Jugador.eliminarJugador(Jugador.jugadorLog.getUsername());
-            JOptionPane.showMessageDialog(this, "El usuario "+Jugador.jugadorLog.getUsername()+" fue eliminado!.");
+            JOptionPane.showMessageDialog(this, "El usuario " + Jugador.jugadorLog.getUsername() + " fue eliminado!", "ELIMINAR CUENTA", JOptionPane.INFORMATION_MESSAGE);
+            System.out.println("[CONSOLE LOG] La cuenta del jugador " + Jugador.jugadorLog.getUsername() + " ha sido eliminada con exito. [" + Fecha.getFechaHora() + "]");
+
+            System.out.println("[CONSOLE LOG] Saliendo del menu Eliminar Cuenta.");
+            System.out.println("[CONSOLE LOG] Ejecutando el menu Menu Inicial.\n");
             MenuInicial menuinicial = new MenuInicial();
             menuinicial.setVisible(true);
             menuinicial.setLocationRelativeTo(this);
             dispose();
-        }else{
-            JOptionPane.showMessageDialog(this, "La contraseña ingresada es incorrecta.");
+        } else {
+            JOptionPane.showMessageDialog(this, "La contraseña ingresada es incorrecta!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_botonConfirmarActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         // TODO add your handling code here:
+
+        System.out.println("[CONSOLE LOG] Saliendo del menu Eliminar Cuenta.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Mi Perfil.\n");
+
         MiPerfil miperfil = new MiPerfil();
         miperfil.setVisible(true);
         miperfil.setLocationRelativeTo(null);

@@ -1,6 +1,7 @@
 package proyectostratego.ventanas;
 
 import javax.swing.JOptionPane;
+import proyectostratego.utilidades.Fecha;
 import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
 
@@ -29,7 +30,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/menuprincipaltexto.png"))); // NOI18N
 
-        jugar.setFont(new java.awt.Font("ITF Devanagari", 1, 16)); // NOI18N
+        jugar.setFont(new java.awt.Font("Kefa", 1, 15)); // NOI18N
         jugar.setForeground(new java.awt.Color(0, 153, 255));
         jugar.setText("STRATEGO - MARVEL HEROES!");
         jugar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -39,7 +40,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        configuracion.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        configuracion.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         configuracion.setForeground(new java.awt.Color(0, 153, 255));
         configuracion.setText("CONFIGURACION");
         configuracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -49,7 +50,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        perfil.setFont(new java.awt.Font("ITF Devanagari", 1, 18)); // NOI18N
+        perfil.setFont(new java.awt.Font("Kefa", 1, 18)); // NOI18N
         perfil.setForeground(new java.awt.Color(0, 153, 255));
         perfil.setText("MI PERFIL");
         perfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -59,7 +60,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        universo.setFont(new java.awt.Font("ITF Devanagari", 1, 17)); // NOI18N
+        universo.setFont(new java.awt.Font("Kefa", 1, 15)); // NOI18N
         universo.setForeground(new java.awt.Color(0, 153, 255));
         universo.setText("UNIVERSO MARVEL");
         universo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -69,7 +70,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        cerrarsesion.setFont(new java.awt.Font("ITF Devanagari", 1, 17)); // NOI18N
+        cerrarsesion.setFont(new java.awt.Font("Kefa", 1, 17)); // NOI18N
         cerrarsesion.setForeground(new java.awt.Color(0, 153, 255));
         cerrarsesion.setText("CERRAR SESION");
         cerrarsesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -117,7 +118,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(perfil, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cerrarsesion, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,21 +139,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (Jugador.nUsuariosTotal > 1) {
+            System.out.println("[CONSOLE LOG] Saliendo del menu Menu Principal.");
+            System.out.println("[CONSOLE LOG] Ejecutando el menu Marvel Heroes.\n");
             MarvelHeroes marvel = new MarvelHeroes();
             marvel.setVisible(true);
             marvel.setLocationRelativeTo(null);
             dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "No existen jugadores para poder jugar.");
         }
     }//GEN-LAST:event_jugarActionPerformed
 
     private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuracionActionPerformed
         // TODO add your handling code here:
+        System.out.println("[CONSOLE LOG] En mantenimiento!\n");
     }//GEN-LAST:event_configuracionActionPerformed
 
     private void perfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perfilActionPerformed
         // TODO add your handling code here:
+        System.out.println("[CONSOLE LOG] Saliendo del menu Menu Principal.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Mi Perfil.\n");
         MiPerfil miperfil = new MiPerfil();
         miperfil.setVisible(true);
         miperfil.setLocationRelativeTo(null);
@@ -161,12 +167,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void universoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_universoActionPerformed
         // TODO add your handling code here:
-        
+
+        System.out.println("[CONSOLE LOG] Saliendo del menu Menu Principal.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Universo Marvel.\n");
         UniversoMarvel umarvel = new UniversoMarvel();
         umarvel.setVisible(true);
         umarvel.setLocationRelativeTo(null);
         dispose();
-        
+
     }//GEN-LAST:event_universoActionPerformed
 
     private void cerrarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarsesionActionPerformed
@@ -175,6 +183,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         int opcion = JOptionPane.showConfirmDialog(null, "¿Estás seguro?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
         if (opcion == JOptionPane.YES_OPTION) {
+            System.out.println("[CONSOLE LOG] El jugador " + Jugador.jugadorLog.getUsername() + " ha cerrado sesion. ["+Fecha.getFechaHora()+"]");
+            System.out.println("[CONSOLE LOG] Saliendo del menu Menu Principal.");
+            System.out.println("[CONSOLE LOG] Ejecutando el menu Menu Inicial.\n");
             MenuInicial menuinicial = new MenuInicial();
             Jugador.jugadorLog = null;
             Jugador.logged = false;

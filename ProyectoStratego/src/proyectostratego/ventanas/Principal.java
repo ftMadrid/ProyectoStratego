@@ -68,6 +68,7 @@ public class Principal extends javax.swing.JFrame {
         MenuInicial menu = new MenuInicial();
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Menu Inicial.\n");
         dispose();
     }//GEN-LAST:event_botonStartActionPerformed
 

@@ -1,6 +1,7 @@
 package proyectostratego.ventanas;
 
 import javax.swing.DefaultComboBoxModel;
+import proyectostratego.utilidades.Fecha;
 import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
 import proyectostratego.utilidades.StatsGlobales;
@@ -105,10 +106,12 @@ public class CfgPartida extends javax.swing.JFrame {
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(200, 200, 200))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(243, 243, 243)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(165, 165, 165)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -124,11 +127,11 @@ public class CfgPartida extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,23 +174,31 @@ public class CfgPartida extends javax.swing.JFrame {
             Jugador.jugadorContrincante.setBando(false);
             Jugador.jugadorLog.setHeroesPartidas(1);
             Jugador.jugadorContrincante.setVillanosPartidas(1);
+            System.out.println("[CONSOLE LOG] Jugadores: "+Jugador.jugadorLog.getUsername()+" [Heroes] vs "
+                +Jugador.jugadorContrincante.getUsername()+" [Villanos]");
         } else {
             Jugador.jugadorContrincante.setBando(true);
             Jugador.jugadorLog.setBando(false);
             Jugador.jugadorLog.setVillanosPartidas(1);
             Jugador.jugadorContrincante.setHeroesPartidas(1);
+            System.out.println("[CONSOLE LOG] Jugadores: "+Jugador.jugadorLog.getUsername()+" [Villanos] vs "
+                +Jugador.jugadorContrincante.getUsername()+" [Heroes]");
         }
-
+        
         StatsGlobales.setPartidas();
         Juego juego = new Juego();
         juego.setVisible(true);
         juego.setLocationRelativeTo(null);
+        System.out.println("[CONSOLE LOG] Saliendo del menu Config Partida.");
+        System.out.println("[CONSOLE LOG] Ejecutando la partida en el menu Tablero. ["+Fecha.getFechaHora()+"]\n");
         dispose();
     }//GEN-LAST:event_aceptarActionPerformed
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
         
+        System.out.println("[CONSOLE LOG] Saliendo del menu Config Partida.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Menu Principal.\n");
         MenuPrincipal menu = new MenuPrincipal();
         menu.setVisible(true);
         menu.setLocationRelativeTo(null);

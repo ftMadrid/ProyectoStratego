@@ -138,6 +138,10 @@ public class LogPartidas extends javax.swing.JFrame {
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
+        
+        System.out.println("[CONSOLE LOG] Saliendo del menu Log Partidas.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Mi Perfil.\n");
+        
         MiPerfil mperfil = new MiPerfil();
         mperfil.setVisible(true);
         mperfil.setLocationRelativeTo(null);

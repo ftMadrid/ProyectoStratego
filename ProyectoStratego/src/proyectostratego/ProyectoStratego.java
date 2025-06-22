@@ -9,6 +9,7 @@ public class ProyectoStratego {
         Principal ventana = new Principal();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
+        System.out.println("[CONSOLE LOG] Iniciando el juego.\n");
         
     }
 }

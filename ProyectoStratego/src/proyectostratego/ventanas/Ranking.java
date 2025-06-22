@@ -141,6 +141,9 @@ public class Ranking extends javax.swing.JFrame {
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
         // TODO add your handling code here:
         
+        System.out.println("[CONSOLE LOG] Saliendo del menu Ranking.");
+        System.out.println("[CONSOLE LOG] Ejecutando el menu Universo Marvel.\n");
+        
         UniversoMarvel umarvel = new UniversoMarvel();
         umarvel.setVisible(true);
         umarvel.setLocationRelativeTo(null);
