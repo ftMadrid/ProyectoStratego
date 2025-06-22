@@ -338,7 +338,7 @@ public class GenerarTablero extends JPanel {
                             for (int i = inicioRecorrido; i < finalRecorrido; i++) {
                                 if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna]) {
                                     esMovimientoValido = false;
-                                    JOptionPane.showMessageDialog(null, "Movimiento invalido!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
+                                    //JOptionPane.showMessageDialog(null, "Movimiento invalido 1!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                                     break;
                                 }
                             }
@@ -351,7 +351,7 @@ public class GenerarTablero extends JPanel {
                                 System.out.println(tablero[i][piezaSeleccionada.columna]);
                                 if (tablero[piezaSeleccionada.fila][i] != null || zonaProhibida[piezaSeleccionada.fila][i]) {
                                     esMovimientoValido = false;
-                                    JOptionPane.showMessageDialog(null, "Movimiento invalido!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
+                                    //JOptionPane.showMessageDialog(null, "Movimiento invalido 2!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                                     break;
                                 }
                             }
