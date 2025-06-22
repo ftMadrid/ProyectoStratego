@@ -91,7 +91,6 @@ public class GenerarTablero extends JPanel {
                 tierra.imagen = tierra.reverso;
 
             }
-            //System.out.println("Se colocó Tierra en (" + filaTierra + "," + columna + ")");
         }
 
         // setear coords para poner las bombas
@@ -124,7 +123,6 @@ public class GenerarTablero extends JPanel {
                         bomba.imagen = bomba.reverso;
 
                     }
-                    //System.out.println("Se colocó bomba en (" + r + "," + c + ")");
                 }
             }
         }
@@ -267,18 +265,15 @@ public class GenerarTablero extends JPanel {
                     }
                 } while (tablero[randomr][randomc] != null);
                 if (tablero[randomr][randomc] != null) {
-                    //System.out.println(tablero[randomr][randomc].nombre);
                     System.out.println("DEBUG - Agarro una pieza no nula");
                     break;
                 }
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
-                //System.out.println("Se coloco heroe:" + eleccion.nombre + "En " + randomr + "," + randomc);
                 eleccion.colocada = true;
                 if (eleccion.rango >= 1) {
                     heroesC++;
-                    //System.out.println("Heroes++");
                 }
                 colocados++;
             }
@@ -341,12 +336,9 @@ public class GenerarTablero extends JPanel {
                             int inicioRecorrido = Math.min(seleccionFila, celday) + 1;//+1 Para poder evitar nuestra ficha
                             int finalRecorrido = Math.max(seleccionFila, celday);
                             for (int i = inicioRecorrido; i < finalRecorrido; i++) {
-                                //System.out.println(tablero[i][piezaSeleccionada.columna]);
                                 if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna]) {
                                     esMovimientoValido = false;
-                                    System.out.println("Columa " + piezaSeleccionada.columna + "  " + i);
-                                    System.out.println("No aceptada");
-                                    JOptionPane.showMessageDialog(null, "Movimiento invalido");
+                                    JOptionPane.showMessageDialog(null, "Movimiento invalido!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                                     break;
                                 }
                             }
@@ -359,66 +351,46 @@ public class GenerarTablero extends JPanel {
                                 System.out.println(tablero[i][piezaSeleccionada.columna]);
                                 if (tablero[piezaSeleccionada.fila][i] != null || zonaProhibida[piezaSeleccionada.fila][i]) {
                                     esMovimientoValido = false;
-                                    System.out.println(piezaSeleccionada.fila + "  " + i);
-                                    System.out.println("No aceptada");
-                                    JOptionPane.showMessageDialog(null, "Movimiento invalido");
+                                    JOptionPane.showMessageDialog(null, "Movimiento invalido!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                                     break;
                                 }
                             }
 
                         }
-
-                        /*if (esMovimientoValido && (distanciaColumna > 1 || distanciaFila > 1)) {
-                            piezaSeleccionada.revelada = true;
-                        }*/
-                        //Talvez se mantiene?
                     }
                     Piezas objetivo = tablero[celday][celdax];
 
                     if (esMovimientoValido) {
-                        if (zonaProhibida[celday][celdax]) {
-                            System.out.println("Zona Prohibida");
-                            JOptionPane.showMessageDialog(null, "No puedes moverte en zonas prohibidas.");
+                        if (zonaProhibida[celday][celdax]) { // Zona Prohibida check
+                            JOptionPane.showMessageDialog(null, "No puedes moverte en zonas prohibidas!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                             reiniciarSeleccion();
                             repaint();
                             return;//Salia un error en consola entonces con el return se soluciono
 
-                        } else if ((objetivo != null)&&piezaSeleccionada.heroe == objetivo.heroe){
-                            System.out.println("No puedes atacar a tu propio equipo.");
-                            JOptionPane.showMessageDialog(null, "No puedes atacar a tu propio equipo");
+                        } else if ((objetivo != null) && piezaSeleccionada.heroe == objetivo.heroe) {
+                            JOptionPane.showMessageDialog(null, "No puedes atacar a tu propio equipo!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                             //No deberia contarte el turno realmente
                             reiniciarSeleccion();
                             repaint();
                             return;
-                            
-                        
-                        
-                        
-                        
-                        }else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas
+
+                        } else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas
                             //Logica para que explote la pieza a menos que sea rango 3
                             if (piezaSeleccionada.rango == 3 && objetivo.heroe != piezaSeleccionada.heroe) {
-                                Juego.setPelea(piezaSeleccionada.nombre + " desarma a " + objetivo.nombre);
-                                System.out.println("Come la bomba");//Desarma la bsomba
+                                Juego.setPelea(piezaSeleccionada.nombre + " desarmo una " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
 
                                 tablero[celday][celdax] = piezaSeleccionada;
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
                                 piezaSeleccionada.colocada = true;
-
-                                /*if (piezaSeleccionada.heroe) {
-                                    heroesC--;
-                                } else if (!piezaSeleccionada.heroe) {
-                                    villanosC--;
-                                }*/
                             } else {
                                 if (piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     heroesC--;
                                 } else if (!piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     villanosC--;
                                 }
-                                Juego.setPelea(piezaSeleccionada.nombre + " es explotada por " + objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + " exploto por " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
@@ -435,7 +407,6 @@ public class GenerarTablero extends JPanel {
                             } else if (piezaSeleccionada.heroe) {
                                 getGanador(heroe, villano);
                             }
-                            
 
                         } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
@@ -457,12 +428,11 @@ public class GenerarTablero extends JPanel {
                             if (objetivo.rango == 0) {
 
                                 esMovimientoValido = false;
-                                System.out.println("Cancela el movimiento");
-                                JOptionPane.showMessageDialog(null, "No se puede capturar tierra con otro rango aparte de 1");
+                                JOptionPane.showMessageDialog(null, "No puedes capturar la tierra con este personaje.", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                                 piezaSeleccionada.colocada = true;
                                 reiniciarSeleccion();
                                 repaint();
-                                
+
                                 return;//Talvez quitar esto despues
 
                             } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
@@ -471,8 +441,6 @@ public class GenerarTablero extends JPanel {
                                 Juego.setPelea(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
                                 juego.agregarPiezaMuerta(objetivo);
                                 tablero[celday][celdax] = piezaSeleccionada;
-                                //piezaSeleccionada.revelada = true;
-                                //objetivo.revelada = true;
                                 //Logica de revelacion TODO
 
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
@@ -488,11 +456,6 @@ public class GenerarTablero extends JPanel {
                                     heroesC -= 1;
                                     System.out.println("Villanos--");
                                 }
-                                /*if (villanosC == 0 && heroesC != 0) {
-                                    getGanador(heroe, villano);
-                                } else if (heroesC == 0 && villanosC != 0) {
-                                    getGanador(villano, heroe);
-                                }*/
 
                                 empate();
 
@@ -509,11 +472,6 @@ public class GenerarTablero extends JPanel {
                                 } else {
                                     villanosC -= 1;
                                 }
-                                /*if (villanosC == 0 && heroesC != 0) {
-                                    getGanador(heroe, villano);
-                                } else if (heroesC == 0 && villanosC != 0) {
-                                    getGanador(villano, heroe);
-                                }*/
                                 empate();
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
                                 Juego.setPelea(objetivo.nombre + " y " + piezaSeleccionada.nombre + " Se derrotan mutuamente");
@@ -530,27 +488,20 @@ public class GenerarTablero extends JPanel {
                                 heroesC -= 1;
                                 villanosC -= 1;
 
-                                /*if (villanosC == 0 && heroesC != 0) {
-                                    getGanador(heroe, villano);
-                                } else if (heroesC == 0 && villanosC != 0) {
-                                    getGanador(villano, heroe);
-                                }*/
                                 empate();
                                 reiniciarSeleccion();
 
                             }
 
-                        } else  {
+                        } else {
                             // Mismo bando
-                            System.out.println("No puedes atacar a tu propio equipo.");
-                            JOptionPane.showMessageDialog(null, "No puedes atacar a tu propio equipo");
+                            JOptionPane.showMessageDialog(null, "No puedes atacar a tu propio equipo!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                             //No deberia contarte el turno realmente
                             reiniciarSeleccion();
                             repaint();
                             return;
 
                         }
-                        System.out.println("Reinicia seleccion");
                         //Siempre entra aqui?
                         reiniciarSeleccion();
                         getGanadorPiezas();
@@ -592,7 +543,7 @@ public class GenerarTablero extends JPanel {
                         }
                     } else {
                         System.out.println(piezaSeleccionada.movimiento);
-                        System.out.println("Movimiento inválido.");
+                        JOptionPane.showMessageDialog(null, "Movimiento invalido!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                         reiniciarSeleccion();
 
                     }
@@ -743,18 +694,19 @@ public class GenerarTablero extends JPanel {
         if (turno) {
             LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
                     + " usando HEROES se ha retirado del juego. - " + Fecha.getFecha());
-            System.out.println(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
+            System.out.println("[CONSOLE LOG]" + villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
                     + " usando HEROES se ha retirado del juego. - " + Fecha.getFecha());
             itemsPartidas(villano, heroe);
-            JOptionPane.showMessageDialog(this, heroe.username + " (Heroes) es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, heroe.username + " [Heroes] se ha rendido! \n \n" + villano.username
+                    + " [Villanos] es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
                     + " usando VILLANOS se ha retirado del juego. - " + Fecha.getFecha());
-            System.out.println(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
+            System.out.println("[CONSOLE LOG]" + heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
                     + " usando VILLANOS se ha retirado del juego. - " + Fecha.getFecha());
             itemsPartidas(heroe, villano);
-            JOptionPane.showMessageDialog(this, villano.username + " (Villanos) es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, villano.username + " [Villanos] se ha rendido! \n \n" + heroe.username + " [Heroes] es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
         }
 
         turno = true;
@@ -775,10 +727,11 @@ public class GenerarTablero extends JPanel {
         if (villanosC == 0 && heroesC != 0) {
             LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
                     + heroe.getUsername() + " - " + Fecha.getFecha());
-            System.out.println(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
+            System.out.println("[CONSOLE LOG]" + villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
                     + heroe.getUsername() + " - " + Fecha.getFecha());
             itemsPartidas(heroe, villano);
-            JOptionPane.showMessageDialog(this, villano.username + " (Villanos) se ha quedado sin fichas! \n \n" + heroe.username + " (Heroes) es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, villano.username + " [Villanos] se ha quedado sin fichas! \n \n"
+                    + heroe.username + " [Heroes] es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
             JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
             if (ventana != null) {
 
@@ -791,10 +744,10 @@ public class GenerarTablero extends JPanel {
         } else if (heroesC == 0 && villanosC != 0) {
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
                     + villano.getUsername() + " - " + Fecha.getFecha());
-            System.out.println(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
+            System.out.println("[CONSOLE LOG]" + heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
                     + villano.getUsername() + " - " + Fecha.getFecha());
             itemsPartidas(villano, heroe);
-            JOptionPane.showMessageDialog(this, heroe.username + " (Heroes) se ha quedado sin fichas! \n \n" + villano.username + " (Villanos) es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, heroe.username + " [Heroes] se ha quedado sin fichas! \n \n" + villano.username + " [Villanos] es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
             JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
             if (ventana != null) {
 
@@ -811,31 +764,26 @@ public class GenerarTablero extends JPanel {
     private void getGanador(Jugador ganador, Jugador perdedor) {
 
         if (ganador == villano) {
-            System.out.println("Gano villano");
             itemsPartidas(villano, heroe);
-            System.out.println(ganador.villanosPartidas);
-            System.out.println(ganador.victorias);
 
-            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + Fecha.getFecha());
-            System.out.println(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + Fecha.getFecha());
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a "
+                    + perdedor.getUsername() + " [" + Fecha.getFecha() + "]");
+            System.out.println("[CONSOLE LOG]" + ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! "
+                    + "Venciendo a " + perdedor.getUsername() + " [" + Fecha.getFecha() + "]");
 
-            System.out.println(perdedor.heroesPartidas);
-            System.out.println(perdedor.derrotas);
-
-            JOptionPane.showMessageDialog(this, villano.username + " (Villanos) es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, villano.username + " [Villanos] es el ganador de la partida. "
+                    + "\nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            System.out.println("Gano heroe!!!");
 
             itemsPartidas(heroe, villano);
-            System.out.println(ganador.heroesPartidas);
-            System.out.println(ganador.victorias);
 
-            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + Fecha.getFecha());
-            System.out.println(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + Fecha.getFecha());
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a "
+                    + perdedor.getUsername() + " [" + Fecha.getFecha() + "]");
+            System.out.println("[CONSOLE LOG]" + ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " 
+                    + perdedor.getUsername() + " [" + Fecha.getFecha() + "]");
 
-            System.out.println(perdedor.villanosPartidas);
-            System.out.println(perdedor.derrotas);
-            JOptionPane.showMessageDialog(this, heroe.username + " (Heroes) es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, heroe.username + " [Heroes] es el ganador de la partida. "
+                    + "\nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
@@ -855,16 +803,15 @@ public class GenerarTablero extends JPanel {
 
         if (villanosC == 0 && heroesC == 0) {
             // Empate
-            System.out.println("EMPATE");
             StatsGlobales.setEmpates();
             Jugador.jugadorLog.setEmpates(1);
             Jugador.jugadorContrincante.setEmpates(1);
             JOptionPane.showMessageDialog(this, "Los Jugadores " + Jugador.jugadorLog.username + " y " + Jugador.jugadorContrincante.username + " han empatado!", "Partida Empatada", JOptionPane.INFORMATION_MESSAGE);
 
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha quedado empatado con " + villano.getUsername()
-                    + " usando VILLANOS. - " + Fecha.getFecha());
-            System.out.println(heroe.getUsername() + " usando HEROES ha quedado empatado con " + villano.getUsername()
-                    + " usando VILLANOS. - " + Fecha.getFecha());
+                    + " usando VILLANOS. [" + Fecha.getFecha() + "]");
+            System.out.println("[CONSOLE LOG]" + heroe.getUsername() + " usando HEROES ha quedado empatado con " + villano.getUsername()
+                    + " usando VILLANOS. [" + Fecha.getFecha() + "]");
 
             JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
             if (ventana != null) {
