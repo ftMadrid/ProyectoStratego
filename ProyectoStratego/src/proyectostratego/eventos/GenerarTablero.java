@@ -23,9 +23,8 @@ import static java.time.temporal.TemporalQueries.localDate;
 public class GenerarTablero extends JPanel {
 
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");//Year/month/day
-    
+
     Random random = new Random();
-    
 
     private pieza piezaSeleccionada = null;
     private int seleccionFila = -1;
@@ -725,19 +724,22 @@ public class GenerarTablero extends JPanel {
 
     public void Rendirse() {
         LocalDate localDate = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         if (turno) {
             LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
-                    + " usando HEROES se ha retirado del juego-"+ "("+dtf.format(localDate)+")");
+                    + " usando HEROES se ha retirado del juego. - " + dtf.format(localDate));
             System.out.println(villano.getUsername() + " usando VILLANOS ha ganado ya que " + heroe.getUsername()
-                    + " usando HEROES se ha retirado del juego."+ "("+dtf.format(localDate)+")");
+                    + " usando HEROES se ha retirado del juego. - " + dtf.format(localDate));
             itemsPartidas(villano, heroe);
+            JOptionPane.showMessageDialog(this, heroe.username + " (Heroes) es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
 
         } else {
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
-                    + " usando VILLANOS se ha retirado del juego-"+ "("+dtf.format(localDate)+")");
+                    + " usando VILLANOS se ha retirado del juego. - " + dtf.format(localDate));
             System.out.println(heroe.getUsername() + " usando HEROES ha ganado ya que " + villano.getUsername()
-                    + " usando VILLANOS se ha retirado del juego-"+ "("+dtf.format(localDate)+")");
+                    + " usando VILLANOS se ha retirado del juego. - " + dtf.format(localDate));
             itemsPartidas(heroe, villano);
+            JOptionPane.showMessageDialog(this, villano.username + " (Villanos) es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
         }
 
         turno = true;
@@ -756,35 +758,60 @@ public class GenerarTablero extends JPanel {
 
     private void getGanadorPiezas() {
         LocalDate localDate = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         if (villanosC == 0 && heroesC != 0) {
             LogPartidas.agregarRegistro(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
-                    + heroe.getUsername()+ "-("+dtf.format(localDate)+")");
+                    + heroe.getUsername() + " - " + dtf.format(localDate));
             System.out.println(villano.getUsername() + " usando VILLANOS ha perdido por no tener movimientos disponibles ante "
-                    + heroe.getUsername()+ "("+dtf.format(localDate)+")");
+                    + heroe.getUsername() + " - " + dtf.format(localDate));
             itemsPartidas(heroe, villano);
+            JOptionPane.showMessageDialog(this, villano.username+" (Villanos) se ha quedado sin fichas! \n \n"+heroe.username + " (Heroes) es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
+            if (ventana != null) {
+
+                MenuPrincipal ventanas = new MenuPrincipal();
+                ventanas.setVisible(true);
+                ventanas.setLocationRelativeTo(null);
+                ventana.dispose();
+
+            }
         } else if (heroesC == 0 && villanosC != 0) {
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
-                    + villano.getUsername()+ "-("+dtf.format(localDate)+")");
+                    + villano.getUsername() + " - " + dtf.format(localDate));
             System.out.println(heroe.getUsername() + " usando HEROES ha perdido por no tener movimientos disponibles ante "
-                    + villano.getUsername()+ "-("+dtf.format(localDate)+")");
+                    + villano.getUsername() + " - " + dtf.format(localDate));
             itemsPartidas(villano, heroe);
+            JOptionPane.showMessageDialog(this, heroe.username+" (Heroes) se ha quedado sin fichas! \n \n"+villano.username + " (Villanos) es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
+            JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
+            if (ventana != null) {
+
+                MenuPrincipal ventanas = new MenuPrincipal();
+                ventanas.setVisible(true);
+                ventanas.setLocationRelativeTo(null);
+                ventana.dispose();
+
+            }
         }
+
     }
 
     private void getGanador(Jugador ganador, Jugador perdedor) {
         LocalDate localDate = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         if (ganador == villano) {
             System.out.println("Gano villano");
             itemsPartidas(villano, heroe);
             System.out.println(ganador.villanosPartidas);
             System.out.println(ganador.victorias);
 
-            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername()+ "-("+dtf.format(localDate)+")");
-            System.out.println(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername());
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + dtf.format(localDate));
+            System.out.println(ganador.getUsername() + " usando los VILLANOS ha CAPTURADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + dtf.format(localDate));
 
             System.out.println(perdedor.heroesPartidas);
             System.out.println(perdedor.derrotas);
-            JOptionPane.showMessageDialog(this, "Gano "+ganador.getUsername()+" (Villano)");
+            
+            JOptionPane.showMessageDialog(this, villano.username + " (Villanos) es el ganador de la partida. \nLos villanos capturaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
         } else {
             System.out.println("Gano heroe!!!");
 
@@ -792,19 +819,18 @@ public class GenerarTablero extends JPanel {
             System.out.println(ganador.heroesPartidas);
             System.out.println(ganador.victorias);
 
-            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername() + "-("+dtf.format(localDate)+")");
-            System.out.println(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername());
+            LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + dtf.format(localDate));
+            System.out.println(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " + perdedor.getUsername() + " - " + dtf.format(localDate));
 
             System.out.println(perdedor.villanosPartidas);
             System.out.println(perdedor.derrotas);
-            JOptionPane.showMessageDialog(this, "Gano "+ganador.getUsername()+" (Heroe)");
+            JOptionPane.showMessageDialog(this, heroe.username + " (Heroes) es el ganador de la partida. \nLos heroes salvaron la Tierra!", "Partida Finalizada", JOptionPane.INFORMATION_MESSAGE);
 
         }
 
         JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
         if (ventana != null) {
-            //Falta poner cosas como "Gano tal jugador pero se hace despues"
-            
+
             MenuPrincipal ventanas = new MenuPrincipal();
             ventanas.setVisible(true);
             ventanas.setLocationRelativeTo(null);
@@ -815,22 +841,25 @@ public class GenerarTablero extends JPanel {
     }
 
     private void empate() {
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
         if (villanosC == 0 && heroesC == 0) {
             // Empate
             System.out.println("EMPATE");
             StatsGlobales.setEmpates();
             Jugador.jugadorLog.setEmpates(1);
             Jugador.jugadorContrincante.setEmpates(1);
-            JOptionPane.showMessageDialog(this, "Los Jugadores "+Jugador.jugadorLog.username+" y "+Jugador.jugadorContrincante.username+" han empatado!", "Partida Empatada", JOptionPane.INFORMATION_MESSAGE);
-            
+            JOptionPane.showMessageDialog(this, "Los Jugadores " + Jugador.jugadorLog.username + " y " + Jugador.jugadorContrincante.username + " han empatado!", "Partida Empatada", JOptionPane.INFORMATION_MESSAGE);
+
             LogPartidas.agregarRegistro(heroe.getUsername() + " usando HEROES ha quedado empatado con " + villano.getUsername()
-                    + " usando VILLANOS.");
+                    + " usando VILLANOS. - " + dtf.format(localDate));
             System.out.println(heroe.getUsername() + " usando HEROES ha quedado empatado con " + villano.getUsername()
-                    + " usando VILLANOS.");
+                    + " usando VILLANOS. - " + dtf.format(localDate));
 
             JFrame ventana = (JFrame) SwingUtilities.getWindowAncestor(this);//Para conseguir esta ventana
             if (ventana != null) {
-                //Falta poner cosas como "Gano tal jugador pero se hace despues"
+
                 MenuPrincipal ventanas = new MenuPrincipal();
                 ventanas.setVisible(true);
                 ventanas.setLocationRelativeTo(null);
