@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import java.awt.event.MouseAdapter; //Libreria para los mouse
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import proyectostratego.utilidades.StatsGlobales;
 import proyectostratego.ventanas.Juego;
@@ -305,14 +306,18 @@ public class GenerarTablero extends JPanel {
                         }
                     }
                     pieza seleccion = tablero[celday][celdax];
-                    if (seleccion != null && seleccion.heroe == turno) {
+                    if (seleccion != null && seleccion.heroe == turno && seleccion.rango != 0 && seleccion.rango != -1) {
                         piezaSeleccionada = seleccion;
                         seleccionFila = celday;
                         seleccionColumna = celdax;
                         System.out.println("Seleccionada pieza: " + seleccion.nombre);
                         piezaSeleccionada.seleccionada = true;
                     } else if (seleccion != null) {
-                        System.out.println("No es turno de este bando!");
+                        
+                        System.out.println("No es turno de este bando!");//O tambien cuando sea rango 0,-1
+                        
+                        //Talvez agregar aqui?
+                        
                     }
                 } else {
                     // Intentar mover la pieza
@@ -339,6 +344,7 @@ public class GenerarTablero extends JPanel {
                                     esMovimientoValido = false;
                                     System.out.println("Columa " + piezaSeleccionada.columna + "  " + i);
                                     System.out.println("No aceptada");
+                                    JOptionPane.showMessageDialog(null, "Movimiento invalido");
                                     break;
                                 }
                             }
@@ -353,6 +359,7 @@ public class GenerarTablero extends JPanel {
                                     esMovimientoValido = false;
                                     System.out.println(piezaSeleccionada.fila + "  " + i);
                                     System.out.println("No aceptada");
+                                    JOptionPane.showMessageDialog(null, "Movimiento invalido");
                                     break;
                                 }
                             }
@@ -375,7 +382,7 @@ public class GenerarTablero extends JPanel {
                         } else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas
                             //Logica para que explote la pieza a menos que sea rango 3
                             if (piezaSeleccionada.rango == 3 && objetivo.heroe != piezaSeleccionada.heroe) {
-                                Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] desarma a " + objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + " desarma a " + objetivo.nombre);
                                 System.out.println("Come la bomba");//Desarma la bomba
                                 piezaSeleccionada.seleccionada = false;
 
@@ -394,7 +401,7 @@ public class GenerarTablero extends JPanel {
                                 } else if (!piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     villanosC--;
                                 }
-                                Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] es explotada por " + objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + " es explotada por " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
@@ -404,7 +411,7 @@ public class GenerarTablero extends JPanel {
                             }
                         } else if (piezaSeleccionada.rango == 1 && objetivo != null && objetivo.rango == 0) {//Logica captura de tierra
                             //Comer/Destruir tierra
-                            Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] captura " + objetivo.nombre);
+                            Juego.setPelea(piezaSeleccionada.nombre + " captura a " + objetivo.nombre);
                             if (!piezaSeleccionada.heroe) {
                                 getGanador(villano, heroe);//Ganador , perdedor
 
@@ -433,13 +440,14 @@ public class GenerarTablero extends JPanel {
 
                                 esMovimientoValido = false;
                                 System.out.println("Cancela el movimiento");
+                                JOptionPane.showMessageDialog(null, "No se puede capturar tierra con otro rango aparte de 1");
                                 reiniciarSeleccion();
                                 return;//Talvez quitar esto despues
 
                             } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
                                 //La parte es por la excepcion de black widow , despues agregar las de rango 3
                                 System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
-                                Juego.setPelea(piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "] se come a  " + objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
                                 juego.agregarPiezaMuerta(objetivo);
                                 tablero[celday][celdax] = piezaSeleccionada;
                                 //piezaSeleccionada.revelada = true;
@@ -468,7 +476,7 @@ public class GenerarTablero extends JPanel {
                                 empate();
 
                             } else if (piezaSeleccionada.rango < objetivo.rango) {
-                                Juego.setPelea(objetivo.nombre + "[" + objetivo.rango + "] se come a atacante  " + piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "]");
+                                Juego.setPelea(objetivo.nombre + " se come a atacante " + piezaSeleccionada.nombre);
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
 
@@ -487,7 +495,7 @@ public class GenerarTablero extends JPanel {
                                 }*/
                                 empate();
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
-                                Juego.setPelea(objetivo.nombre + "[" + objetivo.rango + "] y " + piezaSeleccionada.nombre + "[" + piezaSeleccionada.rango + "]" + " Se derrotan mutuamente");
+                                Juego.setPelea(objetivo.nombre + " y " + piezaSeleccionada.nombre + " Se derrotan mutuamente");
                                 objetivo.colocada = false;
 
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
@@ -516,7 +524,10 @@ public class GenerarTablero extends JPanel {
                         } else {
                             // Mismo bando
                             System.out.println("No puedes atacar a tu propio equipo.");
+                            JOptionPane.showMessageDialog(null, "No puedes atacar a tu propio equipo");
                             //No deberia contarte el turno realmente
+                            reiniciarSeleccion();
+                            repaint();
                             return;
 
                         }
