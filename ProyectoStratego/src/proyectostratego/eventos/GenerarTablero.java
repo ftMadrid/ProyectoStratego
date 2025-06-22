@@ -383,16 +383,29 @@ public class GenerarTablero extends JPanel {
                             repaint();
                             return;//Salia un error en consola entonces con el return se soluciono
 
-                        } else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas
+                        } else if ((objetivo != null)&&piezaSeleccionada.heroe == objetivo.heroe){
+                            System.out.println("No puedes atacar a tu propio equipo.");
+                            JOptionPane.showMessageDialog(null, "No puedes atacar a tu propio equipo");
+                            //No deberia contarte el turno realmente
+                            reiniciarSeleccion();
+                            repaint();
+                            return;
+                            
+                        
+                        
+                        
+                        
+                        }else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas
                             //Logica para que explote la pieza a menos que sea rango 3
                             if (piezaSeleccionada.rango == 3 && objetivo.heroe != piezaSeleccionada.heroe) {
                                 Juego.setPelea(piezaSeleccionada.nombre + " desarma a " + objetivo.nombre);
-                                System.out.println("Come la bomba");//Desarma la bomba
+                                System.out.println("Come la bomba");//Desarma la bsomba
                                 piezaSeleccionada.seleccionada = false;
 
                                 tablero[celday][celdax] = piezaSeleccionada;
                                 tablero[seleccionFila][seleccionColumna].colocada = false;
                                 tablero[seleccionFila][seleccionColumna] = null;
+                                piezaSeleccionada.colocada = true;
 
                                 /*if (piezaSeleccionada.heroe) {
                                     heroesC--;
@@ -422,6 +435,7 @@ public class GenerarTablero extends JPanel {
                             } else if (piezaSeleccionada.heroe) {
                                 getGanador(heroe, villano);
                             }
+                            
 
                         } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
@@ -445,7 +459,10 @@ public class GenerarTablero extends JPanel {
                                 esMovimientoValido = false;
                                 System.out.println("Cancela el movimiento");
                                 JOptionPane.showMessageDialog(null, "No se puede capturar tierra con otro rango aparte de 1");
+                                piezaSeleccionada.colocada = true;
                                 reiniciarSeleccion();
+                                repaint();
+                                
                                 return;//Talvez quitar esto despues
 
                             } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
@@ -523,7 +540,7 @@ public class GenerarTablero extends JPanel {
 
                             }
 
-                        } else {
+                        } else  {
                             // Mismo bando
                             System.out.println("No puedes atacar a tu propio equipo.");
                             JOptionPane.showMessageDialog(null, "No puedes atacar a tu propio equipo");
@@ -533,6 +550,7 @@ public class GenerarTablero extends JPanel {
                             return;
 
                         }
+                        System.out.println("Reinicia seleccion");
                         //Siempre entra aqui?
                         reiniciarSeleccion();
                         getGanadorPiezas();
