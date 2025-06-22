@@ -734,7 +734,7 @@ public class GenerarTablero extends JPanel {
             villano.setVictorias(1);
             villano.setPuntos(3);
             StatsGlobales.setVictoriasVillanos();
-            villano.setDerrotas(1);
+            heroe.setDerrotas(1);
         }
 
     }
