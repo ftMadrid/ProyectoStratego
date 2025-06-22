@@ -3,7 +3,7 @@ package proyectostratego.utilidades;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
-public class pieza {
+public class Piezas {
     
     public int rango;
     public Image imagen;
@@ -21,7 +21,7 @@ public class pieza {
     //public boolean revelada;
     
     
-    public pieza(String nombre,String rutaImagen , int rango, int movimiento, int fila, int columna, boolean heroe) 
+    public Piezas(String nombre,String rutaImagen , int rango, int movimiento, int fila, int columna, boolean heroe) 
 //    
 //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
     {

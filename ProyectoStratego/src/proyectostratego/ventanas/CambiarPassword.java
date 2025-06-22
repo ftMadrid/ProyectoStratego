@@ -1,7 +1,7 @@
 package proyectostratego.ventanas;
 
 import javax.swing.JOptionPane;
-import proyectostratego.eventos.Jugador;
+import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
 
 public class CambiarPassword extends javax.swing.JFrame {

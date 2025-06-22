@@ -7,9 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import proyectostratego.eventos.GenerarTablero;
-import proyectostratego.eventos.Jugador;
+import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
-import proyectostratego.utilidades.pieza;
+import proyectostratego.utilidades.Piezas;
 
 public class Juego extends javax.swing.JFrame {
 
@@ -60,7 +60,7 @@ public class Juego extends javax.swing.JFrame {
         showTurno.setText(turno);
     }
 
-    public void agregarPiezaMuerta(pieza piezaMuerta) {
+    public void agregarPiezaMuerta(Piezas piezaMuerta) {
         JLabel label = new JLabel(new ImageIcon(piezaMuerta.imagenMuertes));
 
         if (piezaMuerta.heroe) {

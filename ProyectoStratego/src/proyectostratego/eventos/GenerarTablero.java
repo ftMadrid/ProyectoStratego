@@ -1,9 +1,10 @@
 package proyectostratego.eventos;
 
+import proyectostratego.utilidades.Jugador;
 import java.awt.Color;
-import proyectostratego.utilidades.pieza;
-import proyectostratego.utilidades.villanos;
-import proyectostratego.utilidades.heroes;
+import proyectostratego.utilidades.Piezas;
+import proyectostratego.utilidades.Villanos;
+import proyectostratego.utilidades.Heroes;
 import java.util.Random;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -26,7 +27,7 @@ public class GenerarTablero extends JPanel {
 
     Random random = new Random();
 
-    private pieza piezaSeleccionada = null;
+    private Piezas piezaSeleccionada = null;
     private int seleccionFila = -1;
     private int seleccionColumna = -1;
 
@@ -45,7 +46,7 @@ public class GenerarTablero extends JPanel {
     private final int base = 60;//Width
     private final int altura = 60;//Length
     private final int promedio = (base + altura) / 2;
-    private pieza[][] tablero = new pieza[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
+    private Piezas[][] tablero = new Piezas[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
     private final int bombas = 3;
     private final int tierra = 1;
@@ -72,12 +73,12 @@ public class GenerarTablero extends JPanel {
         seleccionColumna = -1;
     }
 
-    private void colocarTierraYBombas(pieza[] grupo, int filaTierra, int filaFrente, boolean heroe) {
+    private void colocarTierraYBombas(Piezas[] grupo, int filaTierra, int filaFrente, boolean heroe) {
         int columna = 1 + random.nextInt(8); // columna entre 1 y 8
 
         // aqui busco la tierra
-        pieza tierra = null;
-        for (pieza p : grupo) {
+        Piezas tierra = null;
+        for (Piezas p : grupo) {
             if (p.rango == 0 && !p.colocada) {
                 tierra = p;
                 break;
@@ -110,8 +111,8 @@ public class GenerarTablero extends JPanel {
             int c = pos[1];
 
             if (r >= 0 && r < rows && c >= 0 && c < columnas && tablero[r][c] == null) {
-                pieza bomba = null;
-                for (pieza p : grupo) {
+                Piezas bomba = null;
+                for (Piezas p : grupo) {
                     if (p.rango == -1 && !p.colocada) {
                         bomba = p;
                         break;
@@ -144,8 +145,8 @@ public class GenerarTablero extends JPanel {
         zonaProhibida[5][6] = true;
         zonaProhibida[5][7] = true;
 
-        heroes heroes = new heroes();//Llama el array
-        villanos villanos = new villanos();//Llama el array
+        Heroes heroes = new Heroes();//Llama el array
+        Villanos villanos = new Villanos();//Llama el array
 
         colocarTierraYBombas(villanos.villanos, 0, 1, false);//False para villano
         colocarTierraYBombas(heroes.heroes, 9, 8, true);//True para heroe
@@ -160,11 +161,11 @@ public class GenerarTablero extends JPanel {
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
 
             while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
-                pieza[] posibles = new pieza[40];//No hay mas de 20 fichas posibles nunca
+                Piezas[] posibles = new Piezas[40];//No hay mas de 20 fichas posibles nunca
                 int contador = 0;
 
                 for (int i = 0; i < villanos.villanos.length; i++) {//Recorrer toooooodo el array
-                    pieza p = villanos.villanos[i];
+                    Piezas p = villanos.villanos[i];
 
                     if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
                         posibles[contador] = p;
@@ -176,7 +177,7 @@ public class GenerarTablero extends JPanel {
                     break;
                 }
                 int posicionRandom = random.nextInt(contador);
-                pieza eleccion = posibles[posicionRandom];
+                Piezas eleccion = posibles[posicionRandom];
 
                 //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
                 int randomr, randomc;
@@ -219,11 +220,11 @@ public class GenerarTablero extends JPanel {
             int minRan = getMinimoPorRango(rango);//Una funcione que esta al finaaaaal del .java
 
             while (colocados < minRan) {//While piezas colocadas sean menores al max permitido por rango
-                pieza[] posibles = new pieza[40];//No hay mas de 20 fichas posibles nunca
+                Piezas[] posibles = new Piezas[40];//No hay mas de 20 fichas posibles nunca
                 int contador = 0;
 
                 for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
-                    pieza p = heroes.heroes[i];
+                    Piezas p = heroes.heroes[i];
                     if (p == null) {
                         //System.out.println("NULL");
                         continue;
@@ -242,7 +243,7 @@ public class GenerarTablero extends JPanel {
                     break;
                 }
                 int posicionRandom = random.nextInt(contador);
-                pieza eleccion = posibles[posicionRandom];
+                Piezas eleccion = posibles[posicionRandom];
                 //Conseguir una pieza basado en el numero del contador (Cuantas piezas hay de ese rango)
 
                 int randomr, randomc;
@@ -311,7 +312,7 @@ public class GenerarTablero extends JPanel {
                             }
                         }
                     }
-                    pieza seleccion = tablero[celday][celdax];
+                    Piezas seleccion = tablero[celday][celdax];
                     if (seleccion != null && seleccion.heroe == turno && seleccion.rango != 0 && seleccion.rango != -1) {
                         piezaSeleccionada = seleccion;
                         seleccionFila = celday;
@@ -376,7 +377,7 @@ public class GenerarTablero extends JPanel {
                         }*/
                         //Talvez se mantiene?
                     }
-                    pieza objetivo = tablero[celday][celdax];
+                    Piezas objetivo = tablero[celday][celdax];
 
                     if (esMovimientoValido) {
                         if (zonaProhibida[celday][celdax]) {
@@ -429,7 +430,7 @@ public class GenerarTablero extends JPanel {
                         } else if (objetivo == null) {
                             // Movimiento normal a celda vacía
 
-                            pieza piezaMovida = piezaSeleccionada;
+                            Piezas piezaMovida = piezaSeleccionada;
                             piezaMovida.seleccionada = false; // Quitar remarcado visual antes de mover
 
                             tablero[celday][celdax] = piezaMovida;
@@ -657,7 +658,7 @@ public class GenerarTablero extends JPanel {
                     }
                 }
 
-                pieza p = tablero[r][c];
+                Piezas p = tablero[r][c];
 
                 if (p != null && p.imagen != null) {
 

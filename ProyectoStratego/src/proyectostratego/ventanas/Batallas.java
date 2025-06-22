@@ -1,6 +1,6 @@
 package proyectostratego.ventanas;
 
-import proyectostratego.eventos.Jugador;
+import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
 import proyectostratego.utilidades.StatsGlobales;
 

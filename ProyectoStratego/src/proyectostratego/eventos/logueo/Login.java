@@ -1,7 +1,7 @@
 package proyectostratego.eventos.logueo;
 
 import javax.swing.JOptionPane;
-import proyectostratego.eventos.Jugador;
+import proyectostratego.utilidades.Jugador;
 import proyectostratego.utilidades.Fondos;
 import proyectostratego.ventanas.MenuInicial;
 import proyectostratego.ventanas.MenuPrincipal;

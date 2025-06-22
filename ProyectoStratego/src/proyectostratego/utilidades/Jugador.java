@@ -1,4 +1,4 @@
-package proyectostratego.eventos;
+package proyectostratego.utilidades;
 
 public class Jugador { //Plantilla para el objeto
 
