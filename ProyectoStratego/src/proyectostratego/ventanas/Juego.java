@@ -16,7 +16,6 @@ import proyectostratego.utilidades.pieza;
 public class Juego extends javax.swing.JFrame {
 
     Jugador heroe = Jugador.getHeroe();
-    MenuPrincipal menu = new MenuPrincipal();
     private GenerarTablero tablero;
     
     // Contadores para el conteo de piezas muertas
