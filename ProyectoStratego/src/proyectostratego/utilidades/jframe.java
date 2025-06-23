@@ -1,79 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package proyectostratego.utilidades;
 
-import java.awt.Image;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.Timer;
 
-/**
- *
- * @author user
- */
-public class jframe extends javax.swing.JDialog { 
+public class jframe extends javax.swing.JDialog {
 
-    /**
-     * Creates new form jframe
-     */
     public jframe(java.awt.Frame parent, boolean modal) {
-    super(parent, modal);  // Configura el diálogo como modal
-    initComponents();
-    this.setResizable(false);
-    this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // Evita que se cierre con la X
-    
-    
-    
-}
-    //108 , 89
-    
-    
-    
-    
-    public void setPieza1(Piezas pieza)
-    {
-    this.NombrePiezaSeleccionada.setText(pieza.nombre);
-    this.Pieza1Foto.setIcon(new ImageIcon(pieza.imagenVs));
+        super(parent, modal);  // Configura el diálogo como modal
+        initComponents();
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); // Evita que se cierre con la X
+
     }
-    
-    public void setPieza2(Piezas pieza)
-    {
-    this.NombreObjetivo.setText(pieza.nombre);
-    this.Pieza2Foto.setIcon(new ImageIcon(pieza.imagenVs));
+
+    public void setPieza1(Piezas pieza) {
+        this.Pieza1Foto.setIcon(new ImageIcon(pieza.imagenVs));
     }
-    
-    public void setGanador(Piezas pieza)
-    {
-    this.Ganador.setText(pieza.nombre);
+
+    public void setPieza2(Piezas pieza) {
+        this.Pieza2Foto.setIcon(new ImageIcon(pieza.imagenVs));
     }
-    
-    public void setForm(Piezas pieza1 ,Piezas pieza2, Piezas ganador)
-    {
-    setPieza1(pieza1);
-    setPieza2(pieza2);
-    setGanador(ganador);
-    Timer timer = new Timer(3000, e -> dispose()); // 3 segundos
-timer.setRepeats(false);
-timer.start();
-    
+
+    public void setGanador(Piezas pieza) {
+        this.Ganador.setText(pieza.nombre);
     }
-    
-    public void setEmpate(Piezas pieza1 , Piezas pieza2)
-    {
-    setPieza1(pieza1);
-    setPieza2(pieza2);
-    this.Ganador.setText("EMPATE");
-    this.jLabel4.setText("");
-    Timer timer = new Timer(3000, e -> dispose()); // 3 segundos
-timer.setRepeats(false);
-timer.start();
+
+    public void setForm(Piezas pieza1, Piezas pieza2, Piezas ganador) {
+        setPieza1(pieza1);
+        setPieza2(pieza2);
+        setGanador(ganador);
+        Timer timer = new Timer(3000, e -> dispose()); // 3 segundos
+        timer.setRepeats(false);
+        timer.start();
+
     }
-    
-    
-    
+
+    public void setEmpate(Piezas pieza1, Piezas pieza2) {
+        setPieza1(pieza1);
+        setPieza2(pieza2);
+        this.Ganador.setText("EMPATE");
+        this.jLabel4.setText("");
+        Timer timer = new Timer(3000, e -> dispose()); // 3 segundos
+        timer.setRepeats(false);
+        timer.start();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,71 +55,85 @@ timer.start();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        NombrePiezaSeleccionada = new javax.swing.JLabel();
-        NombreObjetivo = new javax.swing.JLabel();
-        Pieza2Foto = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        Ganador = new javax.swing.JLabel();
+        jPanel1 = new Fondos("/proyectostratego/imagenes/fondovs.png");
         Pieza1Foto = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        Pieza2Foto = new javax.swing.JLabel();
+        Ganador = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
+        Pieza1Foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("VS");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/vs.png"))); // NOI18N
 
-        NombrePiezaSeleccionada.setText("NOMBRE PIEZA");
+        Pieza2Foto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        NombreObjetivo.setText("NOMBRE OBJETIVO");
+        Ganador.setFont(new java.awt.Font("Kefa", 1, 30)); // NOI18N
+        Ganador.setForeground(new java.awt.Color(255, 255, 255));
+        Ganador.setText("jLabel2");
 
+        jLabel4.setFont(new java.awt.Font("Kefa", 1, 30)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("HA GANADO:");
 
-        Ganador.setText("jLabel2");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/arenatext.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Pieza1Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(45, 45, 45)
+                        .addComponent(Pieza2Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(78, 78, 78))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Ganador, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Pieza1Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Pieza2Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ganador))
+                .addGap(44, 44, 44))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NombrePiezaSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Pieza1Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(NombreObjetivo, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pieza2Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Ganador, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(107, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Pieza2Foto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Pieza1Foto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(NombrePiezaSeleccionada)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(Ganador))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(NombreObjetivo)
-                        .addGap(82, 82, 82))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -157,25 +142,25 @@ timer.start();
     /**
      * @param args the command line arguments
      */
-   public static void main(String args[]) {
-    // ... código existente ...
-    
-    // Modifica la creación de la ventana
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new jframe(null, true).setVisible(true); // Modal=true
-        }
-    });
-}
-   
+    public static void main(String args[]) {
+        // ... código existente ...
+
+        // Modifica la creación de la ventana
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new jframe(null, true).setVisible(true); // Modal=true
+            }
+        });
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Ganador;
-    private javax.swing.JLabel NombreObjetivo;
-    private javax.swing.JLabel NombrePiezaSeleccionada;
     private javax.swing.JLabel Pieza1Foto;
     private javax.swing.JLabel Pieza2Foto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

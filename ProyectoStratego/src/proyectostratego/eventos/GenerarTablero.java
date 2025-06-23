@@ -489,7 +489,6 @@ public class GenerarTablero extends JPanel {
                                 jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
                                 panel.setForm(piezaSeleccionada, objetivo, piezaSeleccionada);
                                 panel.setVisible(true);
-
                                
                                 
                                 //darClick = false;
