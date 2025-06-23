@@ -464,17 +464,17 @@ public class GenerarTablero extends JPanel {
 
                             if (objetivo.rango == 0) {
 
-                                esMovimientoValido = false;
-                                JOptionPane.showMessageDialog(null, "No puedes capturar la tierra con este personaje.", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
-                                piezaSeleccionada.colocada = true;
-                                reiniciarSeleccion();
-                                repaint();
+                                //esMovimientoValido = false;
+                                //JOptionPane.showMessageDialog(null, "No puedes capturar la tierra con este personaje.", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
+                                //piezaSeleccionada.colocada = true;
+                                //reiniciarSeleccion();
+                                //repaint();
 
-                                return;//Talvez quitar esto despues
+                                //return;//Talvez quitar esto despues
 
                             } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {//Gana pieza Seleccionada
                                 //Comer Piezas con excepcion de black widow y rango 10
-                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " vs " + objetivo.nombre + "\nGano " + piezaSeleccionada.nombre, "VERSUS", JOptionPane.INFORMATION_MESSAGE);
+                                //JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " vs " + objetivo.nombre + "\nGano " + piezaSeleccionada.nombre, "VERSUS", JOptionPane.INFORMATION_MESSAGE);
                                 Juego.setPelea(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
                                 juego.agregarPiezaMuerta(objetivo);
                                 tablero[celday][celdax] = piezaSeleccionada;
@@ -488,6 +488,7 @@ public class GenerarTablero extends JPanel {
                                 //La pieza seleccionada se come al a pieza objetivo
                                 jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
                                 panel.setForm(piezaSeleccionada, objetivo, piezaSeleccionada);
+                                panel.setLocationRelativeTo(null);
                                 panel.setVisible(true);
 
                                
@@ -502,7 +503,7 @@ public class GenerarTablero extends JPanel {
                                 empate();
 
                             } else if (piezaSeleccionada.rango < objetivo.rango) {//Gana objetivo
-                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " vs " + objetivo.nombre + "\nGano " + objetivo.nombre, "VERSUS", JOptionPane.INFORMATION_MESSAGE);
+                                //JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " vs " + objetivo.nombre + "\nGano " + objetivo.nombre, "VERSUS", JOptionPane.INFORMATION_MESSAGE);
                                 Juego.setPelea(objetivo.nombre + " se come a atacante " + piezaSeleccionada.nombre);
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
@@ -515,10 +516,15 @@ public class GenerarTablero extends JPanel {
                                 } else {
                                     villanosC -= 1;
                                 }
+                                
+                                jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
+                                panel.setForm(piezaSeleccionada, objetivo, objetivo);//Gana objetivo
+                                panel.setLocationRelativeTo(null);
+                                panel.setVisible(true);
 
                                 empate();//Ineficiente pero 
                             } else if (piezaSeleccionada.rango == objetivo.rango) {//Derrota mutua
-                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " vs " + objetivo.nombre + "\nEmpate", "VERSUS", JOptionPane.INFORMATION_MESSAGE);
+                                //JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " vs " + objetivo.nombre + "\nEmpate", "VERSUS", JOptionPane.INFORMATION_MESSAGE);
 
                                 Juego.setPelea(objetivo.nombre + " y " + piezaSeleccionada.nombre + " Se derrotan mutuamente");
                                 objetivo.colocada = false;
@@ -531,9 +537,11 @@ public class GenerarTablero extends JPanel {
 
                                 heroesC -= 1;
                                 villanosC -= 1;
-                                //jframe panel = new jframe();
-                                //panel.setEmpate(piezaSeleccionada, objetivo);
-                                //panel.setVisible(true);
+                                jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
+                                panel.setEmpate(piezaSeleccionada, objetivo);
+                                panel.setLocationRelativeTo(null);
+                                panel.setVisible(true);
+                                
 
                                 empate();
                                 reiniciarSeleccion();
@@ -589,7 +597,7 @@ public class GenerarTablero extends JPanel {
                     } else {
 
                         JOptionPane.showMessageDialog(null, "Movimiento invalido!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
-                        reiniciarSeleccion();
+                        reiniciarSeleccion();   
 
                     }
                     System.out.println("Villanos piezas:" + villanosC);
