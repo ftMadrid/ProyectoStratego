@@ -44,18 +44,20 @@ public class GenerarTablero extends JPanel {
     private final int promedio = (base + altura) / 2;
     private Piezas[][] tablero = new Piezas[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
-    private final int bombas = 3;
+private final int bombas = 6;
     private final int tierra = 1;
-    private final int rango1 = 0;
-    private final int rango2 = 2;
-    private final int rango3 = 1;
-    private final int rango4 = 0;
-    private final int rango5 = 0;
-    private final int rango6 = 1;
-    private final int rango7 = 0;
-    private final int rango8 = 0;
-    private final int rango9 = 0;
-    private final int rango10 = 0;
+
+    private final int rango1 = 1;
+    private final int rango2 = 8;
+    private final int rango3 = 5;
+    private final int rango4 = 4;
+    private final int rango5 = 4;
+    private final int rango6 = 4;
+    private final int rango7 = 3;
+    private final int rango8 = 2;
+    private final int rango9 = 1;
+    private final int rango10 = 1;
+
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
     //Zona prohibida
@@ -378,7 +380,8 @@ public class GenerarTablero extends JPanel {
                             if (piezaSeleccionada.rango == 3 && objetivo.heroe != piezaSeleccionada.heroe) {
                                 Juego.setPelea(piezaSeleccionada.nombre + " desarmó una " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
-
+                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " VS " + objetivo.nombre + "\nGano "+piezaSeleccionada.nombre);
+                                piezaSeleccionada.colocada = true;
                                 tablero[celday][celdax] = piezaSeleccionada;
 
                                 if (tablero[seleccionFila][seleccionColumna] != null) {
@@ -390,6 +393,7 @@ public class GenerarTablero extends JPanel {
 
                                 piezaSeleccionada.fila = celday;
                                 piezaSeleccionada.columna = celdax;
+
                             } else {
                                 // Explota
                                 if (piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
@@ -397,6 +401,15 @@ public class GenerarTablero extends JPanel {
                                 } else if (!piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     villanosC--;
                                 }
+
+                                Juego.setPelea(piezaSeleccionada.nombre + " exploto por " + objetivo.nombre);
+                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " VS " + objetivo.nombre + "\nGano "+objetivo.nombre);
+                                piezaSeleccionada.seleccionada = false;
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
+                                tablero[celday][celdax].colocada = false;
+                                tablero[celday][celdax] = null; //"Explota" la bomba
+
 
                                 Juego.setPelea(piezaSeleccionada.nombre + " explotó por " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
@@ -419,6 +432,7 @@ public class GenerarTablero extends JPanel {
                         } else if (piezaSeleccionada.rango == 1 && objetivo != null && objetivo.rango == 0) {//Logica captura de tierra
                             //Comer/Destruir tierra
                             Juego.setPelea(piezaSeleccionada.nombre + " captura a " + objetivo.nombre);
+                            
                             if (!piezaSeleccionada.heroe) {
                                 getGanador(villano, heroe);//Ganador , perdedor
 
@@ -438,7 +452,7 @@ public class GenerarTablero extends JPanel {
                             piezaMovida.fila = celday;
                             piezaMovida.columna = celdax;
 
-                            System.out.println("Movida a: " + celday + ", " + celdax);
+                            
 
                         } else if (piezaSeleccionada.heroe != objetivo.heroe) {
                             // Ataca a enemigo
@@ -453,9 +467,9 @@ public class GenerarTablero extends JPanel {
 
                                 return;//Talvez quitar esto despues
 
-                            } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {
-                                //La parte es por la excepcion de black widow , despues agregar las de rango 3
-                                System.out.println(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
+                            } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {//Gana pieza Seleccionada
+                                //Comer Piezas con excepcion de black widow y rango 10
+                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " VS " + objetivo.nombre + "\nGano "+piezaSeleccionada.nombre);
                                 Juego.setPelea(piezaSeleccionada.nombre + " se come a " + objetivo.nombre);
                                 juego.agregarPiezaMuerta(objetivo);
                                 tablero[celday][celdax] = piezaSeleccionada;
@@ -477,7 +491,8 @@ public class GenerarTablero extends JPanel {
 
                                 empate();
 
-                            } else if (piezaSeleccionada.rango < objetivo.rango) {
+                            } else if (piezaSeleccionada.rango < objetivo.rango) {//Gana objetivo
+                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " VS " + objetivo.nombre + "\nGano "+ objetivo.nombre);
                                 Juego.setPelea(objetivo.nombre + " se come a atacante " + piezaSeleccionada.nombre);
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
@@ -490,15 +505,23 @@ public class GenerarTablero extends JPanel {
                                 } else {
                                     villanosC -= 1;
                                 }
+
                                 empate();//Ineficiente pero 
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
+
+                                empate();
+                            } else if (piezaSeleccionada.rango == objetivo.rango) {//Derrota mutua
+                                JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " VS " + objetivo.nombre + "\nEMPATE");
+
                                 Juego.setPelea(objetivo.nombre + " y " + piezaSeleccionada.nombre + " Se derrotan mutuamente");
                                 objetivo.colocada = false;
 
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
                                 tablero[objetivo.fila][objetivo.columna] = null;
-//wtf 
                                 System.out.println("Mismo rango , las dos mueren");
+
+                                
+
 
                                 juego.agregarPiezaMuerta(piezaSeleccionada);
                                 juego.agregarPiezaMuerta(objetivo);
@@ -534,12 +557,16 @@ public class GenerarTablero extends JPanel {
                                 if (heroes.heroes[i].colocada) {
 
                                     heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
-                                    System.out.println(heroes.heroes[i].nombre);
+                                    //System.out.println(heroes.heroes[i].nombre);
 
                                 }
                                 if (villanos.villanos[i].colocada) {
+
                                     villanos.villanos[i].imagen = villanos.villanos[i].reversoVillanos;
                                     System.out.println(villanos.villanos[i].nombre);
+
+                                   
+
 
                                 }
                             }
@@ -549,12 +576,15 @@ public class GenerarTablero extends JPanel {
                             for (int i = 0; i < 40; i++) {
                                 if (heroes.heroes[i].colocada) {
 
+
                                     heroes.heroes[i].imagen = heroes.heroes[i].reversoHeroes;
                                     System.out.println(heroes.heroes[i].nombre);
+
+
                                 }
                                 if (villanos.villanos[i].colocada) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
-                                    System.out.println(villanos.villanos[i].nombre);
+                                    //System.out.println(villanos.villanos[i].nombre);
 
                                 }//Hago push y miras?
                             }

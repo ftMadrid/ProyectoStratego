@@ -4,13 +4,14 @@ public class Jugador { //Plantilla para el objeto
 
     public static int nUsuariosTotal = 0;
     public static int nUsuariosEliminadosTotal = 0;
-    ///*
+    /*
     public static Jugador jugadorLog = new Jugador("preo","12345");//Poner null
     public static Jugador jugadorContrincante = new Jugador("preo2","12345"); //Poner null
     public static boolean logged = true;//Poner false
-    //*/
+    */
     
-    /*public static Jugador jugadorLog = null;
+    ///*
+    public static Jugador jugadorLog = null;
     public static Jugador jugadorContrincante = null;
     public static boolean logged = false;//Poner false*/
 
