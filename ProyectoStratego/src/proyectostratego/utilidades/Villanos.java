@@ -46,7 +46,7 @@ public class Villanos {//Codigo para villanos
         villanos[31] = new Piezas("Elektro[2]", "/proyectostratego/imagenesvillanos/32Elektro.png", 2, 10, -1, -1, false);
         villanos[32] = new Piezas("Black Widow[1]", "/proyectostratego/imagenesvillanos/33BlackWidow.png", 1, 1, -1, -1, false);//1
         
-        villanos[33] = new Piezas("Tierra", "/proyectostratego/imagenesheroes/Tierra.png", 0, 0, -1, -1, false);//1        
+        villanos[33] = new Piezas("Tierra", "/proyectostratego/imagenesvillanos/TierraVillanos.png", 0, 0, -1, -1, false);//1        
         villanos[34] = new Piezas("Pumpkin Bomb", "/proyectostratego/imagenesvillanos/pumpkinbomb.png", -1, 0, -1, -1, false);//1        
         villanos[35] = new Piezas("Pumpkin Bomb", "/proyectostratego/imagenesvillanos/pumpkinbomb.png", -1, 0, -1, -1, false);//1        
         villanos[36] = new Piezas("Pumpkin Bomb", "/proyectostratego/imagenesvillanos/pumpkinbomb.png", -1, 0, -1, -1, false);//1        
