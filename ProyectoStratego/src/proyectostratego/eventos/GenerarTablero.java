@@ -18,7 +18,7 @@ import proyectostratego.ventanas.Juego;
 import proyectostratego.ventanas.LogPartidas;
 import proyectostratego.ventanas.MenuPrincipal;
 import proyectostratego.utilidades.Fecha;
-import proyectostratego.utilidades.jframe;
+import proyectostratego.utilidades.FrameVersus;
 
 public class GenerarTablero extends JPanel {
 
@@ -46,21 +46,6 @@ public class GenerarTablero extends JPanel {
     private Piezas[][] tablero = new Piezas[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 
     //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
-    /* TESTING
-    private final int bombas = 6;
-    private final int tierra = 1;
-
-    private final int rango1 = 2;
-    private final int rango2 = 2;
-    private final int rango3 = 2;
-    private final int rango4 = 0;
-    private final int rango5 = 0;
-    private final int rango6 = 0;
-    private final int rango7 = 0;
-    private final int rango8 = 0;
-    private final int rango9 = 0;
-    private final int rango10 = 0;*/
- /* ORIGINAL */
     private final int bombas = 6;
     private final int tierra = 1;
 
@@ -464,14 +449,6 @@ public class GenerarTablero extends JPanel {
 
                             if (objetivo.rango == 0) {
 
-                                //esMovimientoValido = false;
-                                //JOptionPane.showMessageDialog(null, "No puedes capturar la tierra con este personaje.", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
-                                //piezaSeleccionada.colocada = true;
-                                //reiniciarSeleccion();
-                                //repaint();
-
-                                //return;//Talvez quitar esto despues
-
                             } else if (piezaSeleccionada.rango > objetivo.rango || (piezaSeleccionada.rango == 1 && objetivo.rango == 10)) {//Gana pieza Seleccionada
                                 //Comer Piezas con excepcion de black widow y rango 10
                                 //JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " vs " + objetivo.nombre + "\nGano " + piezaSeleccionada.nombre, "VERSUS", JOptionPane.INFORMATION_MESSAGE);
@@ -486,7 +463,7 @@ public class GenerarTablero extends JPanel {
                                 piezaSeleccionada.columna = celdax;
                                 piezaSeleccionada.colocada = true;
                                 //La pieza seleccionada se come al a pieza objetivo
-                                jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
+                                FrameVersus panel = new FrameVersus((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
                                 panel.setForm(piezaSeleccionada, objetivo, piezaSeleccionada);
                                 panel.setLocationRelativeTo(null);
                                 panel.setVisible(true);
@@ -516,7 +493,7 @@ public class GenerarTablero extends JPanel {
                                     villanosC -= 1;
                                 }
                                 
-                                jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
+                                FrameVersus panel = new FrameVersus((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
                                 panel.setForm(piezaSeleccionada, objetivo, objetivo);//Gana objetivo
                                 panel.setLocationRelativeTo(null);
                                 panel.setVisible(true);
@@ -536,7 +513,7 @@ public class GenerarTablero extends JPanel {
 
                                 heroesC -= 1;
                                 villanosC -= 1;
-                                jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
+                                FrameVersus panel = new FrameVersus((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
                                 panel.setEmpate(piezaSeleccionada, objetivo);
                                 panel.setLocationRelativeTo(null);
                                 panel.setVisible(true);
@@ -656,7 +633,7 @@ public class GenerarTablero extends JPanel {
                             }
                         }
 
-                        // Casilla final
+                        // casilla final si hay en zona prohibida
                         if (zonaProhibida[r][c]) {
                             disponible = false;
                         }
@@ -668,7 +645,7 @@ public class GenerarTablero extends JPanel {
                         }
                     }
 
-                    // Chequeo extendido en líneas hasta movimiento máximo
+                    // chequeo extendido en líneas hasta movimiento máximo
                     final int[][] direcciones = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
                     for (int[] dir : direcciones) {
@@ -685,25 +662,25 @@ public class GenerarTablero extends JPanel {
                                 if (p.heroe != piezaSeleccionada.heroe) {
                                     dibujarBordeVerde(g, col * base, f * altura);
                                 }
-                                break; // Se detiene con cualquier pieza
+                                break; // se detiene con cualquier pieza
                             }
                         }
                     }
                 }
 
-                // Dibuja imagen si hay una pieza
+                // dibuja la imagen si hay pieza jijiji
                 Piezas p = tablero[r][c];
                 if (p != null && p.imagen != null) {
                     g.drawImage(p.imagen, x, y, base, altura, this);
                 }
 
-                // Dibuja borde azul si está seleccionada
+                // dibuja el borde aqui
                 if (p != null && p.seleccionada) {
                     g.setColor(Color.BLUE);
                     dibujarBorde(g, x, y);
                 } else {
                     g.setColor(Color.BLACK);
-                    g.drawRect(x, y, base, altura); // Reafirma borde negro
+                    g.drawRect(x, y, base, altura);
                 }
             }
         }

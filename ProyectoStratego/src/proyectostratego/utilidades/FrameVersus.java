@@ -4,9 +4,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.Timer;
 
-public class jframe extends javax.swing.JDialog {
+public class FrameVersus extends javax.swing.JDialog {
 
-    public jframe(java.awt.Frame parent, boolean modal) {
+    public FrameVersus(java.awt.Frame parent, boolean modal) {
         super(parent, modal);  // Configura el diálogo como modal
         initComponents();
         this.setResizable(false);
@@ -23,14 +23,14 @@ public class jframe extends javax.swing.JDialog {
     }
 
     public void setGanador(Piezas pieza) {
-        this.Ganador.setText("Vencedor: "+pieza.nombre);
+        this.Ganador.setText("  Vencedor: "+pieza.nombre);
     }
 
     public void setForm(Piezas pieza1, Piezas pieza2, Piezas ganador) {
         setPieza1(pieza1);
         setPieza2(pieza2);
         setGanador(ganador);
-        Timer timer = new Timer(2000, e -> dispose()); // 3 segundos
+        Timer timer = new Timer(2000, e -> dispose()); // 2 segundos
         timer.setRepeats(false);
         timer.start();
 
@@ -39,8 +39,8 @@ public class jframe extends javax.swing.JDialog {
     public void setEmpate(Piezas pieza1, Piezas pieza2) {
         setPieza1(pieza1);
         setPieza2(pieza2);
-        this.Ganador.setText("Empate");
-        Timer timer = new Timer(3000, e -> dispose()); // 3 segundos
+        this.Ganador.setText("     Han Quedado Empate");
+        Timer timer = new Timer(2000, e -> dispose()); // 2 segundos
         timer.setRepeats(false);
         timer.start();
     }
@@ -59,7 +59,6 @@ public class jframe extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         Pieza2Foto = new javax.swing.JLabel();
         Ganador = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -74,10 +73,7 @@ public class jframe extends javax.swing.JDialog {
         Ganador.setFont(new java.awt.Font("Kefa", 1, 30)); // NOI18N
         Ganador.setForeground(new java.awt.Color(255, 255, 255));
         Ganador.setText("jLabel2");
-
-        jLabel4.setFont(new java.awt.Font("Kefa", 1, 30)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("HA GANADO:");
+        Ganador.setPreferredSize(new java.awt.Dimension(103, 35));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/arenatext.png"))); // NOI18N
 
@@ -98,30 +94,26 @@ public class jframe extends javax.swing.JDialog {
                 .addGap(78, 78, 78))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Ganador, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33))
+                .addComponent(Ganador, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Pieza1Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Pieza2Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29))
+                        .addGap(42, 42, 42))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Ganador))
-                .addGap(48, 48, 48))
+                        .addGap(62, 62, 62)))
+                .addComponent(Ganador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,7 +139,7 @@ public class jframe extends javax.swing.JDialog {
         // Modifica la creación de la ventana
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jframe(null, true).setVisible(true); // Modal=true
+                new FrameVersus(null, true).setVisible(true); // Modal=true
             }
         });
     }
@@ -159,7 +151,6 @@ public class jframe extends javax.swing.JDialog {
     private javax.swing.JLabel Pieza2Foto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,16 +4,10 @@ public class Jugador { //Plantilla para el objeto
 
     public static int nUsuariosTotal = 0;
     public static int nUsuariosEliminadosTotal = 0;
-    
-    public static Jugador jugadorLog = new Jugador("preo","12345");//Poner null
-    public static Jugador jugadorContrincante = new Jugador("preo2","12345"); //Poner null
-    public static boolean logged = true;//Poner false
-    
-    
-    /*
+
     public static Jugador jugadorLog = null;
     public static Jugador jugadorContrincante = null;
-    public static boolean logged = false;//Poner false*/
+    public static boolean logged = false;
 
     public static Jugador[] jugadores = new Jugador[100]; //Crea la cantidad de jugadores y aqui se almacenan los jugadores como tal
     //La razon por la que son 100 , es porque es eso o crear uno que por cada user se vaya actualizando
