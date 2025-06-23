@@ -43,22 +43,9 @@ public class GenerarTablero extends JPanel {
     private final int altura = 60;//Length
     private final int promedio = (base + altura) / 2;
     private Piezas[][] tablero = new Piezas[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
-//Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
-    
+
+    //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
     private final int bombas = 6;
-    private final int tierra = 1;
-    private final int rango1 = 1;
-    private final int rango2 = 2;
-    private final int rango3 = 1;
-    private final int rango4 = 1;
-    private final int rango5 = 0;
-    private final int rango6 = 0;
-    private final int rango7 = 0;
-    private final int rango8 = 0;
-    private final int rango9 = 0;
-    private final int rango10 = 0;
-    
-    /*private final int bombas = 6;
     private final int tierra = 1;
 
     private final int rango1 = 1;
@@ -70,10 +57,9 @@ public class GenerarTablero extends JPanel {
     private final int rango7 = 3;
     private final int rango8 = 2;
     private final int rango9 = 1;
-    private final int rango10 = 1;*/
+    private final int rango10 = 1;
 
     private boolean[][] zonaProhibida = new boolean[rows][columnas];
-    //Zona prohibida
 
     private void reiniciarSeleccion() {
         if (piezaSeleccionada != null) {
@@ -182,7 +168,7 @@ public class GenerarTablero extends JPanel {
                     }
                 }
                 if (contador == 0) {
-                    
+
                     break;
                 }
                 int posicionRandom = random.nextInt(contador);
@@ -194,11 +180,10 @@ public class GenerarTablero extends JPanel {
                     if (eleccion.rango == -1) {
                         randomr = random.nextInt(2);
                         randomc = random.nextInt(columnas);
-                        
+
                     } else if (eleccion.rango == 2) {
                         randomr = 2 + random.nextInt(2);
                         randomc = random.nextInt(columnas);
-                        
 
                     } else {
                         randomr = 0 + random.nextInt(4);
@@ -209,11 +194,11 @@ public class GenerarTablero extends JPanel {
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
                 eleccion.imagen = eleccion.reversoVillanos;//Para que spawnee dada vuelta
-                
+
                 eleccion.colocada = true;
                 if (eleccion.rango >= 1) {
                     villanosC++;
-                   
+
                 }
                 colocados++;
             }
@@ -235,15 +220,15 @@ public class GenerarTablero extends JPanel {
                 for (int i = 0; i < heroes.heroes.length; i++) {//Recorrer toooooodo el array
                     Piezas p = heroes.heroes[i];
                     if (p == null) {
-                        
+
                         continue;
                     }
                     if (p.rango == rango && p.colocada == false) {//colocada nueva booleana para saber si fue puesta en el tablero o no
                         posibles[contador] = p;
                         contador++;
-                       
+
                         if (p.rango == -1) {
-                            
+
                         }
                     }
                 }
@@ -271,10 +256,8 @@ public class GenerarTablero extends JPanel {
                         randomc = random.nextInt(columnas);
                     }
                     intentos++;
-                    
 
                     if (intentos > 100) {
-                        
 
                         break; // rompe el bucle para evitar ciclo infinito
                     }
@@ -305,8 +288,6 @@ public class GenerarTablero extends JPanel {
 
                 celdax = coordenadax / promedio;
                 celday = coordenaday / promedio;
-                //Creo que hay que hacer que las bombas y la tierra no se puedan seleccionar 
-                //Para evitar problemas mas a futuro
 
                 if (piezaSeleccionada == null) {
                     // Seleccionar pieza si existe en la celda
@@ -329,7 +310,6 @@ public class GenerarTablero extends JPanel {
 
                         System.out.println("No es turno de este bando!");//O tambien cuando sea rango 0,-1
 
-                        //Talvez agregar aqui?
                     }
                 } else {
                     // Intentar mover la pieza
@@ -353,7 +333,6 @@ public class GenerarTablero extends JPanel {
                             for (int i = inicioRecorrido; i < finalRecorrido; i++) {
                                 if (tablero[i][piezaSeleccionada.columna] != null || zonaProhibida[i][piezaSeleccionada.columna]) {
                                     esMovimientoValido = false;
-                                    //JOptionPane.showMessageDialog(null, "Movimiento invalido 1!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                                     break;
                                 }
                             }
@@ -363,10 +342,9 @@ public class GenerarTablero extends JPanel {
                             int inicioRecorrido = Math.min(seleccionColumna, celdax) + 1;//+1 Para poder evitar nuestra ficha
                             int finalRecorrido = Math.max(seleccionColumna, celdax);
                             for (int i = inicioRecorrido; i < finalRecorrido; i++) {
-                                
+
                                 if (tablero[piezaSeleccionada.fila][i] != null || zonaProhibida[piezaSeleccionada.fila][i]) {
                                     esMovimientoValido = false;
-                                    //JOptionPane.showMessageDialog(null, "Movimiento invalido 2!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                                     break;
                                 }
                             }
@@ -504,10 +482,10 @@ public class GenerarTablero extends JPanel {
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
 
                                 juego.agregarPiezaMuerta(piezaSeleccionada);
-                                
+
                                 if (piezaSeleccionada.heroe) {
                                     heroesC -= 1;
-                                    
+
                                 } else {
                                     villanosC -= 1;
                                 }
@@ -521,7 +499,6 @@ public class GenerarTablero extends JPanel {
 
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
                                 tablero[objetivo.fila][objetivo.columna] = null;
-                                
 
                                 juego.agregarPiezaMuerta(piezaSeleccionada);
                                 juego.agregarPiezaMuerta(objetivo);
@@ -557,13 +534,11 @@ public class GenerarTablero extends JPanel {
                                 if (heroes.heroes[i].colocada) {
 
                                     heroes.heroes[i].imagen = heroes.heroes[i].imagenOriginal;
-                                    
 
                                 }
                                 if (villanos.villanos[i].colocada) {
 
                                     villanos.villanos[i].imagen = villanos.villanos[i].reversoVillanos;
-                                    
 
                                 }
                             }
@@ -574,18 +549,16 @@ public class GenerarTablero extends JPanel {
                                 if (heroes.heroes[i].colocada) {
 
                                     heroes.heroes[i].imagen = heroes.heroes[i].reversoHeroes;
-                                    
 
                                 }
                                 if (villanos.villanos[i].colocada) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
-                                   
 
                                 }
                             }
                         }
                     } else {
-                        
+
                         JOptionPane.showMessageDialog(null, "Movimiento invalido!", "ADVERTENCIA", JOptionPane.INFORMATION_MESSAGE);
                         reiniciarSeleccion();
 
@@ -845,7 +818,7 @@ public class GenerarTablero extends JPanel {
     private void empate() {
 
         if (villanosC == 0 && heroesC == 0) {
-            // Empate // pq verga carga a cada rato esto xd
+            // Empate
             StatsGlobales.setEmpates();
             Jugador.jugadorLog.setEmpates(1);
             Jugador.jugadorContrincante.setEmpates(1);
