@@ -15,7 +15,7 @@ public class Juego extends javax.swing.JFrame {
 
     Jugador heroe = Jugador.getHeroe();
     private GenerarTablero tablero;
-    
+
     // Contadores para el conteo de piezas muertas
     private int contadorHeroesMuertos = 0;
     private int contadorVillanosMuertos = 0;
@@ -26,8 +26,8 @@ public class Juego extends javax.swing.JFrame {
 
     public Juego() {
         initComponents();
-        
-        setTitle("Stratego Marvel Heroes | "+Jugador.jugadorLog.username+" vs "+Jugador.jugadorContrincante.username);
+
+        setTitle("Stratego Marvel Heroes | " + Jugador.jugadorLog.username + " vs " + Jugador.jugadorContrincante.username);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         // logica para la formacion de los paneles: 1 fila, 4 columnas
@@ -65,8 +65,9 @@ public class Juego extends javax.swing.JFrame {
 
         if (piezaMuerta.heroe) {
             int col = contadorHeroesMuertos / 10;  // columna de 0 a 3
-            if (col > 3) col = 3; // para no salir del índice si hay más de 40 piezas
-
+            if (col > 3) {
+                col = 3; // para no salir del índice si hay más de 40 piezas
+            }
             columnasHeroes[col].add(label);
             columnasHeroes[col].revalidate();
             columnasHeroes[col].repaint();
@@ -74,7 +75,9 @@ public class Juego extends javax.swing.JFrame {
             contadorHeroesMuertos++;
         } else {
             int col = contadorVillanosMuertos / 10;
-            if (col > 3) col = 3;
+            if (col > 3) {
+                col = 3;
+            }
 
             columnasVillanos[col].add(label);
             columnasVillanos[col].revalidate();

@@ -380,6 +380,7 @@ private final int bombas = 6;
                             if (piezaSeleccionada.rango == 3 && objetivo.heroe != piezaSeleccionada.heroe) {
                                 Juego.setPelea(piezaSeleccionada.nombre + " desarmó una " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
+
                                 JOptionPane.showMessageDialog(null, piezaSeleccionada.nombre + " VS " + objetivo.nombre + "\nGano "+piezaSeleccionada.nombre);
                                 piezaSeleccionada.colocada = true;
                                 tablero[celday][celdax] = piezaSeleccionada;
@@ -387,18 +388,21 @@ private final int bombas = 6;
                                 if (tablero[seleccionFila][seleccionColumna] != null) {
                                     tablero[seleccionFila][seleccionColumna].colocada = false;
                                 }
+
+
+                                tablero[seleccionFila][seleccionColumna].colocada = false;
+
                                 tablero[seleccionFila][seleccionColumna] = null;
 
+                                tablero[celday][celdax] = piezaSeleccionada;
                                 piezaSeleccionada.colocada = true;
-
                                 piezaSeleccionada.fila = celday;
                                 piezaSeleccionada.columna = celdax;
 
                             } else {
-                                // Explota
-                                if (piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
+                                if (piezaSeleccionada.heroe) {
                                     heroesC--;
-                                } else if (!piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
+                                } else {
                                     villanosC--;
                                 }
 
@@ -414,20 +418,15 @@ private final int bombas = 6;
                                 Juego.setPelea(piezaSeleccionada.nombre + " explotó por " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
 
-                                if (piezaSeleccionada.fila >= 0 && piezaSeleccionada.columna >= 0
-                                        && piezaSeleccionada.fila < tablero.length && piezaSeleccionada.columna < tablero[0].length) {
-                                    if (tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] != null) {
-                                        tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
-                                    }
-                                    tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
+                                if (tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] != null) {
+                                    tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
                                 }
+                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
 
-                                if (celday >= 0 && celdax >= 0 && celday < tablero.length && celdax < tablero[0].length) {
-                                    if (tablero[celday][celdax] != null) {
-                                        tablero[celday][celdax].colocada = false;
-                                    }
-                                    tablero[celday][celdax] = null;
+                                if (tablero[celday][celdax] != null) {
+                                    tablero[celday][celdax].colocada = false;
                                 }
+                                tablero[celday][celdax] = null;
                             }
                         } else if (piezaSeleccionada.rango == 1 && objetivo != null && objetivo.rango == 0) {//Logica captura de tierra
                             //Comer/Destruir tierra
