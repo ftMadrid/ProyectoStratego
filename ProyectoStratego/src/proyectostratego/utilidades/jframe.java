@@ -23,14 +23,14 @@ public class jframe extends javax.swing.JDialog {
     }
 
     public void setGanador(Piezas pieza) {
-        this.Ganador.setText(pieza.nombre);
+        this.Ganador.setText("Vencedor: "+pieza.nombre);
     }
 
     public void setForm(Piezas pieza1, Piezas pieza2, Piezas ganador) {
         setPieza1(pieza1);
         setPieza2(pieza2);
         setGanador(ganador);
-        Timer timer = new Timer(3000, e -> dispose()); // 3 segundos
+        Timer timer = new Timer(2000, e -> dispose()); // 3 segundos
         timer.setRepeats(false);
         timer.start();
 
@@ -39,8 +39,7 @@ public class jframe extends javax.swing.JDialog {
     public void setEmpate(Piezas pieza1, Piezas pieza2) {
         setPieza1(pieza1);
         setPieza2(pieza2);
-        this.Ganador.setText("EMPATE");
-        this.jLabel4.setText("");
+        this.Ganador.setText("Empate");
         Timer timer = new Timer(3000, e -> dispose()); // 3 segundos
         timer.setRepeats(false);
         timer.start();
@@ -115,14 +114,14 @@ public class jframe extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Pieza1Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Pieza2Foto, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33))
+                        .addGap(29, 29, 29))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)))
+                        .addGap(49, 49, 49)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Ganador))
-                .addGap(44, 44, 44))
+                .addGap(48, 48, 48))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

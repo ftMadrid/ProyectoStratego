@@ -31,16 +31,10 @@ public class Piezas {
     Image original = new ImageIcon(getClass().getResource(rutaImagen)).getImage();
     Image reversoHeroes = new ImageIcon(getClass().getResource("/proyectostratego/imagenesheroes/reversoHeroes.png")).getImage();
     Image reversoVillanos = new ImageIcon(getClass().getResource("/proyectostratego/imagenesvillanos/reversoVillanos.png")).getImage();
-    //Explicacion
-    /*
-    Basicamente reverso es la imagen reverso , consigue su ruta imagen (Y como son las mismas para todos pues no importa)
-    */
-    
-
     
     this.imagen = original.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 
-    this.imagenVs = original.getScaledInstance(108, 89, Image.SCALE_SMOOTH);
+    this.imagenVs = original.getScaledInstance(151, 129, Image.SCALE_SMOOTH);
     this.imagen = original.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
 
     this.imagenm = original.getScaledInstance(59, 46, Image.SCALE_SMOOTH);
