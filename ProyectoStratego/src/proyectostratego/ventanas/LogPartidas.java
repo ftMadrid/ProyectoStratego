@@ -76,13 +76,21 @@ public class LogPartidas extends javax.swing.JFrame {
             new String [] {
                 "Registro"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.setGridColor(new java.awt.Color(0, 0, 0));
         jTable1.setRowHeight(30);
         jTable1.setShowGrid(true);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Registro");
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
         }
 
         regresar.setFont(new java.awt.Font("Kefa", 1, 24)); // NOI18N
