@@ -18,11 +18,12 @@ import proyectostratego.ventanas.Juego;
 import proyectostratego.ventanas.LogPartidas;
 import proyectostratego.ventanas.MenuPrincipal;
 import proyectostratego.utilidades.Fecha;
+import proyectostratego.utilidades.jframe;
 
 public class GenerarTablero extends JPanel {
 
     Random random = new Random();
-
+    boolean darClick = true;
     private Piezas piezaSeleccionada = null;
     private int seleccionFila = -1;
     private int seleccionColumna = -1;
@@ -298,6 +299,9 @@ public class GenerarTablero extends JPanel {
             @Override
             public void mouseClicked(MouseEvent click) {
 
+                if (!darClick) {
+                    return;
+                }
                 int coordenadax = click.getX();
                 int coordenaday = click.getY();
 
@@ -482,6 +486,13 @@ public class GenerarTablero extends JPanel {
                                 piezaSeleccionada.columna = celdax;
                                 piezaSeleccionada.colocada = true;
                                 //La pieza seleccionada se come al a pieza objetivo
+                                jframe panel = new jframe((JFrame) SwingUtilities.getWindowAncestor(GenerarTablero.this), true);
+                                panel.setForm(piezaSeleccionada, objetivo, piezaSeleccionada);
+                                panel.setVisible(true);
+
+                               
+                                
+                                //darClick = false;
                                 if (piezaSeleccionada.heroe) {
                                     villanosC -= 1;
                                 } else {
@@ -520,6 +531,9 @@ public class GenerarTablero extends JPanel {
 
                                 heroesC -= 1;
                                 villanosC -= 1;
+                                //jframe panel = new jframe();
+                                //panel.setEmpate(piezaSeleccionada, objetivo);
+                                //panel.setVisible(true);
 
                                 empate();
                                 reiniciarSeleccion();

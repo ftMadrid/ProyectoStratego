@@ -19,6 +19,7 @@ public class Piezas {
     public Image imagenMuertes;
     public Image reversoHeroes;
     public Image reversoVillanos;
+    public Image imagenVs;
     //public boolean revelada;
     
     
@@ -26,6 +27,7 @@ public class Piezas {
 //    
 //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
     {
+    
     Image original = new ImageIcon(getClass().getResource(rutaImagen)).getImage();
     Image reversoHeroes = new ImageIcon(getClass().getResource("/proyectostratego/imagenesheroes/reversoHeroes.png")).getImage();
     Image reversoVillanos = new ImageIcon(getClass().getResource("/proyectostratego/imagenesvillanos/reversoVillanos.png")).getImage();
@@ -34,8 +36,13 @@ public class Piezas {
     Basicamente reverso es la imagen reverso , consigue su ruta imagen (Y como son las mismas para todos pues no importa)
     */
     
+<<<<<<< Updated upstream
     
     this.imagen = original.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+=======
+    this.imagenVs = original.getScaledInstance(108, 89, Image.SCALE_SMOOTH);
+    this.imagen = original.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+>>>>>>> Stashed changes
     this.imagenm = original.getScaledInstance(59, 46, Image.SCALE_SMOOTH);
     this.imagenMuertes = this.imagenm;
     this.imagenOriginal = this.imagen;
