@@ -17,7 +17,8 @@ public class Piezas {
     public boolean colocada;
     public Image imagenOriginal; // imagen original
     public Image imagenMuertes;
-    public Image reverso;
+    public Image reversoHeroes;
+    public Image reversoVillanos;
     //public boolean revelada;
     
     
@@ -26,7 +27,8 @@ public class Piezas {
 //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
     {
     Image original = new ImageIcon(getClass().getResource(rutaImagen)).getImage();
-    Image reverso = new ImageIcon(getClass().getResource("/proyectostratego/imagenes/Pieza.png")).getImage();
+    Image reversoHeroes = new ImageIcon(getClass().getResource("/proyectostratego/imagenesheroes/reversoHeroes.png")).getImage();
+    Image reversoVillanos = new ImageIcon(getClass().getResource("/proyectostratego/imagenesvillanos/reversoVillanos.png")).getImage();
     //Explicacion
     /*
     Basicamente reverso es la imagen reverso , consigue su ruta imagen (Y como son las mismas para todos pues no importa)
@@ -37,7 +39,8 @@ public class Piezas {
     this.imagenm = original.getScaledInstance(59, 46, Image.SCALE_SMOOTH);
     this.imagenMuertes = this.imagenm;
     this.imagenOriginal = this.imagen;
-    this.reverso = reverso;
+    this.reversoHeroes = reversoHeroes;
+    this.reversoVillanos = reversoVillanos;
     this.nombre = nombre;
     this.heroe = heroe;
     this.rango = rango;

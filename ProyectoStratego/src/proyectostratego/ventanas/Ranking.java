@@ -8,6 +8,8 @@ public class Ranking extends javax.swing.JFrame {
 
     public Ranking() {
         initComponents();
+        setTitle("Stratego Marvel Heroes");
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         actualizarRanking();
     }
 
@@ -53,6 +55,7 @@ public class Ranking extends javax.swing.JFrame {
         regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectostratego/imagenes/rankingtext.png"))); // NOI18N
 

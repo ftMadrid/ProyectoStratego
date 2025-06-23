@@ -51,7 +51,7 @@ public class GenerarTablero extends JPanel {
     private final int rango3 = 1;
     private final int rango4 = 0;
     private final int rango5 = 0;
-    private final int rango6 = 0;
+    private final int rango6 = 1;
     private final int rango7 = 0;
     private final int rango8 = 0;
     private final int rango9 = 0;
@@ -88,7 +88,7 @@ public class GenerarTablero extends JPanel {
             tierra.columna = columna;
             tierra.colocada = true;
             if (!heroe) {
-                tierra.imagen = tierra.reverso;
+                tierra.imagen = tierra.reversoVillanos;
 
             }
         }
@@ -120,7 +120,7 @@ public class GenerarTablero extends JPanel {
                     bomba.columna = c;
                     bomba.colocada = true;
                     if (!heroe) {
-                        bomba.imagen = bomba.reverso;
+                        bomba.imagen = bomba.reversoVillanos;
 
                     }
                 }
@@ -193,7 +193,7 @@ public class GenerarTablero extends JPanel {
                 tablero[randomr][randomc] = eleccion;
                 eleccion.fila = randomr;
                 eleccion.columna = randomc;
-                eleccion.imagen = eleccion.reverso;//Para que spawnee dada vuelta
+                eleccion.imagen = eleccion.reversoVillanos;//Para que spawnee dada vuelta
                 //System.out.println("Se coloco villano:" + eleccion.nombre + "En " + randomr + "," + randomc);
                 eleccion.colocada = true;
                 if (eleccion.rango >= 1) {
@@ -202,7 +202,7 @@ public class GenerarTablero extends JPanel {
                 }
                 colocados++;
             }
-        }//Fin for rango
+        }
 
         //HEROES
         for (int rango = -1; rango <= 10; rango++) {
@@ -277,7 +277,7 @@ public class GenerarTablero extends JPanel {
                 }
                 colocados++;
             }
-        }//Fin for rango
+        }
 
         //El mouse listener para lo de click?
         this.addMouseListener(new MouseAdapter() {
@@ -375,28 +375,46 @@ public class GenerarTablero extends JPanel {
                             return;
 
                         } else if (objetivo != null && objetivo.rango == -1 && objetivo.heroe != piezaSeleccionada.heroe) {//Bombas
-                            //Logica para que explote la pieza a menos que sea rango 3
                             if (piezaSeleccionada.rango == 3 && objetivo.heroe != piezaSeleccionada.heroe) {
-                                Juego.setPelea(piezaSeleccionada.nombre + " desarmo una " + objetivo.nombre);
+                                Juego.setPelea(piezaSeleccionada.nombre + " desarmó una " + objetivo.nombre);
                                 piezaSeleccionada.seleccionada = false;
 
                                 tablero[celday][celdax] = piezaSeleccionada;
-                                tablero[seleccionFila][seleccionColumna].colocada = false;
+
+                                if (tablero[seleccionFila][seleccionColumna] != null) {
+                                    tablero[seleccionFila][seleccionColumna].colocada = false;
+                                }
                                 tablero[seleccionFila][seleccionColumna] = null;
+
                                 piezaSeleccionada.colocada = true;
+
+                                piezaSeleccionada.fila = celday;
+                                piezaSeleccionada.columna = celdax;
                             } else {
+                                // Explota
                                 if (piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     heroesC--;
                                 } else if (!piezaSeleccionada.heroe && objetivo.heroe != piezaSeleccionada.heroe) {
                                     villanosC--;
                                 }
-                                Juego.setPelea(piezaSeleccionada.nombre + " exploto por " + objetivo.nombre);
-                                piezaSeleccionada.seleccionada = false;
-                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
-                                tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
-                                tablero[celday][celdax].colocada = false;
-                                tablero[celday][celdax] = null; //"Explota" la bomba
 
+                                Juego.setPelea(piezaSeleccionada.nombre + " explotó por " + objetivo.nombre);
+                                piezaSeleccionada.seleccionada = false;
+
+                                if (piezaSeleccionada.fila >= 0 && piezaSeleccionada.columna >= 0
+                                        && piezaSeleccionada.fila < tablero.length && piezaSeleccionada.columna < tablero[0].length) {
+                                    if (tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] != null) {
+                                        tablero[piezaSeleccionada.fila][piezaSeleccionada.columna].colocada = false;
+                                    }
+                                    tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
+                                }
+
+                                if (celday >= 0 && celdax >= 0 && celday < tablero.length && celdax < tablero[0].length) {
+                                    if (tablero[celday][celdax] != null) {
+                                        tablero[celday][celdax].colocada = false;
+                                    }
+                                    tablero[celday][celdax] = null;
+                                }
                             }
                         } else if (piezaSeleccionada.rango == 1 && objetivo != null && objetivo.rango == 0) {//Logica captura de tierra
                             //Comer/Destruir tierra
@@ -472,14 +490,14 @@ public class GenerarTablero extends JPanel {
                                 } else {
                                     villanosC -= 1;
                                 }
-                                empate();
+                                empate();//Ineficiente pero 
                             } else if (piezaSeleccionada.rango == objetivo.rango) {
                                 Juego.setPelea(objetivo.nombre + " y " + piezaSeleccionada.nombre + " Se derrotan mutuamente");
                                 objetivo.colocada = false;
 
                                 tablero[piezaSeleccionada.fila][piezaSeleccionada.columna] = null;
                                 tablero[objetivo.fila][objetivo.columna] = null;
-
+//wtf 
                                 System.out.println("Mismo rango , las dos mueren");
 
                                 juego.agregarPiezaMuerta(piezaSeleccionada);
@@ -520,7 +538,7 @@ public class GenerarTablero extends JPanel {
 
                                 }
                                 if (villanos.villanos[i].colocada) {
-                                    villanos.villanos[i].imagen = villanos.villanos[i].reverso;
+                                    villanos.villanos[i].imagen = villanos.villanos[i].reversoVillanos;
                                     System.out.println(villanos.villanos[i].nombre);
 
                                 }
@@ -531,14 +549,14 @@ public class GenerarTablero extends JPanel {
                             for (int i = 0; i < 40; i++) {
                                 if (heroes.heroes[i].colocada) {
 
-                                    heroes.heroes[i].imagen = heroes.heroes[i].reverso;
+                                    heroes.heroes[i].imagen = heroes.heroes[i].reversoHeroes;
                                     System.out.println(heroes.heroes[i].nombre);
                                 }
                                 if (villanos.villanos[i].colocada) {
                                     villanos.villanos[i].imagen = villanos.villanos[i].imagenOriginal;
                                     System.out.println(villanos.villanos[i].nombre);
 
-                                }
+                                }//Hago push y miras?
                             }
                         }
                     } else {
@@ -779,7 +797,7 @@ public class GenerarTablero extends JPanel {
 
             LogPartidas.agregarRegistro(ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a "
                     + perdedor.getUsername() + " [" + Fecha.getFecha() + "]");
-            System.out.println("[CONSOLE LOG]" + ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a " 
+            System.out.println("[CONSOLE LOG]" + ganador.getUsername() + " usando los HEROES ha SALVADO la TIERRA! Venciendo a "
                     + perdedor.getUsername() + " [" + Fecha.getFecha() + "]");
 
             JOptionPane.showMessageDialog(this, heroe.username + " [Heroes] es el ganador de la partida. "
@@ -802,7 +820,7 @@ public class GenerarTablero extends JPanel {
     private void empate() {
 
         if (villanosC == 0 && heroesC == 0) {
-            // Empate
+            // Empate // pq verga carga a cada rato esto xd
             StatsGlobales.setEmpates();
             Jugador.jugadorLog.setEmpates(1);
             Jugador.jugadorContrincante.setEmpates(1);

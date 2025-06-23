@@ -14,6 +14,8 @@ public class LogPartidas extends javax.swing.JFrame {
     public LogPartidas(String username) {
         this.username = username;
         initComponents();
+        setTitle("Stratego Marvel Heroes");
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         cargarRegistros();
     }
 
