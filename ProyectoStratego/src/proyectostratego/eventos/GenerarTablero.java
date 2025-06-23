@@ -45,6 +45,24 @@ public class GenerarTablero extends JPanel {
     private Piezas[][] tablero = new Piezas[rows][columnas]; // 10x10 Guarda el objeto como tal (Osea la pieza)
 
     //Variables individuales para cuanto debe de haber min de cada rango (Se podria mejorar pero despues se intenta)
+    
+    /* TESTING
+    private final int bombas = 6;
+    private final int tierra = 1;
+
+    private final int rango1 = 2;
+    private final int rango2 = 2;
+    private final int rango3 = 2;
+    private final int rango4 = 0;
+    private final int rango5 = 0;
+    private final int rango6 = 0;
+    private final int rango7 = 0;
+    private final int rango8 = 0;
+    private final int rango9 = 0;
+    private final int rango10 = 0;*/
+    
+    /* ORIGINAL */
+    
     private final int bombas = 6;
     private final int tierra = 1;
 
@@ -417,7 +435,7 @@ public class GenerarTablero extends JPanel {
                                 }
                                 tablero[celday][celdax] = null;
                             }
-                        } else if (piezaSeleccionada.rango == 1 && objetivo != null && objetivo.rango == 0) {//Logica captura de tierra
+                        } else if (objetivo != null && objetivo.rango == 0) {//Logica captura de tierra
                             //Comer/Destruir tierra
                             Juego.setPelea(piezaSeleccionada.nombre + " captura a " + objetivo.nombre);
 
