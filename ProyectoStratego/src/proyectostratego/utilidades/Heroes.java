@@ -12,7 +12,7 @@ public class Heroes {//Codigo para heroes
         heroes = new Piezas[40];//piezas nomas
         //Formato
         //Al crear la pieza sera - "Ejemplo" , "/asda/asda/asda.png/",1,1,-1,-1,true;
-        heroes[0] = new Piezas("Tierra", "/proyectostratego/imagenesheroes/Tierra.png", 0, 0, -1, -1, true);//1        
+        heroes[0] = new Piezas("Tierra", "/proyectostratego/imagenesheroes/TierraHeroes.png", 0, 0, -1, -1, true);//1        
         heroes[1] = new Piezas("Nova Blast", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
         heroes[2] = new Piezas("Nova Blast", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
         heroes[3] = new Piezas("Nova Blast", "/proyectostratego/imagenesheroes/novablast.png", -1, 0, -1, -1, true);//1        
