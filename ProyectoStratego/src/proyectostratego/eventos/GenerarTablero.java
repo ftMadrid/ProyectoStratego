@@ -595,8 +595,8 @@ public class GenerarTablero extends JPanel {
 
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columnas; c++) {
-                int x = c * base;
-                int y = r * altura;
+                final int x = c * base;
+                final int y = r * altura;
 
                 if (zonaProhibida[r][c]) {
                     continue;
@@ -605,29 +605,29 @@ public class GenerarTablero extends JPanel {
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, base, altura);
 
+                // Mostrar posibles movimientos si hay una pieza seleccionada
                 if (piezaSeleccionada != null) {
-                    int distFila = Math.abs(r - seleccionFila);
-                    int distCol = Math.abs(c - seleccionColumna);
+                    final int distFila = Math.abs(r - seleccionFila);
+                    final int distCol = Math.abs(c - seleccionColumna);
 
-                    if (((distFila <= piezaSeleccionada.movimiento && distCol == 0)
-                            || (distCol <= piezaSeleccionada.movimiento && distFila == 0))
-                            && !(r == seleccionFila && c == seleccionColumna)) {
+                    boolean esMovimientoLineal
+                            = (distFila <= piezaSeleccionada.movimiento && distCol == 0)
+                            || (distCol <= piezaSeleccionada.movimiento && distFila == 0);
+                    boolean noEsLaSeleccionada = !(r == seleccionFila && c == seleccionColumna);
 
+                    if (esMovimientoLineal && noEsLaSeleccionada) {
                         boolean disponible = true;
 
-                        if (distFila > 0 && distCol == 0) {
-                            int inicio = Math.min(seleccionFila, r) + 1;
-                            int fin = Math.max(seleccionFila, r);
-                            for (int i = inicio; i < fin; i++) {
+                        // Revisa si el camino está libre
+                        if (distFila > 0) {
+                            for (int i = Math.min(seleccionFila, r) + 1; i < Math.max(seleccionFila, r); i++) {
                                 if (tablero[i][c] != null || zonaProhibida[i][c]) {
                                     disponible = false;
                                     break;
                                 }
                             }
-                        } else if (distCol > 0 && distFila == 0) {
-                            int inicio = Math.min(seleccionColumna, c) + 1;
-                            int fin = Math.max(seleccionColumna, c);
-                            for (int i = inicio; i < fin; i++) {
+                        } else if (distCol > 0) {
+                            for (int i = Math.min(seleccionColumna, c) + 1; i < Math.max(seleccionColumna, c); i++) {
                                 if (tablero[r][i] != null || zonaProhibida[r][i]) {
                                     disponible = false;
                                     break;
@@ -635,74 +635,68 @@ public class GenerarTablero extends JPanel {
                             }
                         }
 
+                        // Casilla final
                         if (zonaProhibida[r][c]) {
                             disponible = false;
                         }
 
-                        if (disponible) {
-                            g.setColor(Color.GREEN);
-                            g.drawRect(x, y, base, altura);
-                            g.drawRect(x + 1, y + 1, base - 2, altura - 2);
-                            g.drawRect(x + 2, y + 2, base - 4, altura - 4);
-                        } // Nuevo bloque aquí
-                        else if (tablero[r][c] != null && tablero[r][c].heroe != piezaSeleccionada.heroe) {
-                            // Enemigo al final del camino
-                            g.setColor(Color.GREEN);
-                            g.drawRect(x, y, base, altura);
-                            g.drawRect(x + 1, y + 1, base - 2, altura - 2);
-                            g.drawRect(x + 2, y + 2, base - 4, altura - 4);
+                        boolean esEnemigo = tablero[r][c] != null && tablero[r][c].heroe != piezaSeleccionada.heroe;
+
+                        if (disponible || esEnemigo) {
+                            dibujarBordeVerde(g, x, y);
                         }
                     }
 
-                    int[][] direcciones = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+                    // Chequeo extendido en líneas hasta movimiento máximo
+                    final int[][] direcciones = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
                     for (int[] dir : direcciones) {
                         for (int dist = 1; dist <= piezaSeleccionada.movimiento; dist++) {
                             int f = piezaSeleccionada.fila + dir[0] * dist;
                             int col = piezaSeleccionada.columna + dir[1] * dist;
 
-                            if (f < 0 || f >= rows || col < 0 || col >= columnas) {
-                                break;
-                            }
-                            if (zonaProhibida[f][col]) {
+                            if (f < 0 || f >= rows || col < 0 || col >= columnas || zonaProhibida[f][col]) {
                                 break;
                             }
 
                             Piezas p = tablero[f][col];
                             if (p != null) {
-                                // Si es enemigo, marcar y detener búsqueda en esta dirección
                                 if (p.heroe != piezaSeleccionada.heroe) {
-                                    int dx = col * base;
-                                    int dy = f * altura;
-                                    g.setColor(Color.GREEN);
-                                    g.drawRect(dx, dy, base, altura);
-                                    g.drawRect(dx + 1, dy + 1, base - 2, altura - 2);
-                                    g.drawRect(dx + 2, dy + 2, base - 4, altura - 4);
+                                    dibujarBordeVerde(g, col * base, f * altura);
                                 }
-                                break; // Se detiene al encontrar cualquier pieza (enemiga o amiga)
+                                break; // Se detiene con cualquier pieza
                             }
                         }
                     }
                 }
 
-                // Dibuja imagen de pieza
+                // Dibuja imagen si hay una pieza
                 Piezas p = tablero[r][c];
                 if (p != null && p.imagen != null) {
                     g.drawImage(p.imagen, x, y, base, altura, this);
                 }
 
-                // Bordes azules si está seleccionada
-                if (tablero[r][c] != null && tablero[r][c].seleccionada) {
+                // Dibuja borde azul si está seleccionada
+                if (p != null && p.seleccionada) {
                     g.setColor(Color.BLUE);
-                    g.drawRect(x, y, base, altura);
-                    g.drawRect(x + 1, y + 1, base - 2, altura - 2);
-                    g.drawRect(x + 2, y + 2, base - 4, altura - 4);
+                    dibujarBorde(g, x, y);
                 } else {
                     g.setColor(Color.BLACK);
-                    g.drawRect(x, y, base, altura);
+                    g.drawRect(x, y, base, altura); // Reafirma borde negro
                 }
             }
         }
+    }
+
+    private void dibujarBordeVerde(Graphics g, int x, int y) {
+        g.setColor(Color.GREEN);
+        dibujarBorde(g, x, y);
+    }
+
+    private void dibujarBorde(Graphics g, int x, int y) {
+        g.drawRect(x, y, base, altura);
+        g.drawRect(x + 1, y + 1, base - 2, altura - 2);
+        g.drawRect(x + 2, y + 2, base - 4, altura - 4);
     }
 
     private int getMinimoPorRango(int rango) {
